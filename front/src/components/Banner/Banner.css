@@ -1,0 +1,43 @@
+.container {
+    
+    text-align: center;
+    color: white;
+}
+
+.Banner{
+	margin: 0 auto;
+    width: 1600px;
+    overflow: hidden;
+    align-self: flex-start;
+}
+
+.centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.title{
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+    text-shadow: 5px 10px 10px rgba(0, 0, 0, 0.45),
+              -3px 10px 12px rgba(0, 0, 0, 0.45);
+}
+
+.description{
+    /* font-weight: bold; */
+    font-size: 20px;
+    color: white;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.75),
+              0px 5px 12px rgba(0, 0, 0, 0.75);
+}
+
+.joinButton{
+    position: absolute;
+    font-weight: bold;
+    font-size: 60px;
+    color: orange;
+}
