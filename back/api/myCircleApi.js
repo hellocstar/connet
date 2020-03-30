@@ -1,4 +1,14 @@
 const MyCircle = require('../models/myCircle');
+const Profile = require('../models/profile');
+
+const roomList = async (req, res, next) => {
+	try {
+		const userID = await Profile.findOne({ _id: req });
+		res.status(200).send();
+	} catch (e) {
+		res.status(500).send(e);
+	}
+};
 
 const createRoom = async (req, res, next) => {
 	try {
@@ -70,6 +80,7 @@ const joinRoom = async (req, res, next) => {
 };
 
 module.exports = {
+	roomList,
 	createRoom,
 	getRoom,
 	deleteRoom,

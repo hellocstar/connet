@@ -35,6 +35,7 @@ app.post(
 );
 
 //MyCircle
+app.get('/mycircle', myCircleApi.roomList);
 app.post('/createRoom', myCircleApi.createRoom);
 app.get('/getRoom/:roomname', myCircleApi.getRoom);
 app.delete('/deleteRoom/:roomname', myCircleApi.deleteRoom);

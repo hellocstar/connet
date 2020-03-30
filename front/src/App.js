@@ -157,12 +157,13 @@ class App extends Component {
 	render() {
 		const {
 			route,
-			isSignedIn,
 			searchField,
 			communityEvent,
 			communityRoom,
 			myCircle,
-			activityID
+			activityID,
+			isSignedIn,
+			user
 		} = this.state;
 		return (
 			<div className='App'>
@@ -193,6 +194,7 @@ class App extends Component {
 							rooms={myCircle}
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
+							userID={user.id}
 						/>
 					</div>
 				) : route === 'activity' ? (

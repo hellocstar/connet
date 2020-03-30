@@ -6,29 +6,35 @@ const profile = new mongoose.Schema({
 		required: [true, 'Username is required'],
 		unique: true
 	},
+	password: {
+		type: String,
+		required: [true, 'Password is required']
+	},
 	email: {
 		type: String,
 		required: [true, 'Email is required'],
 		unique: true
 	},
-	password: {
-		type: String,
-		required: [true, 'Password is required']
+	photo: {
+		type: String
 	},
-	friends_ID: {
+	biography: {
+		type: String
+	},
+	birthday: {
+		type: String //any "Date" datatype?
+	},
+	friends: {
 		type: [String] //id of user friends
 	},
-	pending_friend: {
+	pending_friends: {
 		type: [String] //id of friend requests
-	},
-	MyCircle_parti: {
-		type: [String] //id of participants in a room
-	},
-	MyCircle_host: {
-		type: String //id of the host of a room
 	},
 	history: {
 		type: [String] //id of rooms history
+	},
+	interests: {
+		type: [String]
 	}
 });
 

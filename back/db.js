@@ -12,8 +12,7 @@ const initDb = async () => {
 			'mongodb+srv://admin:CSCI3100@cluster-tqoug.azure.mongodb.net/CSCI_3100?retryWrites=true&w=majority',
 			{
 				useFindAndModify: false,
-				useNewUrlParser: true,
-				useUnifiedTopology: true
+				useNewUrlParser: true
 			}
 		);
 		_db = mongoose.connection;
