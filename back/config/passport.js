@@ -1,28 +1,44 @@
-const mongoose = require('mongoose');
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const Profile = require("../models/profile");
 
-const Profile = mongoose.model('Profile');
+const initPassport = () => {
+  passport.use(
+    new LocalStrategy(async (username, password, done) => {
+      try {
+        const user = await Profile.findOne({ username: username });
+        if (!user) {
+          return done(null, false, { message: "Profile not found." });
+        }
+        if (password !== user.password) {
+          return done(null, false, { message: "Invalid password." });
+        }
+        return done(null, user);
+      } catch (e) {
+        return done(e);
+      }
+    })
+  );
+  passport.serializeUser((user, done) => {
+    done(null, user.username);
+  });
 
-passport.use(
-	new LocalStrategy(
-		{
-			usernameField: 'user[email]',
-			passwordField: 'user[password]'
-		},
-		(email, password, done) => {
-			profile
-				.findOne({ email })
-				.then(user => {
-					if (!user || !user.validatePassword(password)) {
-						return done(null, false, {
-							errors: { 'email or password': 'is invalid' }
-						});
-					}
+  passport.deserializeUser((username, done) => {
+    Profile.findOne({ username }, (err, profile) => {
+      done(err, profile);
+    });
+  });
+};
 
-					return done(null, user);
-				})
-				.catch(done);
-		}
-	)
-);
+const checkIfAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(401).send("You have to login first to use the function");
+  }
+};
+
+module.exports = {
+  initPassport,
+  checkIfAuthenticated
+};

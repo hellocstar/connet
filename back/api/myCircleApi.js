@@ -16,7 +16,7 @@ const createRoom = async (req, res, next) => {
 
 const getRoom = async (req, res, next) => {
 	try {
-		const room = await MyCircle.findOne({ name: req.params.roomname });
+		const room = await MyCircle.findOne({ _id: req.params.id });
 		res.status(200).send(room);
 	} catch (e) {
 		res.status(500).send(e);
@@ -27,7 +27,7 @@ const updateRoom = async (req, res, next) => {
 	const room = req.body;
 	try {
 		const result = await MyCircle.update(
-			{ name: req.params.roomname },
+			{ _id: req.params.id },
 			room
 		);
 
@@ -47,7 +47,7 @@ const updateRoom = async (req, res, next) => {
 
 const deleteRoom = async (req, res, next) => {
 	try {
-		const result = await MyCircle.deleteOne({ name: req.params.roomname });
+		const result = await MyCircle.deleteOne({ _id: req.params.id });
 		if (result.deletedCount === 0) res.status(404).send();
 		else res.status(200).send('Deleted Successfully');
 	} catch (e) {
@@ -58,7 +58,7 @@ const deleteRoom = async (req, res, next) => {
 const joinRoom = async (req, res, next) => {
 	try {
 		const result = await MyCircle.updateOne(
-			{ name: req.params.roomname },
+			{ _id: req.params.id },
 			{ $push: { parti: req.body.username } }
 		);
 		if (result.ok === 1 && result.nModified > 0)
