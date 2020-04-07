@@ -9,10 +9,10 @@ const initDb = async () => {
 	}
 	try {
 		await mongoose.connect(
-			'mongodb+srv://admin:CSCI3100@cluster-tqoug.azure.mongodb.net/CSCI_3100?retryWrites=true&w=majority',
+			'mongodb+srv://admin:CSCI3100@cluster-tqoug.azure.mongodb.net/test?retryWrites=true&w=majority',
 			{
 				useFindAndModify: false,
-				useNewUrlParser: true
+				useNewUrlParser: true,
 			}
 		);
 		_db = mongoose.connection;
@@ -27,7 +27,7 @@ const getDb = () => {
 	return _db; // if has been initialized
 };
 
-const getCollection = collectionName => {
+const getCollection = (collectionName) => {
 	assert.ok(_db, 'Db has not been initialized.'); // if not initialized
 	return _db.collection(collectionName); // if has been initialized
 };
@@ -35,5 +35,5 @@ const getCollection = collectionName => {
 module.exports = {
 	initDb,
 	getDb,
-	getCollection
+	getCollection,
 };

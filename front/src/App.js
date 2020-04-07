@@ -18,7 +18,7 @@ const CommunityEventDatabase = [
 		date: '20200327',
 		location: 'Hong Kong',
 		description: 'Run',
-		id: '001'
+		id: '001',
 	},
 	{
 		name: 'Singing Contest',
@@ -26,7 +26,7 @@ const CommunityEventDatabase = [
 		date: '20200423',
 		location: 'CUHK',
 		description: 'Sing',
-		id: '002'
+		id: '002',
 	},
 	{
 		name: 'CSCI3100',
@@ -34,8 +34,8 @@ const CommunityEventDatabase = [
 		date: '20200517',
 		location: 'Kowloon',
 		description: 'CSCI',
-		id: '003'
-	}
+		id: '003',
+	},
 ];
 
 const CommunityRoomDatabase = [
@@ -45,7 +45,7 @@ const CommunityRoomDatabase = [
 		date: '20200327',
 		location: 'Hong Kong',
 		description: 'Run',
-		id: '101'
+		id: '101',
 	},
 	{
 		name: 'Community Room 2',
@@ -53,7 +53,7 @@ const CommunityRoomDatabase = [
 		date: '20200423',
 		location: 'CUHK',
 		description: 'Sing',
-		id: '102'
+		id: '102',
 	},
 	{
 		name: 'Community Room 3',
@@ -61,8 +61,8 @@ const CommunityRoomDatabase = [
 		date: '20200517',
 		location: 'Kowloon',
 		description: 'CSCI',
-		id: '103'
-	}
+		id: '103',
+	},
 ];
 
 const MyCircleDatabase = [
@@ -72,7 +72,7 @@ const MyCircleDatabase = [
 		date: '20200327',
 		location: 'Hong Kong',
 		description: 'Run',
-		id: '301'
+		id: '301',
 	},
 	{
 		name: 'MyCircle Room 2',
@@ -80,7 +80,7 @@ const MyCircleDatabase = [
 		date: '20200423',
 		location: 'CUHK',
 		description: 'Sing',
-		id: '302'
+		id: '302',
 	},
 	{
 		name: 'MyCircle Room 3',
@@ -88,36 +88,36 @@ const MyCircleDatabase = [
 		date: '20200517',
 		location: 'Kowloon',
 		description: 'CSCI',
-		id: '303'
-	}
+		id: '303',
+	},
 ];
 
 const ProfileInformationDatabase = [
 	{
 		username: 'derek',
 		email: 'chanchunyat1999@gmail.com',
-		password: '12345678'
+		password: '12345678',
 	},
 	{
 		username: 'tommy',
 		email: 'tommy@gmail.com',
-		password: '12345678'
+		password: '12345678',
 	},
 	{
 		username: 'winky',
 		email: 'winky@gmail.com',
-		password: '12345678'
+		password: '12345678',
 	},
 	{
 		username: 'ivan',
 		email: 'ivan@gmail.com',
-		password: '12345678'
+		password: '12345678',
 	},
 	{
 		username: 'albert',
 		email: 'albert@gmail.com',
-		password: '12345678'
-	}
+		password: '12345678',
+	},
 ];
 
 const initialState = {
@@ -127,13 +127,13 @@ const initialState = {
 	communityRoom: CommunityRoomDatabase,
 	myCircle: MyCircleDatabase,
 	activityID: '',
-	isSignedIn: false,
+	isSignedIn: true,
 	user: {
 		id: '',
 		name: '',
 		email: '',
-		password: ''
-	}
+		password: '',
+	},
 };
 
 class App extends Component {
@@ -142,15 +142,15 @@ class App extends Component {
 		this.state = initialState;
 	}
 
-	onSearchChange = search => {
+	onSearchChange = (search) => {
 		this.setState({ searchField: search.target.value });
 	};
 
-	onRouteChange = route => {
+	onRouteChange = (route) => {
 		this.setState({ route: route });
 	};
 
-	onActivityIDChange = id => {
+	onActivityIDChange = (id) => {
 		this.setState({ activityID: id });
 	};
 
@@ -163,7 +163,7 @@ class App extends Component {
 			myCircle,
 			activityID,
 			isSignedIn,
-			user
+			user,
 		} = this.state;
 		return (
 			<div className='App'>
@@ -194,6 +194,7 @@ class App extends Component {
 							rooms={myCircle}
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
+							isSignedIn={isSignedIn}
 							userID={user.id}
 						/>
 					</div>

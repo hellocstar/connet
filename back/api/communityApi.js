@@ -1,9 +1,10 @@
-const MyCircle = require('../models/myCircleSchema');
-const Profile = require('../models/profileSchema');
+const Community = require('../models/communitySchema');
+const db = require('../db');
 
-const roomList = async (req, res, next) => {
+const eventList = async (req, res, next) => {
 	try {
-		const userID = await Profile.findOne({ _id: req });
+		console.log('hello');
+		// const userID = await db.inventory.find({});
 		res.status(200).send();
 	} catch (e) {
 		res.status(500).send(e);
@@ -80,7 +81,7 @@ const joinRoom = async (req, res, next) => {
 };
 
 module.exports = {
-	roomList,
+	eventList,
 	createRoom,
 	getRoom,
 	deleteRoom,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ListItem from '../ListItem/ListItem';
 
 const MyCircle = ({
@@ -6,15 +6,32 @@ const MyCircle = ({
 	rooms,
 	onRouteChange,
 	onActivityIDChange,
-	userID
+	isSignedIn,
+	userID,
 }) => {
-	const filtered = rooms.filter(rooms => {
+	useEffect(() => {
+		if (isSignedIn) {
+			fetch('http://localhost:3000/mycircle')
+				.then((response) => response.json())
+				.then((data) => {
+					if (data) {
+						this.props.onRouteChange('community');
+					}
+				});
+		}
+	});
+
+	// if (!isSignedIn) {
+	// 	this.props.onRouteChange('community');
+	// }
+
+	const filtered = rooms.filter((rooms) => {
 		return rooms.name.toLowerCase().includes(searchField.toLowerCase());
 	});
 
 	return (
 		<div className='parent'>
-			{filtered.map(room => {
+			{filtered.map((room) => {
 				return (
 					<div className='child'>
 						<ListItem

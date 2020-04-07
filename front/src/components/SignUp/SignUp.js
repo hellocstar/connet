@@ -6,19 +6,19 @@ class SignUp extends React.Component {
 		this.state = {
 			username: '',
 			email: '',
-			password: ''
+			password: '',
 		};
 	}
 
-	onUsernameChange = name => {
+	onUsernameChange = (name) => {
 		this.setState({ username: name.target.value });
 	};
 
-	onEmailChange = email => {
+	onEmailChange = (email) => {
 		this.setState({ email: email.target.value });
 	};
 
-	onPasswordChange = password => {
+	onPasswordChange = (password) => {
 		this.setState({ password: password.target.value });
 	};
 
@@ -29,12 +29,11 @@ class SignUp extends React.Component {
 			body: JSON.stringify({
 				username: this.state.username,
 				email: this.state.email,
-				password: this.state.password
-			})
+				password: this.state.password,
+			}),
 		})
-			.then(response => response.json())
-			.then(data => {
-				console.log(data);
+			.then((response) => response.json())
+			.then((data) => {
 				if (data) {
 					this.props.onRouteChange('signin');
 				}

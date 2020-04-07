@@ -1,8 +1,8 @@
-const Profile = require('../models/profile');
+const Profile = require('../models/profileSchema');
+const passport = require('../config/passport');
 
 const createProfile = async (req, res, next) => {
 	try {
-		console.log(req);
 		const profile = new Profile(req.body);
 		const result = await profile.save();
 		res.status(201).send(result._id);
@@ -18,7 +18,7 @@ const createProfile = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
 	try {
 		const profile = await Profile.findOne({
-			username: req.params.username
+			username: req.params.username,
 		});
 		res.status(200).send(profile);
 	} catch (e) {
@@ -29,7 +29,7 @@ const getProfile = async (req, res, next) => {
 const deleteProfile = async (req, res, next) => {
 	try {
 		const result = await Profile.deleteOne({
-			username: req.params.username
+			username: req.params.username,
 		});
 		if (result.deletedCount === 0) res.status(404).send();
 		else res.status(200).send('Deleted Successfully');
@@ -60,9 +60,25 @@ const updateProfile = async (req, res, next) => {
 	}
 };
 
+const signIn = async (req, res, next) => {
+	try {
+		passport.authenticate('local', { failureRedirect: '/signin' }),
+			function (req, res) {
+				res.redirect('/community');
+			};
+	} catch (e) {
+		if (e.name === 'ValidationError') {
+			res.status(400).send(e);
+		} else {
+			res.status(500).send(e);
+		}
+	}
+};
+
 module.exports = {
 	createProfile,
 	getProfile,
 	deleteProfile,
-	updateProfile
+	updateProfile,
+	signIn,
 };
