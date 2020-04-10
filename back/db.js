@@ -1,6 +1,11 @@
 const assert = require('assert');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 let _db;
+
+const connecionString =
+	'mongodb+srv://admin:CSCI3100@cluster-tqoug.azure.mongodb.net/test?retryWrites=true&w=majority';
 
 const initDb = async () => {
 	if (_db) {
@@ -8,13 +13,10 @@ const initDb = async () => {
 		return;
 	}
 	try {
-		await mongoose.connect(
-			'mongodb+srv://admin:CSCI3100@cluster-tqoug.azure.mongodb.net/test?retryWrites=true&w=majority',
-			{
-				useFindAndModify: false,
-				useNewUrlParser: true,
-			}
-		);
+		await mongoose.connect(connecionString, {
+			useFindAndModify: false,
+			useNewUrlParser: true,
+		});
 		_db = mongoose.connection;
 		console.log('Connected successfully to mongodb');
 	} catch (e) {
@@ -32,8 +34,25 @@ const getCollection = (collectionName) => {
 	return _db.collection(collectionName); // if has been initialized
 };
 
+const sessionStore = new MongoStore({
+	mongooseConnection: mongoose.connection,
+	collection: 'sessions',
+});
+
+const expressSession = session({
+	// secret: process.env.SECRET,
+	secret: 'some secret',
+	resave: false,
+	saveUninitialized: true,
+	store: sessionStore,
+	cookie: {
+		maxAge: 1000 * 30,
+	},
+});
+
 module.exports = {
 	initDb,
 	getDb,
 	getCollection,
+	expressSession,
 };

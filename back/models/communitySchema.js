@@ -6,12 +6,11 @@ const community = new mongoose.Schema({
 		required: [true, 'room name needed'],
 	},
 	date: {
-		type: Date,
+		type: String,
 		required: [true, 'date needed'],
 	},
 	// time: {
 	// 	type: TimeRanges
-	// 	// required: [true, 'time needed'] //required but data type is what?
 	// },
 	location: {
 		type: String,
@@ -35,5 +34,5 @@ const community = new mongoose.Schema({
 	},
 });
 
-const Community = mongoose.model('Community', community);
+const Community = mongoose.model('Community', community, 'community');
 module.exports = Community;

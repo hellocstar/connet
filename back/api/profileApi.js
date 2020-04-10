@@ -1,11 +1,30 @@
 const Profile = require('../models/profileSchema');
-const passport = require('../config/passport');
+const Passport = require('../config/passport');
 
-const createProfile = async (req, res, next) => {
+const signIn = async (req, res, next) => {
 	try {
-		const profile = new Profile(req.body);
-		const result = await profile.save();
-		res.status(201).send(result._id);
+		res.status(200).send(req.user);
+	} catch (e) {
+		if (e.name === 'ValidationError') {
+			res.status(400).send(e);
+		} else {
+			res.status(500).send(e);
+		}
+	}
+};
+
+const signUp = async (req, res, next) => {
+	try {
+		const hashPw = Passport.genPassword(req.body.password);
+		const user = {
+			username: req.body.username,
+			email: req.body.email,
+			hash: hashPw.hash,
+			salt: hashPw.salt,
+		};
+		const profile = new Profile(user);
+		await profile.save();
+		res.status(201).send('Successfully created an account!');
 	} catch (e) {
 		if (e.name === 'ValidationError') {
 			res.status(400).send(e);
@@ -60,25 +79,10 @@ const updateProfile = async (req, res, next) => {
 	}
 };
 
-const signIn = async (req, res, next) => {
-	try {
-		passport.authenticate('local', { failureRedirect: '/signin' }),
-			function (req, res) {
-				res.redirect('/community');
-			};
-	} catch (e) {
-		if (e.name === 'ValidationError') {
-			res.status(400).send(e);
-		} else {
-			res.status(500).send(e);
-		}
-	}
-};
-
 module.exports = {
-	createProfile,
+	signIn,
+	signUp,
 	getProfile,
 	deleteProfile,
 	updateProfile,
-	signIn,
 };

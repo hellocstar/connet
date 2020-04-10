@@ -4,38 +4,42 @@ const profile = new mongoose.Schema({
 	username: {
 		type: String,
 		required: [true, 'Username is required'],
-		unique: true
+		unique: true,
 	},
-	password: {
+	salt: {
 		type: String,
-		required: [true, 'Password is required']
+		required: [true, 'Password is required'],
+	},
+	hash: {
+		type: String,
+		required: [true, 'Password is required'],
 	},
 	email: {
 		type: String,
 		required: [true, 'Email is required'],
-		unique: true
+		unique: true,
 	},
 	photo: {
-		type: String
+		type: String,
 	},
 	biography: {
-		type: String
+		type: String,
 	},
 	birthday: {
-		type: String //any "Date" datatype?
+		type: String, //any "Date" datatype?
 	},
 	friends: {
-		type: [String] //id of user friends
+		type: [String], //id of user friends
 	},
 	pending_friends: {
-		type: [String] //id of friend requests
+		type: [String], //id of friend requests
 	},
 	history: {
-		type: [String] //id of rooms history
+		type: [String], //id of rooms history
 	},
 	interests: {
-		type: [String]
-	}
+		type: [String],
+	},
 });
 
 const Profile = mongoose.model('Profile', profile);

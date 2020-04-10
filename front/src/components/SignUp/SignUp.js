@@ -43,12 +43,13 @@ class SignUp extends React.Component {
 	render() {
 		return (
 			<div>
+				<p>Sign Up to reach out to the world!</p>
 				<fieldset id='sign_up'>
 					<legend>Sign Up</legend>
 					<div>
 						<label htmlFor='username'>Username</label>
 						<input
-							type='username'
+							type='text'
 							name='username'
 							id='username'
 							onChange={this.onUsernameChange}

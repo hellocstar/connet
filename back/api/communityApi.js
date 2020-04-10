@@ -3,25 +3,21 @@ const db = require('../db');
 
 const eventList = async (req, res, next) => {
 	try {
-		console.log('hello');
-		// const userID = await db.inventory.find({});
-		res.status(200).send();
+		const events = await Community.find({});
+		res.status(200).send(events);
 	} catch (e) {
 		res.status(500).send(e);
 	}
 };
 
-const createRoom = async (req, res, next) => {
+const createEvent = async (req, res, next) => {
 	try {
-		const room = new MyCircle(req.body);
-		const result = await room.save();
-		res.status(201).send(result._id);
+		console.log(req.body);
+		const event = new Community(req.body);
+		const result = await event.save();
+		res.status(201).send(result);
 	} catch (e) {
-		if (e.name === 'ValidationError') {
-			res.status(400).send(e);
-		} else {
-			res.status(500).send(e);
-		}
+		res.status(500).send(e);
 	}
 };
 
@@ -82,7 +78,7 @@ const joinRoom = async (req, res, next) => {
 
 module.exports = {
 	eventList,
-	createRoom,
+	createEvent,
 	getRoom,
 	deleteRoom,
 	updateRoom,

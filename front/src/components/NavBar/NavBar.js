@@ -22,49 +22,49 @@ const theme = createMuiTheme({
 		primary: {
 			main: '#ffffff',
 			mainGradient: 'linear-gradient(to right, orange, #9c27b0)',
-			contrastText: '#fff'
+			contrastText: '#fff',
 		},
 		secondary: {
-			main: '#e91e63'
-		}
+			main: '#e91e63',
+		},
 	},
 	typography: {
 		button: {
-			textTransform: 'none'
-		}
-	}
+			textTransform: 'none',
+		},
+	},
 });
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	button: {
-		margin: theme.spacing(1)
+		margin: theme.spacing(1),
 	},
 	grow: {
-		flexGrow: 1
+		flexGrow: 1,
 	},
 	menuButton: {
-		marginRight: theme.spacing(2)
+		marginRight: theme.spacing(2),
 	},
 	title: {
 		display: 'none',
 		[theme.breakpoints.up('sm')]: {
-			display: 'block'
-		}
+			display: 'block',
+		},
 	},
 	search: {
 		position: 'relative',
 		borderRadius: theme.shape.borderRadius,
 		backgroundColor: fade(theme.palette.common.white, 0.15),
 		'&:hover': {
-			backgroundColor: fade(theme.palette.common.white, 0.25)
+			backgroundColor: fade(theme.palette.common.white, 0.25),
 		},
 		marginRight: theme.spacing(2),
 		marginLeft: 0,
 		width: '100%',
 		[theme.breakpoints.up('sm')]: {
 			marginLeft: theme.spacing(3),
-			width: 'auto'
-		}
+			width: 'auto',
+		},
 	},
 	searchIcon: {
 		padding: theme.spacing(0, 2),
@@ -73,10 +73,10 @@ const useStyles = makeStyles(theme => ({
 		pointerEvents: 'none',
 		display: 'flex',
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
 	},
 	inputRoot: {
-		color: 'inherit'
+		color: 'inherit',
 	},
 	inputInput: {
 		padding: theme.spacing(1, 1, 1, 0),
@@ -85,21 +85,21 @@ const useStyles = makeStyles(theme => ({
 		transition: theme.transitions.create('width'),
 		width: '100%',
 		[theme.breakpoints.up('md')]: {
-			width: '20ch'
-		}
+			width: '20ch',
+		},
 	},
 	sectionDesktop: {
 		display: 'none',
 		[theme.breakpoints.up('md')]: {
-			display: 'flex'
-		}
+			display: 'flex',
+		},
 	},
 	sectionMobile: {
 		display: 'flex',
 		[theme.breakpoints.up('md')]: {
-			display: 'none'
-		}
-	}
+			display: 'none',
+		},
+	},
 }));
 
 const BootstrapButton = withStyles({
@@ -118,18 +118,18 @@ const BootstrapButton = withStyles({
 			'sans-serif',
 			'"Apple Color Emoji"',
 			'"Segoe UI Emoji"',
-			'"Segoe UI Symbol"'
+			'"Segoe UI Symbol"',
 		].join(','),
 		'&:hover': {
 			backgroundColor: 'orange',
 
-			boxShadow: 'none'
+			boxShadow: 'none',
 		},
 		'&:active': {
 			boxShadow: 'none',
-			backgroundColor: 'orange'
-		}
-	}
+			backgroundColor: 'orange',
+		},
+	},
 })(Button);
 
 // // function topButton(){
@@ -145,7 +145,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }) {
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-	const handleProfileMenuOpen = event => {
+	const handleProfileMenuOpen = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
 
@@ -158,7 +158,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }) {
 		handleMobileMenuClose();
 	};
 
-	const handleMobileMenuOpen = event => {
+	const handleMobileMenuOpen = (event) => {
 		setMobileMoreAnchorEl(event.currentTarget);
 	};
 
@@ -241,9 +241,9 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }) {
 						<BootstrapButton
 							variant='contained'
 							color='primary'
-							onClick={() => onRouteChange('about')}
+							onClick={() => onRouteChange('create')}
 						>
-							ConNET
+							Create!
 						</BootstrapButton>
 						<div className={classes.search}>
 							<div className={classes.searchIcon}>
@@ -253,7 +253,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }) {
 								placeholder='Search for events…'
 								classes={{
 									root: classes.inputRoot,
-									input: classes.inputInput
+									input: classes.inputInput,
 								}}
 								inputProps={{ 'aria-label': 'search' }}
 							/>

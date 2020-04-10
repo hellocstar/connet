@@ -3,7 +3,7 @@ const Profile = require('../models/profileSchema');
 
 const roomList = async (req, res, next) => {
 	try {
-		const userID = await Profile.findOne({ _id: req });
+		const userID = await Profile.findOne({});
 		res.status(200).send();
 	} catch (e) {
 		res.status(500).send(e);

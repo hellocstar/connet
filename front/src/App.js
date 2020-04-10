@@ -9,7 +9,10 @@ import Community from './components/Community/Community';
 import MyCircle from './components/MyCircle/MyCircle';
 import Banner from './components/Banner/Banner';
 import Event from './components/Event/Event';
+import Create from './components/Create/Create';
+import Profile from './components/Profile/Profile';
 import Room from './components/Room/Room';
+import NewEvent from './components/NewEvent/NewEvent';
 
 const CommunityEventDatabase = [
 	{
@@ -131,8 +134,6 @@ const initialState = {
 	user: {
 		id: '',
 		name: '',
-		email: '',
-		password: '',
 	},
 };
 
@@ -152,6 +153,11 @@ class App extends Component {
 
 	onActivityIDChange = (id) => {
 		this.setState({ activityID: id });
+	};
+
+	onSignIn = (id, name) => {
+		this.setState({ user: { id: id, name: name }, isSignedIn: true });
+		this.onRouteChange('profile');
 	};
 
 	render() {
@@ -178,8 +184,6 @@ class App extends Component {
 						<Community
 							className='itemlist'
 							searchField={searchField}
-							events={communityEvent}
-							rooms={communityRoom}
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
 						/>
@@ -207,11 +211,37 @@ class App extends Component {
 					</div>
 				) : route === 'signin' ? (
 					<div>
-						<SignIn onRouteChange={this.onRouteChange} />
+						<SignIn
+							onRouteChange={this.onRouteChange}
+							onSignIn={this.onSignIn}
+						/>
 					</div>
 				) : route === 'signup' ? (
 					<div>
 						<SignUp onRouteChange={this.onRouteChange} />
+					</div>
+				) : route === 'create' ? (
+					<div>
+						<Create
+							onRouteChange={this.onRouteChange}
+							isSignedIn={isSignedIn}
+						/>
+					</div>
+				) : route === 'profile' ? (
+					<div>
+						<Profile
+							onRouteChange={this.onRouteChange}
+							isSignedIn={isSignedIn}
+							user={user}
+						/>
+					</div>
+				) : route === 'newevent' ? (
+					<div>
+						<NewEvent
+							onRouteChange={this.onRouteChange}
+							isSignedIn={isSignedIn}
+							user={user}
+						/>
 					</div>
 				) : (
 					<div>

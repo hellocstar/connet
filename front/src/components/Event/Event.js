@@ -31,59 +31,67 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
 	root: {
-	  maxWidth: 1300,
-	  margin: 'auto',
-	  margintop: '20px',
+		maxWidth: 1300,
+		margin: 'auto',
+		margintop: '20px',
 	},
 	media: {
-	  height: 350,
+		height: 350,
 	},
-  });
+});
 
-function ActivityCard(prop){
+function ActivityCard(prop) {
 	const classes = useStyles();
-	return (		
+	return (
 		<Card className={classes.root}>
-		<CardActionArea>
-		  <CardMedia
-			className={classes.media}
-			image="./connet_icon.png"
-			title={prop.name}
-		  />
-		  <CardContent>
-			<Typography gutterBottom variant="h5" component="h2">
-			{prop.name}
-			</Typography>
-			<Typography variant="body2" color="textSecondary" component="p">
-			{prop.description}
-			</Typography>
-		  </CardContent>
-		</CardActionArea>
-		<CardActions>
-		  <Button size="small" color="primary">
-			Share
-		  </Button>
-		  <Button size="small" color="primary">
-			Learn More
-		  </Button>
-		</CardActions>
+			<CardActionArea>
+				<CardMedia
+					className={classes.media}
+					image='./connet_icon.png'
+					title={prop.name}
+				/>
+				<CardContent>
+					<Typography gutterBottom variant='h5' component='h2'>
+						{prop.name}
+					</Typography>
+					<Typography
+						variant='body2'
+						color='textSecondary'
+						component='p'
+					>
+						{prop.description}
+					</Typography>
+				</CardContent>
+			</CardActionArea>
+			<CardActions>
+				<Button size='small' color='primary'>
+					Share
+				</Button>
+				<Button size='small' color='primary'>
+					Learn More
+				</Button>
+			</CardActions>
 		</Card>
 	);
 }
 
 const Event = ({ events, activityID }) => {
-	
 	for (let i = 0; i < events.length; i++) {
 		if (events[i].id === activityID) {
 			return (
-				<ActivityCard 
-					name={events[i].name} 
-					description={events[i].description} />
+				<ActivityCard
+					name={events[i].name}
+					description={events[i].description}
+				/>
 			);
 		}
 	}
 	return (
 		<div>
+			<ActivityCard
+				name={events[0].name}
+				description={events[0].description}
+			/>
 			<h1>Event not found</h1>
 		</div>
 	);
