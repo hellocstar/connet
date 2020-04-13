@@ -1,19 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Select } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
+import Chip from '@material-ui/core/Chip';
 
-const NewEvent = ({ onRouteChange, isSignedIn, user }) => {
+const useStyles = makeStyles((theme) => ({
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 120,
+		maxWidth: 300,
+	},
+	chips: {
+		display: 'flex',
+		flexWrap: 'wrap',
+	},
+	chip: {
+		margin: 2,
+	},
+	noLabel: {
+		marginTop: theme.spacing(3),
+	},
+}));
+
+const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
+	const classes = useStyles();
+
 	const [name, setName] = useState('');
 	const [date, setDate] = useState('');
 	const [time, setTime] = useState('');
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
 	// const [photo, setPhoto] = useState('');
-	const [category, setCategory] = useState([]);
+	const [categories, setCategories] = useState([]);
 
 	if (isSignedIn) {
-		const categories = [
+		const categoriesList = [
 			'Outdoors & Adventure',
 			'Tech',
 			'Family',
@@ -32,6 +54,17 @@ const NewEvent = ({ onRouteChange, isSignedIn, user }) => {
 			'Career & Business',
 		];
 
+		const ITEM_HEIGHT = 48;
+		const ITEM_PADDING_TOP = 8;
+		const MenuProps = {
+			PaperProps: {
+				style: {
+					maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+					width: 250,
+				},
+			},
+		};
+
 		const onSubmit = () => {
 			fetch('http://localhost:3000/newevent', {
 				method: 'post',
@@ -46,13 +79,14 @@ const NewEvent = ({ onRouteChange, isSignedIn, user }) => {
 					organiserID: user.id,
 					description: description,
 					// photo: photo,
-					category: category,
+					categories: categories,
 				}),
 			})
 				.then((response) => response.json())
-				.then((data) => {
-					if (data) {
-						onRouteChange('community');
+				.then((id) => {
+					if (id) {
+						onActivityIDChange(id);
+						onRouteChange('event/' + id);
 					}
 				});
 		};
@@ -121,17 +155,28 @@ const NewEvent = ({ onRouteChange, isSignedIn, user }) => {
 					</div> */}
 					<div>
 						<Select
-							labelId='demo-mutiple-name-label'
-							id='demo-mutiple-name'
+							labelId='demo-mutiple-chip-label'
+							id='demo-mutiple-chip'
 							multiple
-							value={category}
+							value={categories}
 							onChange={(event) =>
-								setCategory(event.target.value)
+								setCategories(event.target.value)
 							}
-							input={<Input />}
-							// MenuProps={MenuProps}
+							input={<Input id='select-multiple-chip' />}
+							renderValue={(selected) => (
+								<div className={classes.chips}>
+									{selected.map((value) => (
+										<Chip
+											key={value}
+											label={value}
+											className={classes.chip}
+										/>
+									))}
+								</div>
+							)}
+							MenuProps={MenuProps}
 						>
-							{categories.map((cat) => (
+							{categoriesList.map((cat) => (
 								<MenuItem key={cat} value={cat}>
 									{cat}
 								</MenuItem>

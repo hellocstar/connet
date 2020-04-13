@@ -32,10 +32,12 @@ class SignUp extends React.Component {
 				password: this.state.password,
 			}),
 		})
-			.then((response) => response.json())
-			.then((data) => {
-				if (data) {
-					this.props.onRouteChange('signin');
+			.then((response) => response.text())
+			.then((id) => {
+				if (id) {
+					this.props.onSignIn(id, this.state.username);
+					this.props.onActivityIDChange(id);
+					this.props.onRouteChange('updateprofile/' + id);
 				}
 			});
 	};

@@ -1,14 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const errorHandler = require('errorhandler');
 const passport = require('passport');
-// const session = require('express-session');
 
 const { initDb, expressSession } = require('./db');
 const { passportFunction } = require('./config/passport');
 const profileApi = require('./api/profileApi');
-const myCircleApi = require('./api/myCircleApi');
-const communityApi = require('./api/communityApi');
+const roomApi = require('./api/roomApi');
+const eventApi = require('./api/eventApi');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -17,9 +17,12 @@ const app = express();
 initDb();
 passportFunction();
 
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(expressSession);
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -29,52 +32,35 @@ if (!isProduction) {
 }
 
 //Profile
-app.get('/getUser/:username', profileApi.getProfile);
-app.delete('/deleteUser/:username', profileApi.deleteProfile);
-app.put('/updateUser/:username', profileApi.updateProfile);
-app.patch('/updateUser/:username', profileApi.updateProfile);
+app.get('/profile/:profileid', profileApi.getProfile);
+// app.delete('/deleteUser/:username', profileApi.deleteProfile);
+app.put('/updateprofile/:profileid', profileApi.updateProfile);
+// app.patch('/updateUser/:username', profileApi.updateProfile);
 
 //Sign In
-
 app.post('/signin', passport.authenticate('local'), profileApi.signIn);
-// app.post(
-// 	'/signin',
-// 	passport.authenticate('local', {
-// 		failureRedirect: '/signin-failure',
-// 		successRedirect: '/signin-success',
-// 	}),
-// 	profileApi.signIn
-// );
 app.post('/signup', profileApi.signUp);
-app.get('/signout', (req, res, next) => {
-	req.logout();
-	res.redirect('/signin');
-});
-app.get('/signin-success', (req, res, next) => {
-	console.log(req.user);
-	res.send('You successfully logged in.');
-});
-app.get('/signin-failure', (req, res, next) => {
-	res.send('Username or password is incorrect.');
-});
+app.get('/signout', profileApi.signOut);
+app.get('/signin-success', profileApi.signInSuccess);
+app.get('/signin-failure', profileApi.signInFail);
 
 //MyCircle
-app.get('/mycircle', myCircleApi.roomList);
-app.post('/createRoom', myCircleApi.createRoom);
-app.get('/getRoom/:roomname', myCircleApi.getRoom);
-app.delete('/deleteRoom/:roomname', myCircleApi.deleteRoom);
-app.put('/updateRoom/:roomname', myCircleApi.updateRoom);
-app.patch('/updateRoom/:roomname', myCircleApi.updateRoom);
-app.patch('/joinRoom/:roomname', myCircleApi.joinRoom);
+// app.get('/mycircle', roomApi.roomList);
+// app.post('/createRoom', roomApi.createRoom);
+app.get('/room/:roomid', roomApi.getRoom);
+// app.delete('/deleteRoom/:roomname', roomApi.deleteRoom);
+// app.put('/updateRoom/:roomname', roomApi.updateRoom);
+// app.patch('/updateRoom/:roomname', roomApi.updateRoom);
+// app.patch('/joinRoom/:roomname', roomApi.joinRoom);
 
 //Community
-app.get('/community', communityApi.eventList);
-app.post('/newevent', communityApi.createEvent);
-// app.get('/getRoom/:roomname', communityApi.getRoom);
-// app.delete('/deleteRoom/:roomname', communityApi.deleteRoom);
-// app.put('/updateRoom/:roomname', communityApi.updateRoom);
-// app.patch('/updateRoom/:roomname', communityApi.updateRoom);
-// app.patch('/joinRoom/:roomname', communityApi.joinRoom);
+app.get('/community', eventApi.eventList);
+app.post('/newevent', eventApi.createEvent);
+app.get('/event/:eventid', eventApi.getEvent);
+// app.delete('/deleteRoom/:roomname', eventApi.deleteRoom);
+// app.put('/updateRoom/:roomname', eventApi.updateRoom);
+// app.patch('/updateRoom/:roomname', eventApi.updateRoom);
+// app.patch('/joinRoom/:roomname', eventApi.joinRoom);
 
 app.listen(3000, () => {
 	console.log('The app is running on port 3000');

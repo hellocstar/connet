@@ -1,141 +1,179 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Select } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import Input from '@material-ui/core/Input';
+import Chip from '@material-ui/core/Chip';
 
-class UpdateProfile extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			userEmail: '',
-			userPassword: '',
-			userConfirmPassword: '',
-			dateOfBirth: '',
-			gender: '',
-			interest: '',
-			userDescription: '',
+const useStyles = makeStyles((theme) => ({
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 120,
+		maxWidth: 300,
+	},
+	chips: {
+		display: 'flex',
+		flexWrap: 'wrap',
+	},
+	chip: {
+		margin: 2,
+	},
+	noLabel: {
+		marginTop: theme.spacing(3),
+	},
+}));
+
+const UpdateProfile = ({
+	onRouteChange,
+	onActivityIDChange,
+	isSignedIn,
+	user,
+}) => {
+	const classes = useStyles();
+
+	// const [username, setUsername] = useState('');
+	// const [email, setEmail] = useState('');
+	// const [photo, setPhoto] = useState('');
+	const [biography, setBiography] = useState('');
+	const [birthday, setBirthday] = useState(-1);
+	// const [friends, setFriends] = useState([]);
+	//pending_friends
+	// const [history, setHistory] = useState([]);
+	const [interests, setInterests] = useState([]);
+
+	if (isSignedIn) {
+		const categoriesList = [
+			'Outdoors & Adventure',
+			'Tech',
+			'Family',
+			'Health & Wellness',
+			'Sports & Fitness',
+			'Learning',
+			'Photography',
+			'Food & Drink',
+			'Writing',
+			'Language & Culture',
+			'Music',
+			'Film',
+			'Beliefs',
+			'Arts',
+			'Fashion & Beauty',
+			'Career & Business',
+		];
+
+		const ITEM_HEIGHT = 48;
+		const ITEM_PADDING_TOP = 8;
+		const MenuProps = {
+			PaperProps: {
+				style: {
+					maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+					width: 250,
+				},
+			},
 		};
-	}
 
-	onEmailChange = (email) => {
-		this.setState({ userEmail: email.target.value });
-	};
+		const onSubmit = () => {
+			fetch('http://localhost:3000/updateprofile/' + user.id, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					// photo: photo,
+					id: user.id,
+					biography: biography,
+					birthday: birthday,
+					interests: interests,
+				}),
+			})
+				.then((response) => response.text())
+				.then((data) => {
+					if (data) {
+						onActivityIDChange(user.id);
+						onRouteChange('profile/' + user.id);
+					}
+				});
+		};
 
-	onPasswordChange = (password) => {
-		this.setState({ userPassword: password.target.value });
-	};
-
-	onConfirmPasswordChange = (confirmPassword) => {
-		this.setState({ confirmPassword: confirmPassword.target.value });
-	};
-	onDateOfBirthChange = (DOB) => {
-		this.setState({ dateOfBirth: DOB.target.value });
-	};
-	onGenderChange = (Gender) => {
-		this.setState({ gender: Gender.target.value });
-	};
-	onInterestChange = (Interest) => {
-		this.setState({ interest: Interest.target.value });
-	};
-	onUserDescriptionChange = (Description) => {
-		this.setState({ userDescription: Description.target.value });
-	};
-
-	onSubmitSignIn = () => {
-		fetch('http://localhost:3000/signin', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				signInEmail: this.state.email,
-				signInPassword: this.state.password,
-			}),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				if (data) {
-					this.props.onRouteChange('community');
-				}
-			});
-	};
-
-	render() {
 		return (
 			<div>
-				<fieldset id='update_profile'>
-					<legend>Update Profile</legend>
+				<fieldset id='update-profile'>
+					<legend>Update your profile</legend>
+
 					<div>
-						<label htmlFor='email-address'>Email</label>
+						<label htmlFor='biography'>Biography</label>
 						<input
-							type='email'
-							name='email-address'
-							id='email-address'
-							onChange={this.onEmailChange}
+							type='text'
+							name='biography'
+							id='biography'
+							onChange={(event) =>
+								setBiography(event.target.value)
+							}
 						/>
 					</div>
 					<div>
-						<label htmlFor='password'>Password</label>
+						<label htmlFor='birthday'>Birthday</label>
 						<input
-							type='password'
-							name='password'
-							id='password'
-							onChange={this.onPasswordChange}
+							type='date'
+							name='birthday'
+							id='birthday'
+							onChange={(event) =>
+								setBirthday(event.target.value)
+							}
 						/>
 					</div>
-					<div>
-						<label htmlFor='confirmPassword'>
-							Confirm Password
-						</label>
+					{/* <div>
+						<label htmlFor='photo'>Photo</label>
 						<input
-							type='confirmPassword'
-							name='confirmPassword'
-							id='confirmPassword'
-							onChange={this.onConfirmPasswordChange}
+							type='text'
+							name='photo'
+							id='photo'
+							onChange={(event) => setPhoto(event.target.value)}
 						/>
-					</div>
+					</div> */}
 					<div>
-						<label htmlFor='date_of_birth'>Date of Birth</label>
-						<input
-							type='date_of_birth'
-							name='date_of_birth'
-							id='date_of_birth'
-							onChange={this.onDateOfBirthChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor='gender'>Gender</label>
-						<input
-							type='gender'
-							name='gender'
-							id='gender'
-							onChange={this.onGenderChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor='interest'>Interest</label>
-						<input
-							type='interest'
-							name='interest'
-							id='interest'
-							onChange={this.onInterestChange}
-						/>
-					</div>
-					<div>
-						<label htmlFor='user_description'>Description</label>
-						<input
-							type='user_description'
-							name='user_description'
-							id='user_description'
-							onChange={this.onUserDescriptionChange}
-						/>
+						<Select
+							labelId='demo-mutiple-chip-label'
+							id='demo-mutiple-chip'
+							multiple
+							value={interests}
+							onChange={(event) =>
+								setInterests(event.target.value)
+							}
+							input={<Input id='select-multiple-chip' />}
+							renderValue={(selected) => (
+								<div className={classes.chips}>
+									{selected.map((value) => (
+										<Chip
+											key={value}
+											label={value}
+											className={classes.chip}
+										/>
+									))}
+								</div>
+							)}
+							MenuProps={MenuProps}
+						>
+							{categoriesList.map((cat) => (
+								<MenuItem key={cat} value={cat}>
+									{cat}
+								</MenuItem>
+							))}
+						</Select>
 					</div>
 				</fieldset>
 				<div className=''>
-					<input
-						onClick={this.onSubmitSignIn}
-						type='submit'
-						value='Update'
-					/>
+					<input onClick={onSubmit} type='submit' value='Create!' />
 				</div>
 			</div>
 		);
+	} else {
+		return (
+			<div>
+				<p>Sign In or Sign Up to do whatever you want!</p>
+			</div>
+		);
 	}
-}
+};
 
 export default UpdateProfile;

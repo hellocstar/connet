@@ -28,6 +28,7 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 							activity={event}
 							onRouteChange={onRouteChange}
 							onActivityIDChange={onActivityIDChange}
+							type={'event'}
 						/>
 					</div>
 				);

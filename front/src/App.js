@@ -13,6 +13,7 @@ import Create from './components/Create/Create';
 import Profile from './components/Profile/Profile';
 import Room from './components/Room/Room';
 import NewEvent from './components/NewEvent/NewEvent';
+import UpdateProfile from './components/UpdateProfile/UpdateProfile';
 
 const CommunityEventDatabase = [
 	{
@@ -126,8 +127,6 @@ const ProfileInformationDatabase = [
 const initialState = {
 	route: 'community',
 	searchField: '',
-	communityEvent: CommunityEventDatabase,
-	communityRoom: CommunityRoomDatabase,
 	myCircle: MyCircleDatabase,
 	activityID: '',
 	isSignedIn: true,
@@ -156,16 +155,17 @@ class App extends Component {
 	};
 
 	onSignIn = (id, name) => {
-		this.setState({ user: { id: id, name: name }, isSignedIn: true });
-		this.onRouteChange('profile');
+		this.setState({
+			user: { id: id, name: name },
+			activityID: id,
+			isSignedIn: true,
+		});
 	};
 
 	render() {
 		const {
 			route,
 			searchField,
-			communityEvent,
-			communityRoom,
 			myCircle,
 			activityID,
 			isSignedIn,
@@ -202,23 +202,37 @@ class App extends Component {
 							userID={user.id}
 						/>
 					</div>
-				) : route === 'activity' ? (
+				) : route === 'event/' + activityID ? (
 					<div>
 						<Event
-							events={communityEvent}
 							activityID={activityID}
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+						/>
+					</div>
+				) : route === 'room/' + activityID ? (
+					<div>
+						<Room
+							activityID={activityID}
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
 						/>
 					</div>
 				) : route === 'signin' ? (
 					<div>
 						<SignIn
 							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
 							onSignIn={this.onSignIn}
 						/>
 					</div>
 				) : route === 'signup' ? (
 					<div>
-						<SignUp onRouteChange={this.onRouteChange} />
+						<SignUp
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+							onSignIn={this.onSignIn}
+						/>
 					</div>
 				) : route === 'create' ? (
 					<div>
@@ -227,10 +241,21 @@ class App extends Component {
 							isSignedIn={isSignedIn}
 						/>
 					</div>
-				) : route === 'profile' ? (
+				) : route === 'profile/' + activityID ? (
 					<div>
 						<Profile
 							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+							isSignedIn={isSignedIn}
+							user={user}
+							activityID={activityID}
+						/>
+					</div>
+				) : route === 'updateprofile/' + activityID ? (
+					<div>
+						<UpdateProfile
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
 							isSignedIn={isSignedIn}
 							user={user}
 						/>
@@ -239,6 +264,7 @@ class App extends Component {
 					<div>
 						<NewEvent
 							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
 							isSignedIn={isSignedIn}
 							user={user}
 						/>

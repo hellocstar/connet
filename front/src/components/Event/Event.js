@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ListItem from '../ListItem/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,27 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
-// const Event = ({ events, activityID }) => {
-// 	for (let i = 0; i < events.length; i++) {
-// 		if (events[i].id === activityID) {
-// 			return (
-// 				<div>
-// 					<h1>{events[i].name}</h1>
-// 					<p>{events[i].user}</p>
-// 					<p>{events[i].date}</p>
-// 					<p>{events[i].location}</p>
-// 					<p>{events[i].description}</p>
-// 				</div>
-// 			);
-// 		}
-// 	}
-// 	return (
-// 		<div>
-// 			<h1>Event not found</h1>
-// 		</div>
-// 	);
-// };
 
 const useStyles = makeStyles({
 	root: {
@@ -75,24 +55,64 @@ function ActivityCard(prop) {
 	);
 }
 
-const Event = ({ events, activityID }) => {
-	for (let i = 0; i < events.length; i++) {
-		if (events[i].id === activityID) {
-			return (
-				<ActivityCard
-					name={events[i].name}
-					description={events[i].description}
-				/>
-			);
-		}
-	}
+const Event = ({ activityID, onRouteChange, onActivityIDChange }) => {
+	const [name, setName] = useState('');
+	const [date, setDate] = useState('');
+	const [time, setTime] = useState('');
+	const [location, setLocation] = useState('');
+	const [description, setDescription] = useState('');
+	// const [photo, setPhoto] = useState('');
+	const [categories, setCategories] = useState([]);
+	const [rooms, setRooms] = useState([]);
+	const [organiser, setOrganiser] = useState('');
+
+	useEffect(() => {
+		fetch('http://localhost:3000/event/' + activityID)
+			.then((response) => response.json())
+			.then((data) => {
+				if (data) {
+					setName(data.event.name);
+					setDate(data.event.date);
+					setTime(data.event.time);
+					setLocation(data.event.location);
+					setDescription(data.event.description);
+					setCategories(data.event.categories);
+					setRooms(data.rooms);
+					setOrganiser(data.organiser);
+				}
+			});
+	}, []);
+
 	return (
 		<div>
-			<ActivityCard
-				name={events[0].name}
-				description={events[0].description}
-			/>
-			<h1>Event not found</h1>
+			<ActivityCard name={name} description={description} />
+			<h1>{date}</h1>
+			<h1>{time}</h1>
+			<h1>{location}</h1>
+			<h1
+				onClick={() => {
+					onActivityIDChange(organiser.id);
+					onRouteChange('profile/' + organiser.id);
+				}}
+			>
+				{organiser.username}
+			</h1>
+			<h1>{categories}</h1>
+
+			<div className='parent'>
+				{rooms.map((room) => {
+					return (
+						<div className='child' key={room._id}>
+							<ListItem
+								activity={room}
+								onRouteChange={onRouteChange}
+								onActivityIDChange={onActivityIDChange}
+								type={'room'}
+							/>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 };

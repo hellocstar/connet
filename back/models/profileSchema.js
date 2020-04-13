@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const profile = new mongoose.Schema({
+const profileSchema = new mongoose.Schema({
 	username: {
 		type: String,
 		required: [true, 'Username is required'],
@@ -42,6 +42,5 @@ const profile = new mongoose.Schema({
 	},
 });
 
-const Profile = mongoose.model('Profile', profile);
-
+const Profile = mongoose.model('profile', profileSchema);
 module.exports = Profile;

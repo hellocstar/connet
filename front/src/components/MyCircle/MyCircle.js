@@ -15,7 +15,7 @@ const MyCircle = ({
 				.then((response) => response.json())
 				.then((data) => {
 					if (data) {
-						this.props.onRouteChange('community');
+						// this.props.onRouteChange('community');
 					}
 				});
 		}

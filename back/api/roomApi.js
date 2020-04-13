@@ -1,10 +1,11 @@
-const MyCircle = require('../models/myCircleSchema');
 const Profile = require('../models/profileSchema');
+const Room = require('../models/roomSchema');
+const Event = require('../models/eventSchema');
 
 const roomList = async (req, res, next) => {
 	try {
-		const userID = await Profile.findOne({});
-		res.status(200).send();
+		const room = await Room.findOne({});
+		res.status(200).send(room);
 	} catch (e) {
 		res.status(500).send(e);
 	}
@@ -12,23 +13,47 @@ const roomList = async (req, res, next) => {
 
 const createRoom = async (req, res, next) => {
 	try {
-		const room = new MyCircle(req.body);
+		const room = new Room(req.body);
 		const result = await room.save();
 		res.status(201).send(result._id);
 	} catch (e) {
-		if (e.name === 'ValidationError') {
-			res.status(400).send(e);
-		} else {
-			res.status(500).send(e);
-		}
+		res.status(500).send(e);
 	}
 };
 
 const getRoom = async (req, res, next) => {
 	try {
-		const room = await MyCircle.findOne({ name: req.params.roomname });
-		res.status(200).send(room);
+		const room = await Room.findOne({ _id: req.params.roomid });
+		const host = await Profile.findOne({ _id: room.hostID });
+		const typeName = 'MyCircle';
+		if (room.type != 'MyCircle') {
+			const event = await Event.findOne({ _id: room.type });
+			const typeName = event.name;
+		}
+		let participants = [];
+		const partiID = room.participants;
+		async function getParti() {
+			for (let i = 0; i < partiID.length; i++) {
+				const parti = await Profile.findOne({ _id: partiID[i] });
+				participants.push({
+					id: parti._id,
+					username: parti.username,
+				});
+			}
+		}
+		await getParti();
+		const responseObj = {
+			room: room,
+			host: {
+				id: host._id,
+				username: host.username,
+			},
+			type: typeName,
+			participants: participants,
+		};
+		res.status(200).send(responseObj);
 	} catch (e) {
+		console.log(e);
 		res.status(500).send(e);
 	}
 };
@@ -36,10 +61,7 @@ const getRoom = async (req, res, next) => {
 const updateRoom = async (req, res, next) => {
 	const room = req.body;
 	try {
-		const result = await MyCircle.update(
-			{ name: req.params.roomname },
-			room
-		);
+		const result = await Room.update({ name: req.params.roomname }, room);
 
 		if (result.ok === 1) res.status(200).send('Update Success');
 	} catch (e) {
@@ -57,7 +79,7 @@ const updateRoom = async (req, res, next) => {
 
 const deleteRoom = async (req, res, next) => {
 	try {
-		const result = await MyCircle.deleteOne({ name: req.params.roomname });
+		const result = await Room.deleteOne({ name: req.params.roomname });
 		if (result.deletedCount === 0) res.status(404).send();
 		else res.status(200).send('Deleted Successfully');
 	} catch (e) {
@@ -67,7 +89,7 @@ const deleteRoom = async (req, res, next) => {
 
 const joinRoom = async (req, res, next) => {
 	try {
-		const result = await MyCircle.updateOne(
+		const result = await Room.updateOne(
 			{ name: req.params.roomname },
 			{ $push: { parti: req.body.username } }
 		);

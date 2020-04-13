@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const community = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: [true, 'room name needed'],
@@ -9,12 +9,12 @@ const community = new mongoose.Schema({
 		type: String,
 		required: [true, 'date needed'],
 	},
-	// time: {
-	// 	type: TimeRanges
-	// },
+	time: {
+		type: String,
+	},
 	location: {
 		type: String,
-		required: [true, 'venue needed'],
+		required: [true, 'location needed'],
 	},
 	organiserID: {
 		type: String, //id of host
@@ -34,5 +34,5 @@ const community = new mongoose.Schema({
 	},
 });
 
-const Community = mongoose.model('Community', community, 'community');
-module.exports = Community;
+const Event = mongoose.model('event', eventSchema);
+module.exports = Event;
