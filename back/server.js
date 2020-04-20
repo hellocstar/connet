@@ -12,6 +12,7 @@ const { passportFunction } = require('./config/passport')
 const profileApi = require('./api/profileApi')
 const roomApi = require('./api/roomApi')
 const eventApi = require('./api/eventApi')
+const isProduction = process.env.NODE_ENV === 'production'
 const app = express()
 
 initDb()
