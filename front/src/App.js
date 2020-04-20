@@ -9,7 +9,11 @@ import Community from './components/Community/Community';
 import MyCircle from './components/MyCircle/MyCircle';
 import Banner from './components/Banner/Banner';
 import Event from './components/Event/Event';
+import Create from './components/Create/Create';
+import Profile from './components/Profile/Profile';
 import Room from './components/Room/Room';
+import NewEvent from './components/NewEvent/NewEvent';
+import UpdateProfile from './components/UpdateProfile/UpdateProfile';
 
 const CommunityEventDatabase = [
 	{
@@ -18,7 +22,7 @@ const CommunityEventDatabase = [
 		date: '20200327',
 		location: 'Hong Kong',
 		description: 'Run',
-		id: '001'
+		id: '001',
 	},
 	{
 		name: 'Singing Contest',
@@ -26,7 +30,7 @@ const CommunityEventDatabase = [
 		date: '20200423',
 		location: 'CUHK',
 		description: 'Sing',
-		id: '002'
+		id: '002',
 	},
 	{
 		name: 'CSCI3100',
@@ -34,8 +38,8 @@ const CommunityEventDatabase = [
 		date: '20200517',
 		location: 'Kowloon',
 		description: 'CSCI',
-		id: '003'
-	}
+		id: '003',
+	},
 ];
 
 const CommunityRoomDatabase = [
@@ -45,7 +49,7 @@ const CommunityRoomDatabase = [
 		date: '20200327',
 		location: 'Hong Kong',
 		description: 'Run',
-		id: '101'
+		id: '101',
 	},
 	{
 		name: 'Community Room 2',
@@ -53,7 +57,7 @@ const CommunityRoomDatabase = [
 		date: '20200423',
 		location: 'CUHK',
 		description: 'Sing',
-		id: '102'
+		id: '102',
 	},
 	{
 		name: 'Community Room 3',
@@ -61,8 +65,8 @@ const CommunityRoomDatabase = [
 		date: '20200517',
 		location: 'Kowloon',
 		description: 'CSCI',
-		id: '103'
-	}
+		id: '103',
+	},
 ];
 
 const MyCircleDatabase = [
@@ -72,7 +76,7 @@ const MyCircleDatabase = [
 		date: '20200327',
 		location: 'Hong Kong',
 		description: 'Run',
-		id: '301'
+		id: '301',
 	},
 	{
 		name: 'MyCircle Room 2',
@@ -80,7 +84,7 @@ const MyCircleDatabase = [
 		date: '20200423',
 		location: 'CUHK',
 		description: 'Sing',
-		id: '302'
+		id: '302',
 	},
 	{
 		name: 'MyCircle Room 3',
@@ -88,52 +92,48 @@ const MyCircleDatabase = [
 		date: '20200517',
 		location: 'Kowloon',
 		description: 'CSCI',
-		id: '303'
-	}
+		id: '303',
+	},
 ];
 
 const ProfileInformationDatabase = [
 	{
 		username: 'derek',
 		email: 'chanchunyat1999@gmail.com',
-		password: '12345678'
+		password: '12345678',
 	},
 	{
 		username: 'tommy',
 		email: 'tommy@gmail.com',
-		password: '12345678'
+		password: '12345678',
 	},
 	{
 		username: 'winky',
 		email: 'winky@gmail.com',
-		password: '12345678'
+		password: '12345678',
 	},
 	{
 		username: 'ivan',
 		email: 'ivan@gmail.com',
-		password: '12345678'
+		password: '12345678',
 	},
 	{
 		username: 'albert',
 		email: 'albert@gmail.com',
-		password: '12345678'
-	}
+		password: '12345678',
+	},
 ];
 
 const initialState = {
 	route: 'community',
 	searchField: '',
-	communityEvent: CommunityEventDatabase,
-	communityRoom: CommunityRoomDatabase,
 	myCircle: MyCircleDatabase,
 	activityID: '',
-	isSignedIn: false,
+	isSignedIn: true,
 	user: {
 		id: '',
 		name: '',
-		email: '',
-		password: ''
-	}
+	},
 };
 
 class App extends Component {
@@ -142,27 +142,34 @@ class App extends Component {
 		this.state = initialState;
 	}
 
-	onSearchChange = search => {
+	onSearchChange = (search) => {
 		this.setState({ searchField: search.target.value });
 	};
 
-	onRouteChange = route => {
+	onRouteChange = (route) => {
 		this.setState({ route: route });
 	};
 
-	onActivityIDChange = id => {
+	onActivityIDChange = (id) => {
 		this.setState({ activityID: id });
+	};
+
+	onSignIn = (id, name) => {
+		this.setState({
+			user: { id: id, name: name },
+			activityID: id,
+			isSignedIn: true,
+		});
 	};
 
 	render() {
 		const {
 			route,
-			isSignedIn,
 			searchField,
-			communityEvent,
-			communityRoom,
 			myCircle,
-			activityID
+			activityID,
+			isSignedIn,
+			user,
 		} = this.state;
 		return (
 			<div className='App'>
@@ -177,8 +184,6 @@ class App extends Component {
 						<Community
 							className='itemlist'
 							searchField={searchField}
-							events={communityEvent}
-							rooms={communityRoom}
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
 						/>
@@ -193,22 +198,76 @@ class App extends Component {
 							rooms={myCircle}
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
+							isSignedIn={isSignedIn}
+							userID={user.id}
 						/>
 					</div>
-				) : route === 'activity' ? (
+				) : route === 'event/' + activityID ? (
 					<div>
 						<Event
-							events={communityEvent}
 							activityID={activityID}
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+						/>
+					</div>
+				) : route === 'room/' + activityID ? (
+					<div>
+						<Room
+							activityID={activityID}
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
 						/>
 					</div>
 				) : route === 'signin' ? (
 					<div>
-						<SignIn onRouteChange={this.onRouteChange} />
+						<SignIn
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+							onSignIn={this.onSignIn}
+						/>
 					</div>
 				) : route === 'signup' ? (
 					<div>
-						<SignUp onRouteChange={this.onRouteChange} />
+						<SignUp
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+							onSignIn={this.onSignIn}
+						/>
+					</div>
+				) : route === 'create' ? (
+					<div>
+						<Create
+							onRouteChange={this.onRouteChange}
+							isSignedIn={isSignedIn}
+						/>
+					</div>
+				) : route === 'profile/' + activityID ? (
+					<div>
+						<Profile
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+							isSignedIn={isSignedIn}
+							user={user}
+							activityID={activityID}
+						/>
+					</div>
+				) : route === 'updateprofile/' + activityID ? (
+					<div>
+						<UpdateProfile
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+							isSignedIn={isSignedIn}
+							user={user}
+						/>
+					</div>
+				) : route === 'newevent' ? (
+					<div>
+						<NewEvent
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+							isSignedIn={isSignedIn}
+							user={user}
+						/>
 					</div>
 				) : (
 					<div>

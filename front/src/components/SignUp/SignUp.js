@@ -6,19 +6,19 @@ class SignUp extends React.Component {
 		this.state = {
 			username: '',
 			email: '',
-			password: ''
+			password: '',
 		};
 	}
 
-	onUsernameChange = name => {
+	onUsernameChange = (name) => {
 		this.setState({ username: name.target.value });
 	};
 
-	onEmailChange = email => {
+	onEmailChange = (email) => {
 		this.setState({ email: email.target.value });
 	};
 
-	onPasswordChange = password => {
+	onPasswordChange = (password) => {
 		this.setState({ password: password.target.value });
 	};
 
@@ -29,14 +29,15 @@ class SignUp extends React.Component {
 			body: JSON.stringify({
 				username: this.state.username,
 				email: this.state.email,
-				password: this.state.password
-			})
+				password: this.state.password,
+			}),
 		})
-			.then(response => response.json())
-			.then(data => {
-				console.log(data);
-				if (data) {
-					this.props.onRouteChange('signin');
+			.then((response) => response.text())
+			.then((id) => {
+				if (id) {
+					this.props.onSignIn(id, this.state.username);
+					this.props.onActivityIDChange(id);
+					this.props.onRouteChange('updateprofile/' + id);
 				}
 			});
 	};
@@ -44,12 +45,13 @@ class SignUp extends React.Component {
 	render() {
 		return (
 			<div>
+				<p>Sign Up to reach out to the world!</p>
 				<fieldset id='sign_up'>
 					<legend>Sign Up</legend>
 					<div>
 						<label htmlFor='username'>Username</label>
 						<input
-							type='username'
+							type='text'
 							name='username'
 							id='username'
 							onChange={this.onUsernameChange}

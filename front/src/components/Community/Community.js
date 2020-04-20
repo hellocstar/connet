@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ListItem from '../ListItem/ListItem';
 import './community.css';
 
-const Community = ({
-	searchField,
-	events,
-	rooms,
-	onRouteChange,
-	onActivityIDChange
-}) => {
-	const activities = events.concat(rooms);
-	const searchResult = activities.filter(activities => {
-		return activities.name
-			.toLowerCase()
-			.includes(searchField.toLowerCase());
+const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
+	const [eventList, setEventList] = useState([]);
+
+	useEffect(() => {
+		fetch('http://localhost:3000/community')
+			.then((response) => response.json())
+			.then((data) => {
+				if (data) {
+					setEventList(data);
+				}
+			});
+	}, []);
+
+	const searchResult = eventList.filter((event) => {
+		return event.name.toLowerCase().includes(searchField.toLowerCase());
 	});
 
 	return (
-		<div className="parent">
-			{searchResult.map(activity => {
+		<div className='parent'>
+			{searchResult.map((event) => {
 				return (
-					<div className="child">
-					<ListItem 
-						activity={activity}
-						onRouteChange={onRouteChange}
-						onActivityIDChange={onActivityIDChange}
-					/>
+					<div className='child' key={event._id}>
+						<ListItem
+							activity={event}
+							onRouteChange={onRouteChange}
+							onActivityIDChange={onActivityIDChange}
+							type={'event'}
+						/>
 					</div>
 				);
 			})}

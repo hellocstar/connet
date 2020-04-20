@@ -5,15 +5,15 @@ class SignIn extends React.Component {
 		super(props);
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
 		};
 	}
 
-	onUsernameChange = username => {
+	onUsernameChange = (username) => {
 		this.setState({ username: username.target.value });
 	};
 
-	onPasswordChange = password => {
+	onPasswordChange = (password) => {
 		this.setState({ password: password.target.value });
 	};
 
@@ -23,14 +23,14 @@ class SignIn extends React.Component {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				username: this.state.username,
-				password: this.state.password
-			})
+				password: this.state.password,
+			}),
 		})
-			.then(response => response.json())
-			.then(data => {
-				if (data) {
-					this.props.onRouteChange('community');
-				}
+			.then((response) => response.json())
+			.then((data) => {
+				this.props.onSignIn(data._id, data.username);
+				this.props.onActivityIDChange(data._id);
+				this.props.onRouteChange('profile/' + data._id);
 			});
 	};
 
