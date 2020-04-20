@@ -31,9 +31,6 @@ app.use(passport.session())
 if (!isProduction) {
   app.use(errorHandler())
 }
-app.use(passport.initialize())
-app.use(passport.session())
-initPassport()
 
 //Profile
 app.get('/profile/:profileid', profileApi.getProfile)
