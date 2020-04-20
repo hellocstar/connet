@@ -56,6 +56,15 @@ const getEvent = async (req, res, next) => {
 	}
 };
 
+const uploadEventPhoto = async (req, res, next) => {
+	try {
+	  const eventPhoto = req.file.buffer;
+	  res.status(200).send(eventPhoto);
+	} catch (e) {
+	  res.status(400).send(e);
+	  console.log(e);
+	}
+  };
 // const updateRoom = async (req, res, next) => {
 // 	const room = req.body;
 // 	try {
@@ -106,6 +115,7 @@ module.exports = {
 	eventList,
 	createEvent,
 	getEvent,
+	uploadEventPhoto,
 	// deleteRoom,
 	// updateRoom,
 	// joinRoom,

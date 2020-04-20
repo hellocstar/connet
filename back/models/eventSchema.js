@@ -24,7 +24,7 @@ const eventSchema = new mongoose.Schema({
 		type: String,
 	},
 	photo: {
-		type: String, //datatype to be updated
+		type: Buffer, //datatype to be updated
 	},
 	categories: {
 		type: [String],
