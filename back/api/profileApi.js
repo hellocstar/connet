@@ -1,7 +1,6 @@
 const Profile = require('../models/profile')
-const passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
-
+const passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy
 
 const createProfile = async (req, res, next) => {
   try {
@@ -64,40 +63,43 @@ const updateProfile = async (req, res, next) => {
 }
 
 const logIn = async (req, res, next) => {
-  passport.use(new LocalStrategy(
-    function(username, password, done) {
+  passport.use(
+    new LocalStrategy(function(username, password, done) {
       Profile.findOne({ username: username }, function(err, user) {
-        if (err) { return done(err); }
+        if (err) {
+          return done(err)
+        }
         if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
+          return done(null, false, { message: 'Incorrect username.' })
         }
         if (!user.validPassword(password)) {
-          return done(null, false, { message: 'Incorrect password.' });
+          return done(null, false, { message: 'Incorrect password.' })
         }
-        return done(null, user);
-      });
-    }
-  ));
+        return done(null, user)
+      })
+    }),
+  )
 
-const logOut = async (req, res, next) => {
-  req.logout()
-  res.status(200).send('logout successed')
-}
-
-const checkAuth = async (req, res, next) => {
-  if (req.isAuthenticated()) {
-    res.status(204).send()
-  } else {
-    res.status(401).send()
+  const logOut = async (req, res, next) => {
+    req.logout()
+    res.status(200).send('logout successed')
   }
-}
 
-module.exports = {
-  createProfile,
-  getProfile,
-  deleteProfile,
-  updateProfile,
-  logIn,
-  logOut,
-  checkAuth,
+  const checkAuth = async (req, res, next) => {
+    if (req.isAuthenticated()) {
+      res.status(204).send()
+    } else {
+      res.status(401).send()
+    }
+  }
+
+  module.exports = {
+    createProfile,
+    getProfile,
+    deleteProfile,
+    updateProfile,
+    logIn,
+    logOut,
+    checkAuth,
+  }
 }
