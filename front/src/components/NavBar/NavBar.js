@@ -302,7 +302,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 	const onEmailChange = email => {
 		setEmail(email.target.value);
 	};
-	const onPasswordChange = username => {
+	const onPasswordChange = password => {
 		setPassword(password.target.value);
 	};
 
