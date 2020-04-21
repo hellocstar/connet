@@ -49,6 +49,7 @@ const getEvent = async (req, res, next) => {
 				username: organiser.username,
 			},
 		};
+		console.log(responseObj);
 		res.status(200).send(responseObj);
 	} catch (e) {
 		console.log(e);

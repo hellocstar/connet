@@ -120,9 +120,9 @@ const deleteProfile = async (req, res, next) => {
 const updateProfile = async (req, res, next) => {
 	const profile = req.body;
 	try {
-		const id = mongoose.Types.ObjectId(JSON.parse(profile.id));
+		// const id = mongoose.Types.ObjectId(JSON.parse(profile.id));
 		const result = await Profile.findOneAndUpdate(
-			{ _id: id },
+			{ _id: profile.id },
 			{
 				biography: profile.biography,
 				birthday: profile.birthday,
@@ -131,6 +131,32 @@ const updateProfile = async (req, res, next) => {
 		);
 		console.log(result);
 		res.status(200).send(profile.id);
+	} catch (e) {
+		console.log(e);
+		res.status(500).send(e);
+	}
+};
+
+const searchUsername = async (req, res, next) => {
+	const username = req.body.username;
+	try {
+		const profile = await Profile.findOne({ username: username });
+		console.log(profile);
+		res.status(200).send(profile);
+	} catch (e) {
+		console.log(e);
+		res.status(500).send(e);
+	}
+};
+
+const addFriend = async (req, res, next) => {
+	try {
+		const profile = await Profile.findOne(
+			{ _id: req.body.me },
+			{ $push: { friends: req.body.friend } }
+		);
+		console.log(profile);
+		res.status(200).send('Added');
 	} catch (e) {
 		console.log(e);
 		res.status(500).send(e);
@@ -146,4 +172,6 @@ module.exports = {
 	getProfile,
 	deleteProfile,
 	updateProfile,
+	searchUsername,
+	addFriend,
 };

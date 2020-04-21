@@ -86,11 +86,11 @@ const UpdateProfile = ({
 					interests: interests,
 				}),
 			})
-				.then((response) => response.json())
+				.then((response) => response.text())
 				.then((data) => {
 					if (data) {
-						onActivityIDChange(user.id);
-						onRouteChange('profile/' + user.id);
+						onActivityIDChange(data);
+						onRouteChange('profile/' + data);
 					}
 				});
 		};

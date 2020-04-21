@@ -19,10 +19,12 @@ const Profile = ({
 	const [history, setHistory] = useState([]);
 	const [interests, setInterests] = useState([]);
 
-	let myself = true;
+	let myself = false;
 	if (user.id === activityID) {
 		myself = true;
 	}
+
+	let friend = false;
 
 	useEffect(() => {
 		fetch('http://localhost:3000/profile/' + activityID)
@@ -40,11 +42,30 @@ const Profile = ({
 			});
 	}, []);
 
-	if (myself) {
-		return (
-			<div>
-				<p>activityID {activityID}</p>
-				<h1>my profile</h1>
+	const onAddFriend = () => {
+		fetch('http://localhost:3000/addfriend/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				me: user.id,
+				friend: activityID,
+			}),
+		})
+			.then((response) => response.text())
+			.then((data) => {
+				if (data === 'Added') {
+					friend = true;
+				}
+				console.log(data);
+			});
+	};
+
+	return (
+		<div>
+			<h1>Profile</h1>
+			{myself ? (
 				<button
 					onClick={() => {
 						onRouteChange('updateprofile/' + user.id);
@@ -52,51 +73,55 @@ const Profile = ({
 				>
 					update your profile
 				</button>
-				<h1>{username}</h1>
-				<h1>{email}</h1>
-				<h1>{biography}</h1>
-				<h1>{birthday}</h1>
-				<h1>{friends}</h1>
-				{friends.map((friend) => {
-					return (
-						<div className='child' key={friend.id}>
-							<p
-								onClick={() => {
-									onActivityIDChange(friend.id);
-									onRouteChange('profile/' + friend.id);
-								}}
-							>
-								{friend.username}
-							</p>
-						</div>
-					);
-				})}
-				{history.map((hist) => {
-					return (
-						<div className='child' key={hist.id}>
-							<p
-								onClick={() => {
-									onActivityIDChange(hist.id);
-									onRouteChange('event/' + hist.id);
-								}}
-							>
-								{hist.name}
-							</p>
-						</div>
-					);
-				})}
-				{interests.map((interest) => {
-					return (
-						<div className='child' key={interest}>
-							<p>{interest.username}</p>
-						</div>
-					);
-				})}
-			</div>
-		);
-	} else {
-		return <p>not me</p>;
-	}
+			) : null}
+			{isSignedIn && !friend && !myself ? (
+				<button onClick={onAddFriend()}>Follow!</button>
+			) : null}
+			{friend && !myself ? <p>He or she is your friend!</p> : null}
+			<h1>{username}</h1>
+			<h1>{email}</h1>
+			<h1>{biography}</h1>
+			<h1>{birthday}</h1>
+
+			{myself
+				? friends.map((friend) => {
+						return (
+							<div className='child' key={friend.id}>
+								<p
+									onClick={() => {
+										onActivityIDChange(friend.id);
+										onRouteChange('profile/' + friend.id);
+									}}
+								>
+									{friend.username}
+								</p>
+							</div>
+						);
+				  })
+				: null}
+			{history.map((hist) => {
+				return (
+					<div className='child' key={hist.id}>
+						<p
+							onClick={() => {
+								onActivityIDChange(hist.id);
+								onRouteChange('event/' + hist.id);
+							}}
+						>
+							{hist.name}
+						</p>
+					</div>
+				);
+			})}
+			{interests.map((interest) => {
+				return (
+					<div className='child' key={interest}>
+						<p>{interest.username}</p>
+					</div>
+				);
+			})}
+		</div>
+	);
 };
 
 export default Profile;

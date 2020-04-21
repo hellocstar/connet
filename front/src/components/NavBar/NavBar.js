@@ -195,6 +195,25 @@ function PrimarySearchAppBar(
 	{ onRouteChange, isSignedIn, onActivityIDChange, onSignIn, onSignOut },
 	props
 ) {
+	const [search, setSearch] = React.useState('');
+
+	const onSubmitSearch = (search) => {
+		fetch('http://localhost:3000/search', {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				username: search,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data) {
+					onActivityIDChange(data._id);
+					onRouteChange('profile/' + data._id);
+				}
+			});
+	};
+
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -326,7 +345,8 @@ function PrimarySearchAppBar(
 				if (data) {
 					handleClose();
 					onSignIn(data._id, data.username);
-					onRouteChange('mycircle');
+					onActivityIDChange(data._id);
+					onRouteChange('profile/' + data._id);
 				}
 			});
 	};
@@ -399,7 +419,7 @@ function PrimarySearchAppBar(
 					fullWidth
 				/>
 				<TextField
-					autoFocus
+					// autoFocus
 					margin='dense'
 					id='name'
 					label='Password'
@@ -461,7 +481,6 @@ function PrimarySearchAppBar(
 					fullWidth
 				/>
 				<TextField
-					autoFocus
 					margin='dense'
 					id='name'
 					label='Email Address'
@@ -533,6 +552,10 @@ function PrimarySearchAppBar(
 							input: classes.inputInput,
 						}}
 						inputProps={{ 'aria-label': 'search' }}
+						onChange={(event) => setSearch(event.target.value)}
+						onKeyPress={(e) => {
+							if (e.key === 'Enter') onSubmitSearch(search);
+						}}
 					/>
 				</div>
 				<div className={classes.grow} />

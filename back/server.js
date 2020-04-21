@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const errorHandler = require('errorhandler');
 const passport = require('passport');
@@ -33,7 +32,8 @@ if (!isProduction) {
 app.get('/profile/:profileid', profileApi.getProfile);
 // app.delete('/deleteUser/:username', profileApi.deleteProfile);
 app.put('/updateprofile/:profileid', profileApi.updateProfile);
-// app.patch('/updateUser/:username', profileApi.updateProfile);
+app.post('/search', profileApi.searchUsername);
+app.post('/addfriend/', profileApi.addFriend);
 
 //Sign In
 app.post('/signin', passport.authenticate('local'), profileApi.signIn);
