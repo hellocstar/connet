@@ -16,6 +16,7 @@ import NewEvent from './components/NewEvent/NewEvent';
 import NewRoom from './components/NewRoom/NewRoom';
 import UpdateProfile from './components/UpdateProfile/UpdateProfile';
 import Toolbar from '@material-ui/core/Toolbar';
+import StickyFooter from './StickyFooter'
 
 const initialState = {
 	route: 'community',
@@ -184,7 +185,9 @@ class App extends Component {
 						<p>Welcome to ConNET!</p>
 					</div>
 				)}
+				<StickyFooter />
 			</div>
+			
 		);
 	}
 }
