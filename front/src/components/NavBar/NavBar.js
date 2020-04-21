@@ -379,6 +379,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 			  type="username"
 			  name='username'
 			  color='secondary'
+			  onChange={onUsernameChange}
 			  fullWidth			  
 			/>
 			<TextField
@@ -389,6 +390,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 			  type="password"
 			  name='password'
 			  color='secondary'
+			  onChange={onPasswordChange}
 			  fullWidth
 			/>
 		  </DialogContent>
@@ -428,6 +430,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 			  type="username"
 			  name='username'
 			  color='secondary'
+			  onChange={onUsernameChange}
 			  fullWidth			  
 			/>			
 			<TextField
@@ -438,6 +441,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 			  type="email"
 			  name='email'
 			  color='secondary'
+			  onChange={onEmailChange}
 			  fullWidth			  
 			/>
 			<TextField
@@ -448,6 +452,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 			  type="password"
 			  name='password'
 			  color='secondary'
+			  onChange={onPasswordChange}
 			  fullWidth
 			/>
 		  </DialogContent>

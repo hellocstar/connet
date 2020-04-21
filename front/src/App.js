@@ -14,6 +14,7 @@ import Profile from './components/Profile/Profile';
 import Room from './components/Room/Room';
 import NewEvent from './components/NewEvent/NewEvent';
 import UpdateProfile from './components/UpdateProfile/UpdateProfile';
+import Toolbar from '@material-ui/core/Toolbar';
 
 const CommunityEventDatabase = [
 	{
@@ -177,6 +178,7 @@ class App extends Component {
 					isSignedIn={isSignedIn}
 					onRouteChange={this.onRouteChange}
 				/>
+				
 				{route === 'community' ? (
 					<div>
 						<Banner onRouteChange={this.onRouteChange} />
@@ -204,6 +206,7 @@ class App extends Component {
 					</div>
 				) : route === 'event/' + activityID ? (
 					<div>
+						<Toolbar/>
 						<Event
 							activityID={activityID}
 							onRouteChange={this.onRouteChange}
@@ -220,6 +223,7 @@ class App extends Component {
 					</div>
 				) : route === 'signin' ? (
 					<div>
+						<Toolbar/>
 						<SignIn
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
@@ -228,6 +232,7 @@ class App extends Component {
 					</div>
 				) : route === 'signup' ? (
 					<div>
+						<Toolbar/>
 						<SignUp
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
@@ -236,6 +241,7 @@ class App extends Component {
 					</div>
 				) : route === 'create' ? (
 					<div>
+						<Toolbar/>
 						<Create
 							onRouteChange={this.onRouteChange}
 							isSignedIn={isSignedIn}
@@ -243,6 +249,7 @@ class App extends Component {
 					</div>
 				) : route === 'profile/' + activityID ? (
 					<div>
+						<Toolbar/>
 						<Profile
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
@@ -253,6 +260,7 @@ class App extends Component {
 					</div>
 				) : route === 'updateprofile/' + activityID ? (
 					<div>
+						<Toolbar/>
 						<UpdateProfile
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
@@ -262,6 +270,7 @@ class App extends Component {
 					</div>
 				) : route === 'newevent' ? (
 					<div>
+						<Toolbar/>
 						<NewEvent
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
