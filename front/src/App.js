@@ -54,6 +54,15 @@ class App extends Component {
 		});
 	};
 
+	onSignOut = () => {
+		this.setState({
+			user: '',
+			activityID: '',
+			isSignedIn: false,
+		});
+		this.onRouteChange('community');
+	};
+
 	render() {
 		const {
 			route,
@@ -70,8 +79,9 @@ class App extends Component {
 					onRouteChange={this.onRouteChange}
 					onActivityIDChange={this.onActivityIDChange}
 					onSignIn={this.onSignIn}
+					onSignOut={this.onSignOut}
 				/>
-				
+
 				{route === 'community' ? (
 					<div>
 						<Banner onRouteChange={this.onRouteChange} />
@@ -98,7 +108,7 @@ class App extends Component {
 					</div>
 				) : route === 'event/' + activityID ? (
 					<div>
-						<Toolbar/>
+						<Toolbar />
 						<Event
 							activityID={activityID}
 							onRouteChange={this.onRouteChange}
@@ -115,7 +125,7 @@ class App extends Component {
 					</div>
 				) : route === 'signin' ? (
 					<div>
-						<Toolbar/>
+						<Toolbar />
 						<SignIn
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
@@ -124,7 +134,7 @@ class App extends Component {
 					</div>
 				) : route === 'signup' ? (
 					<div>
-						<Toolbar/>
+						<Toolbar />
 						<SignUp
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
@@ -133,7 +143,7 @@ class App extends Component {
 					</div>
 				) : route === 'create' ? (
 					<div>
-						<Toolbar/>
+						<Toolbar />
 						<Create
 							onRouteChange={this.onRouteChange}
 							isSignedIn={isSignedIn}
@@ -141,7 +151,7 @@ class App extends Component {
 					</div>
 				) : route === 'profile/' + activityID ? (
 					<div>
-						<Toolbar/>
+						<Toolbar />
 						<Profile
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
@@ -152,7 +162,7 @@ class App extends Component {
 					</div>
 				) : route === 'updateprofile/' + activityID ? (
 					<div>
-						<Toolbar/>
+						<Toolbar />
 						<UpdateProfile
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
@@ -162,7 +172,7 @@ class App extends Component {
 					</div>
 				) : route === 'newevent' ? (
 					<div>
-						<Toolbar/>
+						<Toolbar />
 						<NewEvent
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}

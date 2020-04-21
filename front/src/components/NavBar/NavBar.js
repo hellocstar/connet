@@ -192,7 +192,7 @@ ElevationScroll.propTypes = {
 
 // const topButtonProp = {className={classes.button} color="primary" size="small"};
 function PrimarySearchAppBar(
-	{ onRouteChange, isSignedIn, onActivityIDChange, onSignIn },
+	{ onRouteChange, isSignedIn, onActivityIDChange, onSignIn, onSignOut },
 	props
 ) {
 	const classes = useStyles();
@@ -326,7 +326,6 @@ function PrimarySearchAppBar(
 				if (data) {
 					handleClose();
 					onSignIn(data._id, data.username);
-					onActivityIDChange(data._id);
 					onRouteChange('mycircle');
 				}
 			});
@@ -376,7 +375,7 @@ function PrimarySearchAppBar(
 			maxWidth='xs'
 		>
 			<DialogTitle id='form-dialog-title' style={{ textAlign: 'center' }}>
-				Login
+				Sign In
 			</DialogTitle>
 			<Divider variant='middle' />
 			<DialogContent>
@@ -384,7 +383,7 @@ function PrimarySearchAppBar(
 					<Typography
 						style={{ whiteSpace: 'pre-line', textAlign: 'center' }}
 					>
-						Already have an account? Log in!
+						Already have an account? Sign in!
 					</Typography>
 				</DialogContentText>
 
@@ -423,7 +422,7 @@ function PrimarySearchAppBar(
 						onClick={onSubmitSignIn}
 						style={{ justifyContent: 'center' }}
 					>
-						Login
+						Sign In
 					</LoginButton>
 				</Grid>
 			</DialogActions>
@@ -514,13 +513,15 @@ function PrimarySearchAppBar(
 				>
 					<MenuIcon />
 				</IconButton>
-				<BootstrapButton
-					variant='contained'
-					color='primary'
-					onClick={() => onRouteChange('create')}
-				>
-					Create!
-				</BootstrapButton>
+				{isSignedIn === true ? (
+					<BootstrapButton
+						variant='contained'
+						color='primary'
+						onClick={() => onRouteChange('create')}
+					>
+						Create!
+					</BootstrapButton>
+				) : null}
 				<div className={classes.search}>
 					<div className={classes.searchIcon}>
 						<SearchIcon />
@@ -545,15 +546,17 @@ function PrimarySearchAppBar(
 					>
 						About
 					</Button>
-					<Button
-						variant='outlined'
-						className={classes.button}
-						color='primary'
-						size='small'
-						onClick={() => onRouteChange('mycircle')}
-					>
-						My Circle
-					</Button>
+					{isSignedIn === true ? (
+						<Button
+							variant='outlined'
+							className={classes.button}
+							color='primary'
+							size='small'
+							onClick={() => onRouteChange('mycircle')}
+						>
+							My Circle
+						</Button>
+					) : null}
 					<Button
 						variant='outlined'
 						className={classes.button}
@@ -563,24 +566,38 @@ function PrimarySearchAppBar(
 					>
 						Community
 					</Button>
-					<Button
-						variant='outlined'
-						className={classes.button}
-						color='primary'
-						size='small'
-						onClick={handleClickOpen}
-					>
-						Sign in
-					</Button>
-					<Button
-						variant='outlined'
-						className={classes.button}
-						color='primary'
-						size='small'
-						onClick={handleClickOpenSignup}
-					>
-						Sign up
-					</Button>
+					{isSignedIn === true ? (
+						<Button
+							variant='outlined'
+							className={classes.button}
+							color='primary'
+							size='small'
+							onClick={() => onSignOut()}
+						>
+							Sign Out
+						</Button>
+					) : (
+						<div>
+							<Button
+								variant='outlined'
+								className={classes.button}
+								color='primary'
+								size='small'
+								onClick={handleClickOpen}
+							>
+								Sign in
+							</Button>
+							<Button
+								variant='outlined'
+								className={classes.button}
+								color='primary'
+								size='small'
+								onClick={handleClickOpenSignup}
+							>
+								Sign up
+							</Button>
+						</div>
+					)}
 				</div>
 				<div className={classes.sectionMobile}>
 					<IconButton
@@ -616,6 +633,7 @@ const NavBar = ({
 	isSignedIn,
 	onActivityIDChange,
 	onSignIn,
+	onSignOut,
 }) => {
 	//const bar = <PrimarySearchAppBar onRouteChange={onRouteChange} isSignedIn={isSignedIn} />;
 	if (isSignedIn) {
@@ -628,6 +646,7 @@ const NavBar = ({
 				isSignedIn={isSignedIn}
 				onActivityIDChange={onActivityIDChange}
 				onSignIn={onSignIn}
+				onSignOut={onSignOut}
 			/>
 		);
 	} else {
@@ -638,6 +657,7 @@ const NavBar = ({
 				isSignedIn={isSignedIn}
 				onActivityIDChange={onActivityIDChange}
 				onSignIn={onSignIn}
+				onSignOut={onSignOut}
 			/>
 		);
 	}
