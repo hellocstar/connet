@@ -86,7 +86,7 @@ const UpdateProfile = ({
 					interests: interests,
 				}),
 			})
-				.then((response) => response.text())
+				.then((response) => response.json())
 				.then((data) => {
 					if (data) {
 						onActivityIDChange(user.id);

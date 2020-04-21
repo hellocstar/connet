@@ -7,7 +7,7 @@ const Create = ({ isSignedIn, onRouteChange }) => {
 				<button onClick={() => onRouteChange('newevent')}>
 					Organise an Event in Community
 				</button>
-				<button onClick={() => onRouteChange('signin')}>
+				<button onClick={() => onRouteChange('newroom')}>
 					Host a Room in MyCircle
 				</button>
 			</div>

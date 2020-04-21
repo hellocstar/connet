@@ -21,7 +21,7 @@ const createEvent = async (req, res, next) => {
 			{ $push: { history: event._id } }
 		);
 		console.log(updateHistory);
-		res.status(201).send(result)._id;
+		res.status(201).send(result._id);
 	} catch (e) {
 		console.log(e);
 		res.status(500).send(e);

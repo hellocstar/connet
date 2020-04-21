@@ -13,124 +13,15 @@ import Create from './components/Create/Create';
 import Profile from './components/Profile/Profile';
 import Room from './components/Room/Room';
 import NewEvent from './components/NewEvent/NewEvent';
+import NewRoom from './components/NewRoom/NewRoom';
 import UpdateProfile from './components/UpdateProfile/UpdateProfile';
 import Toolbar from '@material-ui/core/Toolbar';
-
-const CommunityEventDatabase = [
-	{
-		name: 'Marathon',
-		user: 'abc',
-		date: '20200327',
-		location: 'Hong Kong',
-		description: 'Run',
-		id: '001',
-	},
-	{
-		name: 'Singing Contest',
-		user: 'def',
-		date: '20200423',
-		location: 'CUHK',
-		description: 'Sing',
-		id: '002',
-	},
-	{
-		name: 'CSCI3100',
-		user: 'ghi',
-		date: '20200517',
-		location: 'Kowloon',
-		description: 'CSCI',
-		id: '003',
-	},
-];
-
-const CommunityRoomDatabase = [
-	{
-		name: 'Community Room 1',
-		host: 'abc',
-		date: '20200327',
-		location: 'Hong Kong',
-		description: 'Run',
-		id: '101',
-	},
-	{
-		name: 'Community Room 2',
-		host: 'def',
-		date: '20200423',
-		location: 'CUHK',
-		description: 'Sing',
-		id: '102',
-	},
-	{
-		name: 'Community Room 3',
-		host: 'ghi',
-		date: '20200517',
-		location: 'Kowloon',
-		description: 'CSCI',
-		id: '103',
-	},
-];
-
-const MyCircleDatabase = [
-	{
-		name: 'MyCircle Room 1',
-		host: 'abc',
-		date: '20200327',
-		location: 'Hong Kong',
-		description: 'Run',
-		id: '301',
-	},
-	{
-		name: 'MyCircle Room 2',
-		host: 'def',
-		date: '20200423',
-		location: 'CUHK',
-		description: 'Sing',
-		id: '302',
-	},
-	{
-		name: 'MyCircle Room 3',
-		host: 'ghi',
-		date: '20200517',
-		location: 'Kowloon',
-		description: 'CSCI',
-		id: '303',
-	},
-];
-
-const ProfileInformationDatabase = [
-	{
-		username: 'derek',
-		email: 'chanchunyat1999@gmail.com',
-		password: '12345678',
-	},
-	{
-		username: 'tommy',
-		email: 'tommy@gmail.com',
-		password: '12345678',
-	},
-	{
-		username: 'winky',
-		email: 'winky@gmail.com',
-		password: '12345678',
-	},
-	{
-		username: 'ivan',
-		email: 'ivan@gmail.com',
-		password: '12345678',
-	},
-	{
-		username: 'albert',
-		email: 'albert@gmail.com',
-		password: '12345678',
-	},
-];
 
 const initialState = {
 	route: 'community',
 	searchField: '',
-	myCircle: MyCircleDatabase,
 	activityID: '',
-	isSignedIn: true,
+	isSignedIn: false,
 	user: {
 		id: '',
 		name: '',
@@ -167,7 +58,7 @@ class App extends Component {
 		const {
 			route,
 			searchField,
-			myCircle,
+			// myCircle,
 			activityID,
 			isSignedIn,
 			user,
@@ -199,7 +90,6 @@ class App extends Component {
 						<MyCircle
 							className='itemlist'
 							searchField={searchField}
-							rooms={myCircle}
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
 							isSignedIn={isSignedIn}
@@ -274,6 +164,15 @@ class App extends Component {
 					<div>
 						<Toolbar/>
 						<NewEvent
+							onRouteChange={this.onRouteChange}
+							onActivityIDChange={this.onActivityIDChange}
+							isSignedIn={isSignedIn}
+							user={user}
+						/>
+					</div>
+				) : route === 'newroom' ? (
+					<div>
+						<NewRoom
 							onRouteChange={this.onRouteChange}
 							onActivityIDChange={this.onActivityIDChange}
 							isSignedIn={isSignedIn}

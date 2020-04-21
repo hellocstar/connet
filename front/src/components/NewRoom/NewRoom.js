@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
+const NewRoom = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	const classes = useStyles();
 
 	const [name, setName] = useState('');
@@ -33,6 +33,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	const [description, setDescription] = useState('');
 	// const [photo, setPhoto] = useState('');
 	const [categories, setCategories] = useState([]);
+	const [maxNoOfParticipants, setMaxNoOfParticipants] = useState(0);
 
 	if (isSignedIn) {
 		const categoriesList = [
@@ -66,37 +67,39 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 		};
 
 		const onSubmit = () => {
-			fetch('http://localhost:3000/newevent', {
+			fetch('http://localhost:3000/newroom', {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
+					type: 'mycircle',
 					name: name,
 					date: date,
 					time: time,
 					location: location,
-					organiserID: user.id,
+					hostID: user.id,
 					description: description,
 					// photo: photo,
 					categories: categories,
+					maxNoOfParticipants: maxNoOfParticipants,
 				}),
 			})
 				.then((response) => response.json())
 				.then((id) => {
 					if (id) {
 						onActivityIDChange(id);
-						onRouteChange('event/' + id);
+						onRouteChange('room/' + id);
 					}
 				});
 		};
 
 		return (
 			<div>
-				<fieldset id='new_event'>
-					<legend>Tell others your idea!</legend>
+				<fieldset id='new_room'>
+					<legend>Create a room!</legend>
 					<div>
-						<label htmlFor='name'>Name of the Event</label>
+						<label htmlFor='name'>Name of the Room</label>
 						<input
 							type='text'
 							name='name'
@@ -183,6 +186,19 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							))}
 						</Select>
 					</div>
+					<div>
+						<label htmlFor='maxNoOfParticipants'>
+							Maximum Number Of Participants
+						</label>
+						<input
+							type='number'
+							name='maxNoOfParticipants'
+							id='maxNoOfParticipants'
+							onChange={(event) =>
+								setDescription(event.target.value)
+							}
+						/>
+					</div>
 				</fieldset>
 				<div className=''>
 					<input onClick={onSubmit} type='submit' value='Create!' />
@@ -198,4 +214,4 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	}
 };
 
-export default NewEvent;
+export default NewRoom;

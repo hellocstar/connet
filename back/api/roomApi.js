@@ -4,8 +4,24 @@ const Event = require('../models/eventSchema');
 
 const roomList = async (req, res, next) => {
 	try {
-		const room = await Room.findOne({});
-		res.status(200).send(room);
+		const user = await Profile.findOne({ _id: req.body.id });
+		friends = user.friends;
+		const rooms = [];
+		for (let i = 0; i < friends.length; i++) {
+			const friendRooms = await Room.find({ hostID: friends[i] });
+			for (let j = 0; j < friendRooms.length; i++) {
+				if (friendRooms[j].type === 'mycircle') {
+					rooms.push(friendRooms[j]);
+				}
+			}
+		}
+		const roomByMe = await Room.find({ hostID: user._id });
+		for (let i = 0; i < roomByMe.length; i++) {
+			if (roomByMe[i].type === 'mycircle') {
+				rooms.push(roomByMe[i]);
+			}
+		}
+		res.status(200).send(rooms);
 	} catch (e) {
 		res.status(500).send(e);
 	}
@@ -25,8 +41,8 @@ const getRoom = async (req, res, next) => {
 	try {
 		const room = await Room.findOne({ _id: req.params.roomid });
 		const host = await Profile.findOne({ _id: room.hostID });
-		const typeName = 'MyCircle';
-		if (room.type != 'MyCircle') {
+		const typeName = room.type;
+		if (room.type != 'mycircle') {
 			const event = await Event.findOne({ _id: room.type });
 			const typeName = event.name;
 		}
