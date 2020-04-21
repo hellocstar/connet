@@ -21,6 +21,7 @@ const roomList = async (req, res, next) => {
 				rooms.push(roomByMe[i]);
 			}
 		}
+		console.log(rooms);
 		res.status(200).send(rooms);
 	} catch (e) {
 		res.status(500).send(e);

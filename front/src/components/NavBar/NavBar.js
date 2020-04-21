@@ -29,7 +29,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Divider from '@material-ui/core/Divider';
 import Slide from '@material-ui/core/Slide';
-import Typography from "@material-ui/core/Typography";
+import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 const theme = createMuiTheme({
@@ -153,34 +153,37 @@ function ElevationScroll(props) {
 	// will default to window.
 	// This is only being set here because the demo is in an iframe.
 	const trigger = useScrollTrigger({
-	  disableHysteresis: true,
-	  threshold: 0,
-	  target: window ? window() : undefined,
+		disableHysteresis: true,
+		threshold: 0,
+		target: window ? window() : undefined,
 	});
-  
+
 	// return React.cloneElement(children, {
 	//   elevation: trigger ? 4 : 0, style:{ background: trigger ? theme.palette.primary.mainGradient : 'transparent',  boxShadow: 'none'}
 	// });
 
 	const bar = React.cloneElement(children, {
-		   elevation: trigger ? 4 : 0, style:{ background: theme.palette.primary.mainGradient ,  boxShadow: 'none'}
-		 })
+		elevation: trigger ? 4 : 0,
+		style: {
+			background: theme.palette.primary.mainGradient,
+			boxShadow: 'none',
+		},
+	});
 
 	return (
 		<Fade in={trigger} timeout={500}>
 			{bar}
-		</Fade>		
-	)
-	
-  }
-  
+		</Fade>
+	);
+}
+
 ElevationScroll.propTypes = {
-children: PropTypes.element.isRequired,
-/**
- * Injected by the documentation to work in an iframe.
- * You won't need it on your project.
- */
-window: PropTypes.func,
+	children: PropTypes.element.isRequired,
+	/**
+	 * Injected by the documentation to work in an iframe.
+	 * You won't need it on your project.
+	 */
+	window: PropTypes.func,
 };
 
 // // function topButton(){
@@ -188,7 +191,10 @@ window: PropTypes.func,
 // // }
 
 // const topButtonProp = {className={classes.button} color="primary" size="small"};
-function PrimarySearchAppBar({ onRouteChange, isSignedIn, onActivityIDChange, onSignIn }, props) {
+function PrimarySearchAppBar(
+	{ onRouteChange, isSignedIn, onActivityIDChange, onSignIn },
+	props
+) {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -277,32 +283,32 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn, onActivityIDChange, on
 	const [openSignup, setOpenSignup] = React.useState(false);
 
 	const handleClickOpen = () => {
-	setOpen(true);
+		setOpen(true);
 	};
 
 	const handleClose = () => {
-	setOpen(false);
+		setOpen(false);
 	};
 
 	const handleClickOpenSignup = () => {
-	setOpenSignup(true);
+		setOpenSignup(true);
 	};
 
 	const handleCloseSignup = () => {
-	setOpenSignup(false);
+		setOpenSignup(false);
 	};
 
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [username, setUsername] = React.useState('');
 
-	const onUsernameChange = username => {
+	const onUsernameChange = (username) => {
 		setUsername(username.target.value);
 	};
-	const onEmailChange = email => {
+	const onEmailChange = (email) => {
 		setEmail(email.target.value);
 	};
-	const onPasswordChange = password => {
+	const onPasswordChange = (password) => {
 		setPassword(password.target.value);
 	};
 
@@ -312,14 +318,16 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn, onActivityIDChange, on
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				username: username,
-				password: password
-			})
+				password: password,
+			}),
 		})
-			.then(response => response.json())
-			.then(data => {
+			.then((response) => response.json())
+			.then((data) => {
 				if (data) {
 					handleClose();
-					onRouteChange('community');
+					onSignIn(data._id, data.username);
+					onActivityIDChange(data._id);
+					onRouteChange('mycircle');
 				}
 			});
 	};
@@ -345,248 +353,270 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn, onActivityIDChange, on
 			});
 	};
 
-
 	const LoginButton = withStyles({
 		root: {
-		  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-		  borderRadius: 100,
-		  border: 0,
-		  color: 'white',
-		  height: 48,
-		  padding: '0 30px',
-		  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-		  
+			background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+			borderRadius: 100,
+			border: 0,
+			color: 'white',
+			height: 48,
+			padding: '0 30px',
+			boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 		},
 		label: {
-		  textTransform: 'capitalize',
+			textTransform: 'capitalize',
 		},
 	})(Button);
 
 	const LoginDialogue = (
-		<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" maxWidth='xs' >
-		  <DialogTitle id="form-dialog-title" style={{textAlign: "center"}}>Login</DialogTitle>
-		  <Divider variant="middle" />
-		  <DialogContent>
-			<DialogContentText>
-			  <Typography style={{whiteSpace: 'pre-line', textAlign: "center"}}>
-			  Already have an account? Log in!
-			  </Typography>
-			</DialogContentText>
-						
-			<TextField
-			  autoFocus
-			  margin="dense"
-			  id="name"
-			  label="User Name"
-			  type="username"
-			  name='username'
-			  color='secondary'
-			  onChange={onUsernameChange}
-			  fullWidth			  
-			/>
-			<TextField
-			  autoFocus
-			  margin="dense"
-			  id="name"
-			  label="Password"
-			  type="password"
-			  name='password'
-			  color='secondary'
-			  onChange={onPasswordChange}
-			  fullWidth
-			/>
-		  </DialogContent>
-		  <Divider variant="middle" />
-		  <DialogActions>
-		  <Grid
-			container
-			direction="row"
-			justify="center"
-			alignItems="center"
-			>			
-			<LoginButton onClick={onSubmitSignIn} style={{justifyContent: 'center'}}>
-			  Login
-			</LoginButton>
-		  </Grid>
-			
-		  </DialogActions>		  
+		<Dialog
+			open={open}
+			onClose={handleClose}
+			aria-labelledby='form-dialog-title'
+			maxWidth='xs'
+		>
+			<DialogTitle id='form-dialog-title' style={{ textAlign: 'center' }}>
+				Login
+			</DialogTitle>
+			<Divider variant='middle' />
+			<DialogContent>
+				<DialogContentText>
+					<Typography
+						style={{ whiteSpace: 'pre-line', textAlign: 'center' }}
+					>
+						Already have an account? Log in!
+					</Typography>
+				</DialogContentText>
+
+				<TextField
+					autoFocus
+					margin='dense'
+					id='name'
+					label='User Name'
+					type='username'
+					name='username'
+					color='secondary'
+					onChange={onUsernameChange}
+					fullWidth
+				/>
+				<TextField
+					autoFocus
+					margin='dense'
+					id='name'
+					label='Password'
+					type='password'
+					name='password'
+					color='secondary'
+					onChange={onPasswordChange}
+					fullWidth
+				/>
+			</DialogContent>
+			<Divider variant='middle' />
+			<DialogActions>
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+					<LoginButton
+						onClick={onSubmitSignIn}
+						style={{ justifyContent: 'center' }}
+					>
+						Login
+					</LoginButton>
+				</Grid>
+			</DialogActions>
 		</Dialog>
-	)
+	);
 
 	const SignupDialogue = (
-		<Dialog open={openSignup} onClose={handleCloseSignup} aria-labelledby="form-dialog-title" maxWidth='xs' >
-		  <DialogTitle id="form-dialog-title" style={{textAlign: "center"}}>Sign up</DialogTitle>
-		  <Divider variant="middle" />
-		  <DialogContent>
-			<DialogContentText>
-			  <Typography style={{whiteSpace: 'pre-line', textAlign: "center"}}>
-			  Don't have an account yet? Join us!
-			  </Typography>
-			</DialogContentText>
+		<Dialog
+			open={openSignup}
+			onClose={handleCloseSignup}
+			aria-labelledby='form-dialog-title'
+			maxWidth='xs'
+		>
+			<DialogTitle id='form-dialog-title' style={{ textAlign: 'center' }}>
+				Sign up
+			</DialogTitle>
+			<Divider variant='middle' />
+			<DialogContent>
+				<DialogContentText>
+					<Typography
+						style={{ whiteSpace: 'pre-line', textAlign: 'center' }}
+					>
+						Don't have an account yet? Join us!
+					</Typography>
+				</DialogContentText>
 
-			<TextField
-			  autoFocus
-			  margin="dense"
-			  id="name"
-			  label="User Name"
-			  type="username"
-			  name='username'
-			  color='secondary'
-			  onChange={onUsernameChange}
-			  fullWidth			  
-			/>			
-			<TextField
-			  autoFocus
-			  margin="dense"
-			  id="name"
-			  label="Email Address"
-			  type="email"
-			  name='email'
-			  color='secondary'
-			  onChange={onEmailChange}
-			  fullWidth			  
-			/>
-			<TextField
-			  autoFocus
-			  margin="dense"
-			  id="name"
-			  label="Password"
-			  type="password"
-			  name='password'
-			  color='secondary'
-			  onChange={onPasswordChange}
-			  fullWidth
-			/>
-		  </DialogContent>
-		  <Divider variant="middle" />
-		  <DialogActions>
-		  <Grid
-			container
-			direction="row"
-			justify="center"
-			alignItems="center"
-			>			
-			<LoginButton onClick={onSubmitSignUp} style={{justifyContent: 'center'}}>
-			  Sign Up
-			</LoginButton>
-		  </Grid>
-			
-		  </DialogActions>		  
+				<TextField
+					autoFocus
+					margin='dense'
+					id='name'
+					label='User Name'
+					type='username'
+					name='username'
+					color='secondary'
+					onChange={onUsernameChange}
+					fullWidth
+				/>
+				<TextField
+					autoFocus
+					margin='dense'
+					id='name'
+					label='Email Address'
+					type='email'
+					name='email'
+					color='secondary'
+					onChange={onEmailChange}
+					fullWidth
+				/>
+				<TextField
+					autoFocus
+					margin='dense'
+					id='name'
+					label='Password'
+					type='password'
+					name='password'
+					color='secondary'
+					onChange={onPasswordChange}
+					fullWidth
+				/>
+			</DialogContent>
+			<Divider variant='middle' />
+			<DialogActions>
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+					<LoginButton
+						onClick={onSubmitSignUp}
+						style={{ justifyContent: 'center' }}
+					>
+						Sign Up
+					</LoginButton>
+				</Grid>
+			</DialogActions>
 		</Dialog>
-	)
+	);
 
 	const CustomAppBar = (
-		<AppBar style={{ background: 'transparent',  boxShadow: 'none'}}>
-		  <Toolbar>
-						<IconButton
-							edge='start'
-							className={classes.menuButton}
-							color='inherit'
-							aria-label='open drawer'
-						>
-							<MenuIcon />
-						</IconButton>
-						<BootstrapButton
-							variant='contained'
-							color='primary'
-							onClick={() => onRouteChange('create')}
-						>
-							Create!
-						</BootstrapButton>
-						<div className={classes.search}>
-							<div className={classes.searchIcon}>
-								<SearchIcon />
-							</div>
-							<InputBase
-								placeholder='Search for events…'
-								classes={{
-									root: classes.inputRoot,
-									input: classes.inputInput,
-								}}
-								inputProps={{ 'aria-label': 'search' }}
-							/>
-						</div>
-						<div className={classes.grow} />
-						<div className={classes.sectionDesktop}>
-							<Button
-								variant='outlined'
-								className={classes.button}
-								color='primary'
-								size='small'
-								onClick={() => onRouteChange('about')}
-							>
-								About
-							</Button>
-							<Button
-								variant='outlined'
-								className={classes.button}
-								color='primary'
-								size='small'
-								onClick={() => onRouteChange('mycircle')}
-							>
-								My Circle
-							</Button>
-							<Button
-								variant='outlined'
-								className={classes.button}
-								color='primary'
-								size='small'
-								onClick={() => onRouteChange('community')}
-							>
-								Community
-							</Button>
-							<Button
-								variant='outlined'
-								className={classes.button}
-								color='primary'
-								size='small'
-								onClick={handleClickOpen}
-							>
-								Sign in
-							</Button>
-							<Button
-								variant='outlined'
-								className={classes.button}
-								color='primary'
-								size='small'
-								onClick={handleClickOpenSignup}
-							>
-								Sign up
-							</Button>
-						</div>
-						<div className={classes.sectionMobile}>
-							<IconButton
-								aria-label='show more'
-								aria-controls={mobileMenuId}
-								aria-haspopup='true'
-								onClick={handleMobileMenuOpen}
-								color='inherit'
-							>
-								<MoreIcon />
-							</IconButton>
-						</div>
-					</Toolbar>
+		<AppBar style={{ background: 'transparent', boxShadow: 'none' }}>
+			<Toolbar>
+				<IconButton
+					edge='start'
+					className={classes.menuButton}
+					color='inherit'
+					aria-label='open drawer'
+				>
+					<MenuIcon />
+				</IconButton>
+				<BootstrapButton
+					variant='contained'
+					color='primary'
+					onClick={() => onRouteChange('create')}
+				>
+					Create!
+				</BootstrapButton>
+				<div className={classes.search}>
+					<div className={classes.searchIcon}>
+						<SearchIcon />
+					</div>
+					<InputBase
+						placeholder='Search for events…'
+						classes={{
+							root: classes.inputRoot,
+							input: classes.inputInput,
+						}}
+						inputProps={{ 'aria-label': 'search' }}
+					/>
+				</div>
+				<div className={classes.grow} />
+				<div className={classes.sectionDesktop}>
+					<Button
+						variant='outlined'
+						className={classes.button}
+						color='primary'
+						size='small'
+						onClick={() => onRouteChange('about')}
+					>
+						About
+					</Button>
+					<Button
+						variant='outlined'
+						className={classes.button}
+						color='primary'
+						size='small'
+						onClick={() => onRouteChange('mycircle')}
+					>
+						My Circle
+					</Button>
+					<Button
+						variant='outlined'
+						className={classes.button}
+						color='primary'
+						size='small'
+						onClick={() => onRouteChange('community')}
+					>
+						Community
+					</Button>
+					<Button
+						variant='outlined'
+						className={classes.button}
+						color='primary'
+						size='small'
+						onClick={handleClickOpen}
+					>
+						Sign in
+					</Button>
+					<Button
+						variant='outlined'
+						className={classes.button}
+						color='primary'
+						size='small'
+						onClick={handleClickOpenSignup}
+					>
+						Sign up
+					</Button>
+				</div>
+				<div className={classes.sectionMobile}>
+					<IconButton
+						aria-label='show more'
+						aria-controls={mobileMenuId}
+						aria-haspopup='true'
+						onClick={handleMobileMenuOpen}
+						color='inherit'
+					>
+						<MoreIcon />
+					</IconButton>
+				</div>
+			</Toolbar>
 		</AppBar>
-	)
+	);
 
 	return (
 		<div className={classes.grow}>
 			<MuiThemeProvider theme={theme}>
-			{CustomAppBar}
-			<ElevationScroll {...props}>
-			{CustomAppBar}
-			</ElevationScroll>
-			{renderMobileMenu}
-			{renderMenu}
-			{LoginDialogue}
-			{SignupDialogue}
+				{CustomAppBar}
+				<ElevationScroll {...props}>{CustomAppBar}</ElevationScroll>
+				{renderMobileMenu}
+				{renderMenu}
+				{LoginDialogue}
+				{SignupDialogue}
 			</MuiThemeProvider>
-			
 		</div>
 	);
 }
 
-const NavBar = ({ onRouteChange, isSignedIn, onActivityIDChange, onSignIn }) => {
+const NavBar = ({
+	onRouteChange,
+	isSignedIn,
+	onActivityIDChange,
+	onSignIn,
+}) => {
 	//const bar = <PrimarySearchAppBar onRouteChange={onRouteChange} isSignedIn={isSignedIn} />;
 	if (isSignedIn) {
 		//PrimarySearchAppBar({ onRouteChange, isSignedIn });
