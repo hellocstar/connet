@@ -15,7 +15,6 @@ const Profile = ({
 	const [biography, setBiography] = useState('');
 	const [birthday, setBirthday] = useState(-1);
 	const [friends, setFriends] = useState([]);
-	//pending_friends
 	const [history, setHistory] = useState([]);
 	const [interests, setInterests] = useState([]);
 	const [isFriend, setIsFriends] = useState(false);
@@ -82,7 +81,6 @@ const Profile = ({
 			<h1>{email}</h1>
 			<h1>{biography}</h1>
 			<h1>{birthday}</h1>
-
 			{myself
 				? friends.map((friend) => {
 						return (

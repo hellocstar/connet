@@ -422,7 +422,6 @@ function PrimarySearchAppBar(
 					fullWidth
 				/>
 				<TextField
-					// autoFocus
 					margin='dense'
 					id='name'
 					label='Password'
@@ -494,7 +493,6 @@ function PrimarySearchAppBar(
 					fullWidth
 				/>
 				<TextField
-					autoFocus
 					margin='dense'
 					id='name'
 					label='Password'
@@ -549,7 +547,7 @@ function PrimarySearchAppBar(
 						<SearchIcon />
 					</div>
 					<InputBase
-						placeholder='Search for events…'
+						placeholder='Search for people...'
 						classes={{
 							root: classes.inputRoot,
 							input: classes.inputInput,

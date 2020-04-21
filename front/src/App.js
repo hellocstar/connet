@@ -77,7 +77,6 @@ class App extends Component {
 						onSignIn={this.onSignIn}
 						onSignOut={this.onSignOut}
 					/>
-
 					{route === 'community' ? (
 						<div>
 							<Banner onRouteChange={this.onRouteChange} />

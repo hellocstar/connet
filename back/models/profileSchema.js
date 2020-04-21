@@ -31,9 +31,6 @@ const profileSchema = new mongoose.Schema({
 	friends: {
 		type: [String], //id of user friends
 	},
-	pending_friends: {
-		type: [String], //id of friend requests
-	},
 	history: {
 		type: [String], //id of rooms history
 	},
