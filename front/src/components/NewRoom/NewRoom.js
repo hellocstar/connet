@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -23,23 +23,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const UpdateProfile = ({
-	onRouteChange,
-	onActivityIDChange,
-	isSignedIn,
-	user,
-}) => {
+const NewRoom = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	const classes = useStyles();
 
-	// const [username, setUsername] = useState('');
-	// const [email, setEmail] = useState('');
+	const [name, setName] = useState('');
+	const [date, setDate] = useState('');
+	const [time, setTime] = useState('');
+	const [location, setLocation] = useState('');
+	const [description, setDescription] = useState('');
 	// const [photo, setPhoto] = useState('');
-	const [biography, setBiography] = useState('');
-	const [birthday, setBirthday] = useState(-1);
-	// const [friends, setFriends] = useState([]);
-	//pending_friends
-	// const [history, setHistory] = useState([]);
-	const [interests, setInterests] = useState([]);
+	const [categories, setCategories] = useState([]);
+	const [maxNoOfParticipants, setMaxNoOfParticipants] = useState(0);
 
 	if (isSignedIn) {
 		const categoriesList = [
@@ -73,52 +67,83 @@ const UpdateProfile = ({
 		};
 
 		const onSubmit = () => {
-			fetch('http://localhost:3000/updateprofile/' + user.id, {
-				method: 'PUT',
+			fetch('http://localhost:3000/newroom', {
+				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
+					type: 'mycircle',
+					name: name,
+					date: date,
+					time: time,
+					location: location,
+					hostID: user.id,
+					description: description,
 					// photo: photo,
-					id: user.id,
-					biography: biography,
-					birthday: birthday,
-					interests: interests,
+					categories: categories,
+					maxNoOfParticipants: maxNoOfParticipants,
 				}),
 			})
 				.then((response) => response.json())
-				.then((data) => {
-					if (data) {
-						onActivityIDChange(user.id);
-						onRouteChange('profile/' + user.id);
+				.then((id) => {
+					if (id) {
+						onActivityIDChange(id);
+						onRouteChange('room/' + id);
 					}
 				});
 		};
 
 		return (
 			<div>
-				<fieldset id='update-profile'>
-					<legend>Update your profile</legend>
-
+				<fieldset id='new_room'>
+					<legend>Create a room!</legend>
 					<div>
-						<label htmlFor='biography'>Biography</label>
+						<label htmlFor='name'>Name of the Room</label>
 						<input
 							type='text'
-							name='biography'
-							id='biography'
+							name='name'
+							id='name'
+							onChange={(event) => setName(event.target.value)}
+						/>
+					</div>
+					<div>
+						<label htmlFor='date'>Date</label>
+						<input
+							type='date'
+							name='date'
+							id='date'
+							onChange={(event) => setDate(event.target.value)}
+						/>
+					</div>
+					<div>
+						<label htmlFor='time'>Time</label>
+						<input
+							type='time'
+							name='time'
+							id='time'
+							onChange={(event) => setTime(event.target.value)}
+						/>
+					</div>
+					<div>
+						<label htmlFor='location'>Location</label>
+						<input
+							type='text'
+							name='location'
+							id='location'
 							onChange={(event) =>
-								setBiography(event.target.value)
+								setLocation(event.target.value)
 							}
 						/>
 					</div>
 					<div>
-						<label htmlFor='birthday'>Birthday</label>
+						<label htmlFor='description'>Description</label>
 						<input
-							type='date'
-							name='birthday'
-							id='birthday'
+							type='text'
+							name='description'
+							id='description'
 							onChange={(event) =>
-								setBirthday(event.target.value)
+								setDescription(event.target.value)
 							}
 						/>
 					</div>
@@ -136,9 +161,9 @@ const UpdateProfile = ({
 							labelId='demo-mutiple-chip-label'
 							id='demo-mutiple-chip'
 							multiple
-							value={interests}
+							value={categories}
 							onChange={(event) =>
-								setInterests(event.target.value)
+								setCategories(event.target.value)
 							}
 							input={<Input id='select-multiple-chip' />}
 							renderValue={(selected) => (
@@ -161,6 +186,19 @@ const UpdateProfile = ({
 							))}
 						</Select>
 					</div>
+					<div>
+						<label htmlFor='maxNoOfParticipants'>
+							Maximum Number Of Participants
+						</label>
+						<input
+							type='number'
+							name='maxNoOfParticipants'
+							id='maxNoOfParticipants'
+							onChange={(event) =>
+								setMaxNoOfParticipants(event.target.value)
+							}
+						/>
+					</div>
 				</fieldset>
 				<div className=''>
 					<input onClick={onSubmit} type='submit' value='Create!' />
@@ -176,4 +214,4 @@ const UpdateProfile = ({
 	}
 };
 
-export default UpdateProfile;
+export default NewRoom;

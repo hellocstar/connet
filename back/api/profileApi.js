@@ -26,7 +26,7 @@ const signUp = async (req, res, next) => {
 		};
 		const profile = new Profile(user);
 		await profile.save();
-		res.status(200).send(profile._id);
+		res.status(200).send(profile);
 	} catch (e) {
 		if (e.name === 'ValidationError') {
 			res.status(400).send(e);
@@ -130,7 +130,7 @@ const updateProfile = async (req, res, next) => {
 			}
 		);
 		console.log(result);
-		res.status(200).send('Update Success');
+		res.status(200).send(profile.id);
 	} catch (e) {
 		console.log(e);
 		res.status(500).send(e);

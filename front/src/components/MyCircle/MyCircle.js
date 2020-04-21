@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import ListItem from '../ListItem/ListItem';
+import './MyCircle.css';
 
 const MyCircle = ({
 	searchField,
-	rooms,
 	onRouteChange,
 	onActivityIDChange,
 	isSignedIn,
 	userID,
 }) => {
+	const [roomList, setRoomList] = useState([]);
+
 	useEffect(() => {
-		if (isSignedIn) {
-			fetch('http://localhost:3000/mycircle')
-				.then((response) => response.json())
-				.then((data) => {
-					if (data) {
-						// this.props.onRouteChange('community');
-					}
-				});
-		}
-	});
+		fetch('http://localhost:3000/mycircle', {
+			method: 'post',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				id: userID,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data) {
+					setRoomList(data);
+					// this.props.onRouteChange('community');
+				}
+			});
+	}, []);
 
-	// if (!isSignedIn) {
-	// 	this.props.onRouteChange('community');
-	// }
-
-	const filtered = rooms.filter((rooms) => {
+	const filtered = roomList.filter((rooms) => {
 		return rooms.name.toLowerCase().includes(searchField.toLowerCase());
 	});
 
@@ -33,11 +36,12 @@ const MyCircle = ({
 		<div className='parent'>
 			{filtered.map((room) => {
 				return (
-					<div className='child'>
+					<div className='child' key={room._id}>
 						<ListItem
 							activity={room}
 							onRouteChange={onRouteChange}
 							onActivityIDChange={onActivityIDChange}
+							type={'room'}
 						/>
 					</div>
 				);

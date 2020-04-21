@@ -97,7 +97,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
       const files = event.target.files;
       const formData = new FormData();
       formData.append("eventPhoto", files[0]);
-      const file = fetch("/event/photo", {
+      const file = fetch("/newevent/photo", {
         method: "POST",
         body: formData,
       })

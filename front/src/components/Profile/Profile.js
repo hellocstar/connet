@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import proPic from './profile.jpg';
+import './Profile.css';
 
 const Profile = ({
 	onRouteChange,
