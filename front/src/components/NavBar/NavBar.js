@@ -188,7 +188,7 @@ window: PropTypes.func,
 // // }
 
 // const topButtonProp = {className={classes.button} color="primary" size="small"};
-function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
+function PrimarySearchAppBar({ onRouteChange, isSignedIn, onActivityIDChange, onSignIn }, props) {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -318,7 +318,8 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 			.then(response => response.json())
 			.then(data => {
 				if (data) {
-					this.props.onRouteChange('community');
+					handleClose();
+					onRouteChange('community');
 				}
 			});
 	};
@@ -333,12 +334,13 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 				password: password,
 			}),
 		})
-			.then((response) => response.text())
-			.then((id) => {
-				if (id) {
-					this.props.onSignIn(id, this.state.username);
-					this.props.onActivityIDChange(id);
-					this.props.onRouteChange('updateprofile/' + id);
+			.then((response) => response.json())
+			.then((data) => {
+				if (data) {
+					handleCloseSignup();
+					onSignIn(data._id, data.username);
+					onActivityIDChange(data._id);
+					onRouteChange('updateprofile/' + data._id);
 				}
 			});
 	};
@@ -584,7 +586,7 @@ function PrimarySearchAppBar({ onRouteChange, isSignedIn }, props) {
 	);
 }
 
-const NavBar = ({ onRouteChange, isSignedIn }) => {
+const NavBar = ({ onRouteChange, isSignedIn, onActivityIDChange, onSignIn }) => {
 	//const bar = <PrimarySearchAppBar onRouteChange={onRouteChange} isSignedIn={isSignedIn} />;
 	if (isSignedIn) {
 		//PrimarySearchAppBar({ onRouteChange, isSignedIn });
@@ -594,6 +596,8 @@ const NavBar = ({ onRouteChange, isSignedIn }) => {
 			<PrimarySearchAppBar
 				onRouteChange={onRouteChange}
 				isSignedIn={isSignedIn}
+				onActivityIDChange={onActivityIDChange}
+				onSignIn={onSignIn}
 			/>
 		);
 	} else {
@@ -602,6 +606,8 @@ const NavBar = ({ onRouteChange, isSignedIn }) => {
 			<PrimarySearchAppBar
 				onRouteChange={onRouteChange}
 				isSignedIn={isSignedIn}
+				onActivityIDChange={onActivityIDChange}
+				onSignIn={onSignIn}
 			/>
 		);
 	}

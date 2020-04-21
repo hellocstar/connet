@@ -177,6 +177,8 @@ class App extends Component {
 				<NavBar
 					isSignedIn={isSignedIn}
 					onRouteChange={this.onRouteChange}
+					onActivityIDChange={this.onActivityIDChange}
+					onSignIn={this.onSignIn}
 				/>
 				
 				{route === 'community' ? (
