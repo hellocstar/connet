@@ -142,7 +142,11 @@ const searchUsername = async (req, res, next) => {
 	try {
 		const profile = await Profile.findOne({ username: username });
 		console.log(profile);
-		res.status(200).send(profile);
+		if (profile) {
+			res.status(200).send(profile);
+		} else {
+			res.status(200).send({ username: false });
+		}
 	} catch (e) {
 		console.log(e);
 		res.status(500).send(e);

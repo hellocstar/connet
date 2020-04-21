@@ -207,9 +207,11 @@ function PrimarySearchAppBar(
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				if (data) {
+				if (data.username) {
 					onActivityIDChange(data._id);
 					onRouteChange('profile/' + data._id);
+				} else {
+					onRouteChange('notfound');
 				}
 			});
 	};
@@ -343,6 +345,7 @@ function PrimarySearchAppBar(
 			.then((response) => response.json())
 			.then((data) => {
 				if (data) {
+					console.log(data);
 					handleClose();
 					onSignIn(data._id, data.username);
 					onActivityIDChange(data._id);
@@ -659,31 +662,19 @@ const NavBar = ({
 	onSignOut,
 }) => {
 	//const bar = <PrimarySearchAppBar onRouteChange={onRouteChange} isSignedIn={isSignedIn} />;
-	if (isSignedIn) {
-		//PrimarySearchAppBar({ onRouteChange, isSignedIn });
-		//<PrimarySearchAppBar {...this.prop}/>
-		//Welcome("sara");
-		return (
-			<PrimarySearchAppBar
-				onRouteChange={onRouteChange}
-				isSignedIn={isSignedIn}
-				onActivityIDChange={onActivityIDChange}
-				onSignIn={onSignIn}
-				onSignOut={onSignOut}
-			/>
-		);
-	} else {
-		//<PrimarySearchAppBar {...this.prop}/>
-		return (
-			<PrimarySearchAppBar
-				onRouteChange={onRouteChange}
-				isSignedIn={isSignedIn}
-				onActivityIDChange={onActivityIDChange}
-				onSignIn={onSignIn}
-				onSignOut={onSignOut}
-			/>
-		);
-	}
+
+	//PrimarySearchAppBar({ onRouteChange, isSignedIn });
+	//<PrimarySearchAppBar {...this.prop}/>
+	//Welcome("sara");
+	return (
+		<PrimarySearchAppBar
+			onRouteChange={onRouteChange}
+			isSignedIn={isSignedIn}
+			onActivityIDChange={onActivityIDChange}
+			onSignIn={onSignIn}
+			onSignOut={onSignOut}
+		/>
+	);
 };
 
 export default NavBar;
