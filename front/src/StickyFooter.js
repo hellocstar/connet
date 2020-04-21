@@ -10,7 +10,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        ConNET
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -43,7 +43,7 @@ export default function StickyFooter() {
     <div className={classes.root}>
       <footer className={classes.footer}>
         <Container maxWidth="sm">
-          <Typography variant="body1">My sticky footer can be found here.</Typography>
+          <Typography variant="body1">Anytime, anywhere.</Typography>
           <Copyright />
         </Container>
       </footer>
