@@ -18,13 +18,12 @@ const Profile = ({
 	//pending_friends
 	const [history, setHistory] = useState([]);
 	const [interests, setInterests] = useState([]);
+	const [isFriend, setIsFriends] = useState(false);
 
 	let myself = false;
 	if (user.id === activityID) {
 		myself = true;
 	}
-
-	let friend = false;
 
 	useEffect(() => {
 		fetch('http://localhost:3000/profile/' + activityID)
@@ -40,7 +39,7 @@ const Profile = ({
 					setHistory(data.history);
 				}
 			});
-	}, []);
+	}, [isFriend]);
 
 	const onAddFriend = () => {
 		fetch('http://localhost:3000/addfriend/', {
@@ -53,12 +52,11 @@ const Profile = ({
 				friend: activityID,
 			}),
 		})
-			.then((response) => response.text())
+			.then((response) => response.json())
 			.then((data) => {
-				if (data === 'Added') {
-					friend = true;
+				if (data) {
+					setIsFriends(true);
 				}
-				console.log(data);
 			});
 	};
 
@@ -74,10 +72,12 @@ const Profile = ({
 					update your profile
 				</button>
 			) : null}
-			{isSignedIn && !friend && !myself ? (
-				<button onClick={onAddFriend()}>Follow!</button>
+			{isSignedIn && !isFriend && !myself ? (
+				<button onClick={onAddFriend}>Follow!</button>
 			) : null}
-			{friend && !myself ? <p>He or she is your friend!</p> : null}
+			{isFriend && !myself ? (
+				<p>You are now following {username}</p>
+			) : null}
 			<h1>{username}</h1>
 			<h1>{email}</h1>
 			<h1>{biography}</h1>

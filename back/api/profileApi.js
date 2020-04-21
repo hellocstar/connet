@@ -151,12 +151,12 @@ const searchUsername = async (req, res, next) => {
 
 const addFriend = async (req, res, next) => {
 	try {
-		const profile = await Profile.findOne(
+		const result = await Profile.findOneAndUpdate(
 			{ _id: req.body.me },
 			{ $push: { friends: req.body.friend } }
 		);
-		console.log(profile);
-		res.status(200).send('Added');
+		console.log(result);
+		res.status(200).send(result);
 	} catch (e) {
 		console.log(e);
 		res.status(500).send(e);
