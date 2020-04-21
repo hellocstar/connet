@@ -17,8 +17,6 @@ const app = express();
 initDb();
 passportFunction();
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(expressSession);
 app.use(express.json());
@@ -45,8 +43,8 @@ app.get('/signin-success', profileApi.signInSuccess);
 app.get('/signin-failure', profileApi.signInFail);
 
 //MyCircle
-// app.get('/mycircle', roomApi.roomList);
-// app.post('/createRoom', roomApi.createRoom);
+app.post('/mycircle', roomApi.roomList);
+app.post('/newroom', roomApi.createRoom);
 app.get('/room/:roomid', roomApi.getRoom);
 // app.delete('/deleteRoom/:roomname', roomApi.deleteRoom);
 // app.put('/updateRoom/:roomname', roomApi.updateRoom);
