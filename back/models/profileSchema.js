@@ -26,7 +26,7 @@ const profileSchema = new mongoose.Schema({
 		type: String,
 	},
 	birthday: {
-		type: String, //any "Date" datatype?
+		type: Date, //any "Date" datatype?
 	},
 	friends: {
 		type: [String], //id of user friends

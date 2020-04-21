@@ -195,7 +195,7 @@ const NewRoom = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							name='maxNoOfParticipants'
 							id='maxNoOfParticipants'
 							onChange={(event) =>
-								setDescription(event.target.value)
+								setMaxNoOfParticipants(event.target.value)
 							}
 						/>
 					</div>

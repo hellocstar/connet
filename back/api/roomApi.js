@@ -21,6 +21,7 @@ const roomList = async (req, res, next) => {
 				rooms.push(roomByMe[i]);
 			}
 		}
+		console.log(rooms);
 		res.status(200).send(rooms);
 	} catch (e) {
 		res.status(500).send(e);
@@ -31,6 +32,11 @@ const createRoom = async (req, res, next) => {
 	try {
 		const room = new Room(req.body);
 		const result = await room.save();
+		const updateHistory = await Profile.findOneAndUpdate(
+			{ _id: room.hostID },
+			{ $push: { history: room._id } }
+		);
+		console.log(updateHistory);
 		res.status(201).send(result._id);
 	} catch (e) {
 		res.status(500).send(e);
@@ -96,8 +102,8 @@ const updateRoom = async (req, res, next) => {
 const deleteRoom = async (req, res, next) => {
 	try {
 		const result = await Room.deleteOne({ name: req.params.roomname });
-		if (result.deletedCount === 0) res.status(404).send();
-		else res.status(200).send('Deleted Successfully');
+		// if (result.deletedCount === 0) res.status(404).send();
+		res.status(200).send('Deleted Successfully');
 	} catch (e) {
 		res.status(500).send(e);
 	}
