@@ -49,6 +49,7 @@ app.get('/signin-failure', profileApi.signInFail)
 // app.get('/mycircle', roomApi.roomList);
 // app.post('/createRoom', roomApi.createRoom);
 app.get('/room/:roomid', roomApi.getRoom)
+app.post('/room/photo', uploadMem.single('roomPhoto'), roomApi.uploadRoomPhoto)
 // app.delete('/deleteRoom/:roomname', roomApi.deleteRoom);
 // app.put('/updateRoom/:roomname', roomApi.updateRoom);
 // app.patch('/updateRoom/:roomname', roomApi.updateRoom);
