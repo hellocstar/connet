@@ -49,10 +49,10 @@ export default function StickyFooter(props) {
       <MuiThemeProvider theme={theme}>
       <footer className={classes.footer}>
         <Container maxWidth="lg">
-          <Typography variant="h6" align="center" color="primary" gutterBottom>
+          <Typography variant="h6" align="center" gutterBottom>
             {title}
           </Typography>
-          <Typography variant="subtitle1" align="center" color="primary" component="p">
+          <Typography variant="subtitle1" align="center" component="p">
             {description}
           </Typography>
           <Copyright />

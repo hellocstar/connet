@@ -48,6 +48,12 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 	});
 
 	return (
+		<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+		>
 		<React.Fragment>
 			<CssBaseline />
 			<Container maxWidth="lg">
@@ -55,7 +61,14 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 			<div className='parent'>
 			{searchResult.map((event) => {
 				return (
-					<Grid item key={event} xs={12} sm={6} md={6}>
+					
+					<Grid 
+						item key={event} 
+						xs={6} 
+						sm={6} 
+						md={6}
+						
+						>
 						<Box m={1}>
 						<ListItem
 							activity={event}
@@ -65,11 +78,13 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 						/>
 						</Box>
 					</Grid>
+					
 				);
 			})}
 			</div>			
 			</Container>
 		</React.Fragment>
+		</Grid>
 	);
 };
 

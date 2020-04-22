@@ -50,7 +50,7 @@ export default function StickyFooter(props) {
       <footer className={classes.footer}>
         <Container maxWidth="lg">
           <Typography variant="h6" align="center" gutterBottom>
-            {title}
+            {"aaaaa"}
           </Typography>
           <Typography variant="subtitle1" align="center" color="white" component="p">
             {description}
