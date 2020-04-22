@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+// import { db } from '../firebase/firebase-config';
 
 const useStyles = makeStyles({
 	root: {
@@ -69,6 +70,7 @@ const Event = ({
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
 	// const [photo, setPhoto] = useState('');
+	const [imageData, setImageData] = useState('');
 	const [categories, setCategories] = useState([]);
 	const [rooms, setRooms] = useState([]);
 	const [organiser, setOrganiser] = useState('');
@@ -83,6 +85,7 @@ const Event = ({
 					setTime(data.event.time);
 					setLocation(data.event.location);
 					setDescription(data.event.description);
+					setImageData(data.event.imageData);
 					setCategories(data.event.categories);
 					setRooms(data.rooms);
 					setOrganiser(data.organiser);
@@ -96,6 +99,7 @@ const Event = ({
 			<h1>{date}</h1>
 			<h1>{time}</h1>
 			<h1>{location}</h1>
+			<img src={imageData} alt=''></img>
 			<h1
 				onClick={() => {
 					onActivityIDChange(organiser.id);

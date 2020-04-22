@@ -1,63 +1,63 @@
 var express = require('express');
 var Image = require('./models/imageSchema');
 var ImageRouter = express.Router();
-const multer = require('multer');
+// const multer = require('multer');
 
-const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, './uploads/');
-	},
-	filename: function (req, file, cb) {
-		cb(null, Date.now() + file.originalname);
-	},
-});
+// const storage = multer.diskStorage({
+// 	destination: function (req, file, cb) {
+// 		cb(null, './uploads/');
+// 	},
+// 	filename: function (req, file, cb) {
+// 		cb(null, Date.now() + file.originalname);
+// 	},
+// });
 
-const fileFilter = (req, file, cb) => {
-	if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-		cb(null, true);
-	} else {
-		// rejects storing a file
-		cb(null, false);
-	}
-};
+// const fileFilter = (req, file, cb) => {
+// 	if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+// 		cb(null, true);
+// 	} else {
+// 		// rejects storing a file
+// 		cb(null, false);
+// 	}
+// };
 
-const upload = multer({
-	storage: storage,
-	limits: {
-		fileSize: 1024 * 1024 * 5,
-	},
-	fileFilter: fileFilter,
-});
+// const upload = multer({
+// 	storage: storage,
+// 	limits: {
+// 		fileSize: 1024 * 1024 * 5,
+// 	},
+// 	fileFilter: fileFilter,
+// });
 
 /* 
     stores image in uploads folder
     using multer and creates a reference to the 
     file
 */
-ImageRouter.route('/uploadmulter').post(
-	upload.single('imageData'),
-	(req, res, next) => {
-		console.log(req.body);
-		const newImage = new Image({
-			imageName: req.body.imageName,
-			imageData: req.file.path,
-		});
+// ImageRouter.route('/uploadmulter').post(
+// 	upload.single('imageData'),
+// 	(req, res, next) => {
+// 		console.log(req.body);
+// 		const newImage = new Image({
+// 			imageName: req.body.imageName,
+// 			imageData: req.file.path,
+// 		});
 
-		newImage
-			.save()
-			.then((result) => {
-				console.log(result);
-				res.status(200).json({
-					success: true,
-					document: result,
-				});
-			})
-			.catch((err) => {
-				console.log(err);
-				next(err);
-			});
-	}
-);
+// 		newImage
+// 			.save()
+// 			.then((result) => {
+// 				console.log(result);
+// 				res.status(200).json({
+// 					success: true,
+// 					document: result,
+// 				});
+// 			})
+// 			.catch((err) => {
+// 				console.log(err);
+// 				next(err);
+// 			});
+// 	}
+// );
 
 /*
     upload image in base64 format, thereby,
@@ -66,21 +66,21 @@ ImageRouter.route('/uploadmulter').post(
     storage
 */
 
-// ImageRouter.route('/uploadbase').post((req, res, next) => {
-// 	const newImage = new Image({
-// 		imageName: req.body.imageName,
-// 		imageData: req.body.imageData,
-// 	});
+ImageRouter.route('/uploadbase').post((req, res, next) => {
+	const newImage = new Image({
+		imageName: req.body.imageName,
+		imageData: req.body.imageData,
+	});
 
-// 	newImage
-// 		.save()
-// 		.then((result) => {
-// 			res.status(200).json({
-// 				success: true,
-// 				document: result,
-// 			});
-// 		})
-// 		.catch((err) => next(err));
-// });
+	newImage
+		.save()
+		.then((result) => {
+			res.status(200).json({
+				success: true,
+				document: result,
+			});
+		})
+		.catch((err) => next(err));
+});
 
 module.exports = ImageRouter;

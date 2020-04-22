@@ -2,13 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const errorHandler = require('errorhandler');
 const passport = require('passport');
+const path = require('path');
 
 const { initDb, expressSession } = require('./db');
 const { passportFunction } = require('./config/passport');
 const profileApi = require('./api/profileApi');
 const roomApi = require('./api/roomApi');
 const eventApi = require('./api/eventApi');
-// const ImageRouter = require('./image');
+const ImageRouter = require('./image');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -17,15 +18,17 @@ const app = express();
 initDb();
 passportFunction();
 
-app.use('/uploads', express.static('uploads'));
-app.use(express.static('public'));
+// app.use(express.static('public'));
 app.use(expressSession);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use('/image', ImageRouter);
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
+
+app.use('/image', ImageRouter);
 
 if (!isProduction) {
 	app.use(errorHandler());

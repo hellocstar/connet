@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
+import Image from '../Image/Image';
+import DefaultImg from './default-img.jpg';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -39,6 +41,9 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
 	// const [photo, setPhoto] = useState('');
+	const [imageName, setImageName] = useState('none');
+	const [imageData, setImageData] = useState('');
+	const [baseImage, setBaseImage] = useState(DefaultImg);
 	const [categories, setCategories] = useState([]);
 
 	if (isSignedIn) {
@@ -72,6 +77,13 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 			},
 		};
 
+		const getBaseFile = (files) => {
+			// create a local readable base64 instance of an image
+			setBaseImage(files.base64);
+			setImageName('base-image-' + Date.now());
+			setImageData(files.base64.toString());
+		};
+
 		const onSubmit = () => {
 			fetch('http://localhost:3000/newevent', {
 				method: 'post',
@@ -85,7 +97,8 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 					location: location,
 					organiserID: user.id,
 					description: description,
-					// photo: photo,
+					imageName: imageName,
+					imageData: imageData,
 					categories: categories,
 				}),
 			})
@@ -111,16 +124,19 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							fullWidth='true'
 							variant='filled'
 							required
-							id='standard-required'
+							type='text'
+							name='name'
+							id='name'
+							onChange={(event) => {
+								setName(event.target.value);
+							}}
 						>
-							<input
-								type='text'
-								name='name'
-								id='name'
-								onChange={(event) =>
-									setName(event.target.value)
-								}
-							/>
+							{/* <input
+								onChange={(event) => {
+									console.log(name);
+									setName(event.target.value);
+								}}
+							/> */}
 						</TextField>
 					</div>
 					<div className={classes.inputfield}>
@@ -132,16 +148,18 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							variant='filled'
 							fullWidth='true'
 							required
-							id='standard-required'
+							name='date'
+							id='date'
+							onChange={(event) => setDate(event.target.value)}
 						>
-							<input
+							{/* <input
 								type='date'
 								name='date'
 								id='date'
 								onChange={(event) =>
 									setDate(event.target.value)
 								}
-							/>
+							/> */}
 						</TextField>
 					</div>
 					<div className={classes.inputfield}>
@@ -153,16 +171,18 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							variant='filled'
 							fullWidth='true'
 							required
-							id='standard-required'
+							name='time'
+							id='time'
+							onChange={(event) => setTime(event.target.value)}
 						>
-							<input
+							{/* <input
 								type='time'
 								name='time'
 								id='time'
 								onChange={(event) =>
 									setTime(event.target.value)
 								}
-							/>
+							/> */}
 						</TextField>
 					</div>
 					<div className={classes.inputfield}>
@@ -172,18 +192,23 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							fullWidth='true'
 							variant='filled'
 							required
-							id='standard-required'
 							multiline
 							rows={2}
+							type='text'
+							name='location'
+							id='location'
+							onChange={(event) =>
+								setLocation(event.target.value)
+							}
 						>
-							<input
+							{/* <input
 								type='text'
 								name='location'
 								id='location'
 								onChange={(event) =>
 									setLocation(event.target.value)
 								}
-							/>
+							/> */}
 						</TextField>
 					</div>
 					<div className={classes.inputfield}>
@@ -194,26 +219,24 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							variant='filled'
 							multiline
 							rows={5}
+							type='text'
+							name='description'
+							id='description'
+							onChange={(event) =>
+								setDescription(event.target.value)
+							}
 						>
-							<input
+							{/* <input
 								type='text'
 								name='description'
 								id='description'
 								onChange={(event) =>
 									setDescription(event.target.value)
 								}
-							/>
+							/> */}
 						</TextField>
 					</div>
-					{/* <div>
-						<label htmlFor='photo'>Photo</label>
-						<input
-							type='text'
-							name='photo'
-							id='photo'
-							onChange={(event) => setPhoto(event.target.value)}
-						/>
-					</div> */}
+					<Image baseImage={baseImage} getBaseFile={getBaseFile} />
 					<div>
 						<label>Event Catagory (Can select more than one)</label>
 					</div>
