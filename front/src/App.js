@@ -18,6 +18,7 @@ import NewEvent from './components/NewEvent/NewEvent';
 import NewRoom from './components/NewRoom/NewRoom';
 import NotFound from './components/NotFound/NotFound';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import StickyFooter from './StickyFooter';
 
 const initialState = {
 	route: 'community',
@@ -191,6 +192,7 @@ class App extends Component {
 						</div>
 					) : (
 						<div>
+							<Toolbar />
 							<p>
 								ConNET is a user-friendly, multi-functional web
 								application which provides an online platform
@@ -209,6 +211,7 @@ class App extends Component {
 							</p>
 						</div>
 					)}
+					<StickyFooter title="ConNET" description="Anytime, anywhere!"/>
 				</div>
 			</ErrorBoundary>
 		);
