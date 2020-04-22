@@ -210,19 +210,61 @@ const Event = ({
 				
 				<Divider />
 
-				<img src={imageData} alt=''></img>
+				{imageData ? (
+					<Box m={5}>
+					<img src={imageData} alt=''></img>
+					</Box>
+				) : null}
+				
+
 				<Typography variant="p" align='left'>
 					<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
 					{'Location: '}
+					
+					</Box>	
+				</Typography>
+				<Typography variant="p" align='left'>
+					<Box fontSize="h6.fontSize">
+					
 					{location}
 					</Box>	
 				</Typography>
 				<Typography variant="p" align='left'>
 					<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
 					{'Categories: '}
+					
+					</Box>	
+				</Typography>
+				<Typography variant="p" align='left'>
+					<Box fontSize="h6.fontSize">
+					
 					{categories}
 					</Box>	
 				</Typography>
+				<Typography variant="p" align='left' style={{whiteSpace: 'pre-line'}}>
+					<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
+					{'Description: \n'}
+					</Box>	
+				</Typography>
+				<Typography variant="p" align='left' style={{whiteSpace: 'pre-line'}}>
+					<Box fontSize="h6.fontSize">
+					{description}
+					</Box>	
+				</Typography>
+				
+				<Box mt={5}>
+				{isSignedIn ? (
+				<Button
+					onClick={() => {
+						changeCreateRoomFor(activityID);
+						onRouteChange('newroom');
+					}}
+					color = 'primary'
+				>
+					Host a Room in {name}!
+				</Button>
+				) : null}
+				</Box>
 				
 			</Grid>
 			
@@ -231,7 +273,7 @@ const Event = ({
 			
 			{/* <h1>{date}</h1>
 			<h1>{time}</h1> */}
-			<h1>{location}</h1>
+			{/* <h1>{location}</h1>
 			
 			<h1
 				onClick={() => {
@@ -248,10 +290,11 @@ const Event = ({
 						changeCreateRoomFor(activityID);
 						onRouteChange('newroom');
 					}}
+					color = 'primary'
 				>
 					Host a Room in {name}!
 				</Button>
-			) : null}
+			) : null} */}
 			
 			<div className='parent'>
 				{rooms.map((room) => {

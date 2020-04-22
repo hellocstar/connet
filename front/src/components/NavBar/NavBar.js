@@ -37,6 +37,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const theme = createMuiTheme({
 	palette: {
@@ -198,7 +199,7 @@ ElevationScroll.propTypes = {
 
 // const topButtonProp = {className={classes.button} color="primary" size="small"};
 function PrimarySearchAppBar(
-	{ onRouteChange, isSignedIn, onActivityIDChange, onSignIn, onSignOut },
+	{ onRouteChange, isSignedIn, onActivityIDChange, onSignIn, onSignOut, pastRoute },
 	props
 ) {
 	const [search, setSearch] = React.useState('');
@@ -351,7 +352,7 @@ function PrimarySearchAppBar(
 			.then((response) => response.json())
 			.then((data) => {
 				if (data) {
-					console.log(data);
+					// console.log(data);
 					handleClose();
 					onSignIn(data._id, data.username);
 					onActivityIDChange(data._id);
@@ -598,6 +599,7 @@ function PrimarySearchAppBar(
 	);
 
 	const CustomAppBar = (
+		
 		<AppBar style={{ background: 'transparent', boxShadow: 'none' }}>
 			<Toolbar>
 				<IconButton
@@ -605,8 +607,10 @@ function PrimarySearchAppBar(
 					className={classes.menuButton}
 					color='inherit'
 					aria-label='open drawer'
+					onClick={() => onRouteChange(pastRoute)}
 				>
-					<MenuIcon />
+					<ArrowBackIcon />
+					{console.log(isSignedIn)}
 				</IconButton>
 				{isSignedIn === true ? (
 					<BootstrapButton
@@ -733,6 +737,7 @@ const NavBar = ({
 	onActivityIDChange,
 	onSignIn,
 	onSignOut,
+	pastRoute
 }) => {
 	//const bar = <PrimarySearchAppBar onRouteChange={onRouteChange} isSignedIn={isSignedIn} />;
 
@@ -746,6 +751,7 @@ const NavBar = ({
 			onActivityIDChange={onActivityIDChange}
 			onSignIn={onSignIn}
 			onSignOut={onSignOut}
+			pastRoute={pastRoute}
 		/>
 	);
 };

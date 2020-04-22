@@ -71,6 +71,17 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 		setExpanded(!expanded);
 	};
 
+	// const DefaultSentence = '';
+	// if (type === 'event'){
+	// 	DefaultSentence = 'More details about this event......';
+	// }
+	// else if (type === 'room'){
+
+	// }
+
+
+	
+
 	return (
 		<Grid item xs={12} md={12}>
 		<CardActionArea component="a" onClick={onClickName}>
@@ -92,8 +103,9 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 					</Typography>
 				) : 
 					<Typography noWrap variant="subtitle1" align="left" paragraph>
-					More details about this event......
+					More details about this {type}......
 					</Typography>
+					
 				}
               </Typography>
               <Typography variant="subtitle1" align="left" color="secondary">

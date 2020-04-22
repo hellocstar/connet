@@ -21,6 +21,7 @@ import StickyFooter from './StickyFooter';
 import TitleBanner from './TitleBanner'
 
 const initialState = {
+	pastRoute: 'community',
 	route: 'community',
 	searchField: '',
 	activityID: '',
@@ -43,7 +44,10 @@ class App extends Component {
 	};
 
 	onRouteChange = (route) => {
+		this.setState({ pastRoute: this.state.route});
 		this.setState({ route: route });
+		// console.log(route)
+		console.log(this.state.pastRoute);
 	};
 
 	onActivityIDChange = (id) => {
@@ -73,6 +77,7 @@ class App extends Component {
 
 	render() {
 		const {
+			pastRoute,
 			route,
 			searchField,
 			activityID,
@@ -89,6 +94,7 @@ class App extends Component {
 						onActivityIDChange={this.onActivityIDChange}
 						onSignIn={this.onSignIn}
 						onSignOut={this.onSignOut}
+						pastRoute={pastRoute}
 					/>
 					{route === 'community' ? (
 						<div>
