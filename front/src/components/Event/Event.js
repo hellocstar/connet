@@ -55,7 +55,14 @@ function ActivityCard(prop) {
 	);
 }
 
-const Event = ({ activityID, onRouteChange, onActivityIDChange }) => {
+const Event = ({
+	activityID,
+	onRouteChange,
+	onActivityIDChange,
+	isSignedIn,
+	userID,
+	changeCreateRoomFor,
+}) => {
 	const [name, setName] = useState('');
 	const [date, setDate] = useState('');
 	const [time, setTime] = useState('');
@@ -98,7 +105,16 @@ const Event = ({ activityID, onRouteChange, onActivityIDChange }) => {
 				{organiser.username}
 			</h1>
 			<h1>{categories}</h1>
-
+			{isSignedIn ? (
+				<button
+					onClick={() => {
+						changeCreateRoomFor(activityID);
+						onRouteChange('newroom');
+					}}
+				>
+					Host a Room in {name}!
+				</button>
+			) : null}
 			<div className='parent'>
 				{rooms.map((room) => {
 					return (

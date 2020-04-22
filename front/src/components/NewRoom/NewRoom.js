@@ -23,7 +23,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const NewRoom = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
+const NewRoom = ({
+	onActivityIDChange,
+	onRouteChange,
+	isSignedIn,
+	user,
+	createRoomFor,
+}) => {
 	const classes = useStyles();
 
 	const [name, setName] = useState('');
@@ -67,13 +73,14 @@ const NewRoom = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 		};
 
 		const onSubmit = () => {
+			console.log(createRoomFor);
 			fetch('http://localhost:3000/newroom', {
 				method: 'post',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					type: 'mycircle',
+					type: createRoomFor,
 					name: name,
 					date: date,
 					time: time,

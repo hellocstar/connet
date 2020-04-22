@@ -31,7 +31,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	const [time, setTime] = useState('');
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
-	// const [photo, setPhoto] = useState('');
+	const [photo, setPhoto] = useState('');
 	const [categories, setCategories] = useState([]);
 
 	if (isSignedIn) {
@@ -144,13 +144,15 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							}
 						/>
 					</div>
-					{/* <div>
+					{/* <div className='process'>
+						<h4>Process: using Multer</h4>
+						<p>Upload an image</p>
 						<label htmlFor='photo'>Photo</label>
 						<input
-							type='text'
-							name='photo'
+							type='file'
+							className='process_upload-btn'
 							id='photo'
-							onChange={(event) => setPhoto(event.target.value)}
+							onChange={(event) => uploadImage(event, 'multer')}
 						/>
 					</div> */}
 					<div>

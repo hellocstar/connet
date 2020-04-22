@@ -28,6 +28,7 @@ const initialState = {
 		id: '',
 		name: '',
 	},
+	createRoomFor: '',
 };
 
 class App extends Component {
@@ -58,15 +59,26 @@ class App extends Component {
 
 	onSignOut = () => {
 		this.setState({
-			user: '',
+			user: { id: '', name: '' },
 			activityID: '',
 			isSignedIn: false,
 		});
 		this.onRouteChange('community');
 	};
 
+	changeCreateRoomFor = (forWhat) => {
+		this.setState({ createRoomFor: forWhat });
+	};
+
 	render() {
-		const { route, searchField, activityID, isSignedIn, user } = this.state;
+		const {
+			route,
+			searchField,
+			activityID,
+			isSignedIn,
+			user,
+			createRoomFor,
+		} = this.state;
 		return (
 			<ErrorBoundary>
 				<div className='App'>
@@ -108,6 +120,9 @@ class App extends Component {
 								activityID={activityID}
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
+								isSignedIn={isSignedIn}
+								userID={user.id}
+								changeCreateRoomFor={this.changeCreateRoomFor}
 							/>
 						</div>
 					) : route === 'room/' + activityID ? (
@@ -116,6 +131,8 @@ class App extends Component {
 								activityID={activityID}
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
+								isSignedIn={isSignedIn}
+								userID={user.id}
 							/>
 						</div>
 					) : route === 'signin' ? (
@@ -142,6 +159,7 @@ class App extends Component {
 							<Create
 								onRouteChange={this.onRouteChange}
 								isSignedIn={isSignedIn}
+								changeCreateRoomFor={this.changeCreateRoomFor}
 							/>
 						</div>
 					) : route === 'profile/' + activityID ? (
@@ -182,6 +200,7 @@ class App extends Component {
 								onActivityIDChange={this.onActivityIDChange}
 								isSignedIn={isSignedIn}
 								user={user}
+								createRoomFor={createRoomFor}
 							/>
 						</div>
 					) : route === 'notfound' ? (
