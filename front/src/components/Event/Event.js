@@ -96,7 +96,7 @@ const Event = ({
 	return (
 		
 		<div>
-			<Banner />
+			{/* <Banner /> */}
 			<ActivityCard name={name} description={description} />
 			<h1>{date}</h1>
 			<h1>{time}</h1>

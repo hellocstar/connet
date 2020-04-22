@@ -77,32 +77,42 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
         <Card className={classes.card} style={{display: 'flex'}}>
           <div className={classes.cardDetails}>
             <CardContent>
-              <Typography component="h2" variant="h5">
+              <Typography component="h2" align="left" variant="h5">
 				
                 {activity.name}
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
+              <Typography variant="subtitle1" align="left" color="textSecondary">
 			    {"Date: "}
                 {activity.date}
               </Typography>
-              <Typography noWrap variant="subtitle1" paragraph>
+              <Typography noWrap variant="subtitle1" align="left" paragraph>
 				{activity.description ? (
-					<Typography noWrap variant="subtitle1" paragraph>
+					<Typography noWrap variant="subtitle1" align="left" paragraph>
 					{activity.description}
 					</Typography>
 				) : 
-					<Typography noWrap variant="subtitle1" paragraph>
+					<Typography noWrap variant="subtitle1" align="left" paragraph>
 					More details about this event......
 					</Typography>
 				}
               </Typography>
-              <Typography variant="subtitle1" color="secondary">
+              <Typography variant="subtitle1" align="left" color="secondary">
                 Continue reading...
               </Typography>
             </CardContent>
           </div>
           <Hidden xsDown>
-            <CardMedia className={classes.cardMedia} image={'https://source.unsplash.com/random'} title={activity.name} />
+			{activity.imageData ? (
+				<CardMedia 
+				className={classes.cardMedia} 
+				image={activity.imageData} 
+				title={activity.name} />
+			) : 
+				<CardMedia 
+				className={classes.cardMedia} 
+				image={'https://source.unsplash.com/random'} 
+				title={activity.name} />
+			}
           </Hidden>
         </Card>
       	</CardActionArea>
