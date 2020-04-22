@@ -40,6 +40,15 @@ const useStyles = makeStyles((theme) => ({
 	avatar: {
 		backgroundColor: red[500],
 	},
+	card: {
+		display: 'flex',
+	},
+	cardDetails: {
+	flex: 1,
+	},
+	cardMedia: {
+	width: 160,
+	},
 }));
 
 const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {

@@ -1,9 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import ListItem from '../ListItem/ListItem';
 import './community.css';
+import Grid from '@material-ui/core/Grid';
+import Header from './Header';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 
 const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 	const [eventList, setEventList] = useState([]);
+
+	const sections = [
+		{ title: 'Technology', url: '#' },
+		{ title: 'Design', url: '#' },
+		{ title: 'Culture', url: '#' },
+		{ title: 'Business', url: '#' },
+		{ title: 'Politics', url: '#' },
+		{ title: 'Opinion', url: '#' },
+		{ title: 'Science', url: '#' },
+		{ title: 'Health', url: '#' },
+		{ title: 'Style', url: '#' },
+		{ title: 'Travel', url: '#' },
+	];
+
+	const suggestions = [
+		{ title: 'Join a movement'},
+		{ title: 'Learn to cook'},
+		{ title: 'Train fo a marathon'},
+		{ title: 'Build a mobile app'},
+		{ title: 'Hike a mountain'},
+		{ title: 'Practice a language'},
+		
+	];
 
 	useEffect(() => {
 		fetch('http://localhost:3000/community')
@@ -20,20 +47,26 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 	});
 
 	return (
-		<div className='parent'>
+		<React.Fragment>
+			<CssBaseline />
+			<Container maxWidth="lg">
+			<Header suggestions={suggestions} sections={sections} />
+			<div className='parent'>
 			{searchResult.map((event) => {
 				return (
-					<div className='child' key={event._id}>
+					<Grid item key={event} xs={12} sm={6} md={4}>
 						<ListItem
 							activity={event}
 							onRouteChange={onRouteChange}
 							onActivityIDChange={onActivityIDChange}
 							type={'event'}
 						/>
-					</div>
+					</Grid>
 				);
 			})}
-		</div>
+			</div>			
+			</Container>
+		</React.Fragment>
 	);
 };
 

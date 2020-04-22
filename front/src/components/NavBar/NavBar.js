@@ -31,6 +31,12 @@ import Divider from '@material-ui/core/Divider';
 import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Avatar from '@material-ui/core/Avatar';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
 
 const theme = createMuiTheme({
 	palette: {
@@ -391,6 +397,17 @@ function PrimarySearchAppBar(
 		},
 	})(Button);
 
+	const Copyright = (
+		<Typography variant="body2" color="textSecondary" align="center">
+			{'Copyright © '}
+			<Link color="inherit" href="https://material-ui.com/">
+				ConNET
+			</Link>{' '}
+			{new Date().getFullYear()}
+			{'.'}
+		</Typography>
+	)
+
 	const LoginDialogue = (
 		<Dialog
 			open={open}
@@ -399,42 +416,75 @@ function PrimarySearchAppBar(
 			maxWidth='xs'
 		>
 			<DialogTitle id='form-dialog-title' style={{ textAlign: 'center' }}>
-				Sign In
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+				<Avatar>
+					<LockOutlinedIcon />
+				</Avatar>
+				</Grid>
+				<Typography component="h1" variant="h5">
+					Sign in
+				</Typography>
 			</DialogTitle>
-			<Divider variant='middle' />
+			{/* <Divider variant='middle' /> */}
+			
 			<DialogContent>
-				<DialogContentText>
+				{/* <DialogContentText>
 					<Typography
 						style={{ whiteSpace: 'pre-line', textAlign: 'center' }}
 					>
 						Already have an account? Sign in!
 					</Typography>
-				</DialogContentText>
-
+				</DialogContentText> */}
+				
 				<TextField
+					variant="outlined"
+					margin="normal"
+					required
+					fullWidth
+					id="email"
+					label="Email Address"
+					name="email"
+					autoComplete="email"
 					autoFocus
-					margin='dense'
-					id='name'
-					label='User Name'
-					type='username'
-					name='username'
 					color='secondary'
 					onChange={onUsernameChange}
-					fullWidth
+					
 				/>
 				<TextField
+<<<<<<< HEAD
 					margin='dense'
 					id='name'
 					label='Password'
 					type='password'
 					name='password'
+=======
+					variant="outlined"
+					margin="normal"
+					required
+					fullWidth
+					name="password"
+					label="Password"
+					type="password"
+					id="password"
+					autoComplete="current-password"
+>>>>>>> 007f9868a6157de6b49768a1751113dcda1c71f2
 					color='secondary'
 					onChange={onPasswordChange}
-					fullWidth
+					
+				/>
+				<FormControlLabel
+					control={<Checkbox value="remember" color="secondary" />}
+					label="Remember me"
 				/>
 			</DialogContent>
-			<Divider variant='middle' />
+			{/* <Divider variant='middle' /> */}
 			<DialogActions>
+				
 				<Grid
 					container
 					direction='row'
@@ -447,10 +497,18 @@ function PrimarySearchAppBar(
 					>
 						Sign In
 					</LoginButton>
+					
 				</Grid>
+				
+				
 			</DialogActions>
+			<Box mt={2}>
+				{Copyright}
+			</Box>
 		</Dialog>
 	);
+
+	
 
 	const SignupDialogue = (
 		<Dialog
@@ -460,9 +518,21 @@ function PrimarySearchAppBar(
 			maxWidth='xs'
 		>
 			<DialogTitle id='form-dialog-title' style={{ textAlign: 'center' }}>
-				Sign up
+			<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+			<Avatar className={classes.avatar}>
+			<LockOutlinedIcon />
+			</Avatar>
+			</Grid>
+			<Typography component="h1" variant="h5">
+			Sign up
+			</Typography>
 			</DialogTitle>
-			<Divider variant='middle' />
+			{/* <Divider variant='middle' /> */}
 			<DialogContent>
 				<DialogContentText>
 					<Typography
@@ -474,37 +544,62 @@ function PrimarySearchAppBar(
 
 				<TextField
 					autoFocus
-					margin='dense'
-					id='name'
-					label='User Name'
-					type='username'
-					name='username'
+					variant="outlined"
+					required
+					fullWidth
+					name="username"
+					label="User Name"
+					type="username"
+					id="username"
+					autoComplete="current-username"
 					color='secondary'
+					margin="normal"
 					onChange={onUsernameChange}
-					fullWidth
+					
 				/>
 				<TextField
-					margin='dense'
-					id='name'
-					label='Email Address'
-					type='email'
-					name='email'
+					variant="outlined"
+					required
+					fullWidth
+					id="email"
+					label="Email Address"
+					name="email"
+					autoComplete="email"
 					color='secondary'
+					margin="normal"
 					onChange={onEmailChange}
-					fullWidth
+					
 				/>
 				<TextField
+<<<<<<< HEAD
 					margin='dense'
 					id='name'
 					label='Password'
 					type='password'
 					name='password'
-					color='secondary'
-					onChange={onPasswordChange}
+=======
+					variant="outlined"
+					required
 					fullWidth
+					name="password"
+					label="Password"
+					type="password"
+					id="password"
+					autoComplete="current-password"
+>>>>>>> 007f9868a6157de6b49768a1751113dcda1c71f2
+					color='secondary'
+					margin="normal"
+					onChange={onPasswordChange}
+					
 				/>
+				<Grid item xs={12}>
+				<FormControlLabel
+					control={<Checkbox value="allowExtraEmails" color="secondary" />}
+					label="I want to receive inspiration, marketing promotions and updates via email."					
+				/>
+				</Grid>
 			</DialogContent>
-			<Divider variant='middle' />
+			{/* <Divider variant='middle' /> */}
 			<DialogActions>
 				<Grid
 					container
@@ -518,8 +613,13 @@ function PrimarySearchAppBar(
 					>
 						Sign Up
 					</LoginButton>
+					
 				</Grid>
+				
 			</DialogActions>
+			<Box mt={2}>
+				{Copyright}
+			</Box>
 		</Dialog>
 	);
 
