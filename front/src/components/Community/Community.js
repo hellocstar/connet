@@ -50,11 +50,11 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 		<React.Fragment>
 			<CssBaseline />
 			<Container maxWidth="lg">
-			<Header suggestions={suggestions} sections={sections} />
+			{/* <Header suggestions={suggestions} sections={sections} /> */}
 			<div className='parent'>
 			{searchResult.map((event) => {
 				return (
-					<Grid item key={event} xs={12} sm={6} md={4}>
+					<Grid item key={event} xs={12} sm={6} md={6} spacing={3}>
 						<ListItem
 							activity={event}
 							onRouteChange={onRouteChange}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Toolbar from '@material-ui/core/Toolbar';
-
 import NavBar from './components/NavBar/NavBar';
 import Banner from './components/Banner/Banner';
 import Search from './components/Search/Search';

@@ -6,12 +6,17 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Header from './Header';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		'& .MuiTextField-root': {
 			margin: theme.spacing(1),
 			width: '80%',
+			justifyContent: 'space-between',
 		},
 	},
 	search: {
@@ -53,6 +58,29 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const sections = [
+	{ title: 'Technology', url: '#' },
+	{ title: 'Design', url: '#' },
+	{ title: 'Culture', url: '#' },
+	{ title: 'Business', url: '#' },
+	{ title: 'Politics', url: '#' },
+	{ title: 'Opinion', url: '#' },
+	{ title: 'Science', url: '#' },
+	{ title: 'Health', url: '#' },
+	{ title: 'Style', url: '#' },
+	{ title: 'Travel', url: '#' },
+];
+
+const suggestions = [
+	{ title: 'Join a movemcent'},
+	{ title: 'Learn to cook'},
+	{ title: 'Train fo a marathon'},
+	{ title: 'Build a mobile app'},
+	{ title: 'Hike a mountain'},
+	{ title: 'Practice a language'},
+	
+];
+
 const Search = ({ searchChange }) => {
 	const classes = useStyles();
 	return (
@@ -78,6 +106,11 @@ const Search = ({ searchChange }) => {
 					
 					</Grid>
 				</Grid>
+				</Container>
+				
+				<CssBaseline />
+				<Container maxWidth="lg">
+				<Header suggestions={suggestions} sections={sections} searchChange={searchChange} />
 				</Container>
 			</div>
 		</form>

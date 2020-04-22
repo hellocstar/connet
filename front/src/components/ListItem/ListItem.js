@@ -16,6 +16,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -70,61 +72,61 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 	};
 
 	return (
-		<Card className={classes.root}>
-			<CardHeader
-				avatar={
-					<Avatar aria-label='user' className={classes.avatar}>
-						A
-					</Avatar>
-				}
-				action={
-					<IconButton aria-label='settings'>
-						<MoreVertIcon />
-					</IconButton>
-				}
-				title={activity.name}
-				subheader={activity.date}
-			/>
-
-			<CardActionArea onClick={onClickName}>
-				<CardMedia
-					className={classes.media}
-					image='./connet_icon.png'
-					title={activity.name}
-				/>
-				<CardContent>
-					<Typography
-						variant='body2'
-						color='textSecondary'
-						component='p'
-					>
-						{activity.description}
-					</Typography>
-				</CardContent>
-			</CardActionArea>
-			<CardActions disableSpacing>
-				<IconButton aria-label='add to favorites'>
-					<FavoriteIcon />
-				</IconButton>
-				<IconButton aria-label='share'>
-					<ShareIcon />
-				</IconButton>
-				<IconButton
-					className={clsx(classes.expand, {
-						[classes.expandOpen]: expanded,
-					})}
-					onClick={handleExpandClick}
-					aria-expanded={expanded}
-					aria-label='show more'
-				>
-					<ExpandMoreIcon />
-				</IconButton>
-			</CardActions>
-			<Collapse in={expanded} timeout='auto' unmountOnExit>
-				<CardContent>{activity.description}</CardContent>
-			</Collapse>
-		</Card>
+		<Grid item xs={12} md={11}>
+		<CardActionArea component="a" onClick={onClickName}>
+        <Card className={classes.card}>
+          <div className={classes.cardDetails}>
+            <CardContent>
+              <Typography component="h2" variant="h5">
+				
+                {activity.name}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+			    {"Date: "}
+                {activity.date}
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+                {activity.description}
+				{" \nMore details about this event...... "}
+              </Typography>
+              <Typography variant="subtitle1" color="secondary">
+                Continue reading...
+              </Typography>
+            </CardContent>
+          </div>
+          <Hidden xsDown>
+            <CardMedia className={classes.cardMedia} image={'https://source.unsplash.com/random'} title={activity.name} />
+          </Hidden>
+        </Card>
+      	</CardActionArea>
+		</Grid>
 	);
 };
+
+{/* <Grid item xs={12} md={6}>
+      <CardActionArea component="a" onClick={onClickName}>
+        <Card className={classes.card}>
+          <div className={classes.cardDetails}>
+            <CardContent>
+              <Typography component="h2" variant="h5">
+                {activity.title}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                {activity.date}
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+                {activity.description}
+              </Typography>
+              <Typography variant="subtitle1" color="primary">
+                Continue reading...
+              </Typography>
+            </CardContent>
+          </div>
+          <Hidden xsDown>
+            <CardMedia className={classes.cardMedia} image={'url(https://source.unsplash.com/random)'} title={activity.description} />
+          </Hidden>
+        </Card>
+      </CardActionArea>
+    </Grid> */}
 
 export default ListItem;

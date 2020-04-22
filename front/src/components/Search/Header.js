@@ -48,7 +48,7 @@ const theme = createMuiTheme({
 
 export default function Header(props) {
   const classes = useStyles();
-  const { sections, suggestions } = props;
+  const { searchChange, sections, suggestions } = props;
 
   return (
     <React.Fragment>
@@ -71,7 +71,7 @@ export default function Header(props) {
       <Divider variant="middle" />
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
-          // <Link
+           // <Link
           //   color="inherit"
           //   noWrap
           //   key={section.title}
