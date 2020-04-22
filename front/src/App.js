@@ -133,6 +133,7 @@ class App extends Component {
 						</div>
 					) : route === 'room/' + activityID ? (
 						<div>
+							<TitleBanner onRouteChange={this.onRouteChange} />
 							<Room
 								activityID={activityID}
 								onRouteChange={this.onRouteChange}

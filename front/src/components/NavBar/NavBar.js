@@ -610,7 +610,7 @@ function PrimarySearchAppBar(
 					onClick={() => onRouteChange(pastRoute)}
 				>
 					<ArrowBackIcon />
-					{console.log(isSignedIn)}
+					
 				</IconButton>
 				{isSignedIn === true ? (
 					<BootstrapButton
