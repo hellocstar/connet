@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import proPic from './profile.jpg';
+import ListItem from '../ListItem/ListItem';
 import './Profile.css';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 const Profile = ({
 	onRouteChange,
@@ -9,11 +11,11 @@ const Profile = ({
 	user,
 	activityID,
 }) => {
-	const [username, setUsername] = useState('');
+	const [username, setUsername] = useState('Loading...');
 	const [email, setEmail] = useState('');
 	const [imageData, setImageData] = useState('');
 	const [biography, setBiography] = useState('');
-	const [birthday, setBirthday] = useState(-1);
+	const [birthday, setBirthday] = useState('');
 	const [friends, setFriends] = useState([]);
 	const [history, setHistory] = useState([]);
 	const [interests, setInterests] = useState([]);
@@ -101,20 +103,16 @@ const Profile = ({
 				: null}
 			{history.map((hist) => {
 				return (
-					<div className='child' key={hist.id}>
-						<p
-							onClick={() => {
-								onActivityIDChange(hist.id);
-								if (hist.type === 'event') {
-									onRouteChange('event/' + hist.id);
-								} else {
-									onRouteChange('room/' + hist.id);
-								}
-							}}
-						>
-							{hist.name}
-						</p>
-					</div>
+					<Grid item key={hist} xs={6} sm={6} md={6}>
+						<Box m={1}>
+							<ListItem
+								activity={hist.obj}
+								onRouteChange={onRouteChange}
+								onActivityIDChange={onActivityIDChange}
+								type={hist.type}
+							/>
+						</Box>
+					</Grid>
 				);
 			})}
 			{interests.map((interest) => {
