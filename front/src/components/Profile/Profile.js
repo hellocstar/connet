@@ -11,7 +11,7 @@ const Profile = ({
 }) => {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
-	// const [photo, setPhoto] = useState('');
+	const [imageData, setImageData] = useState('');
 	const [biography, setBiography] = useState('');
 	const [birthday, setBirthday] = useState(-1);
 	const [friends, setFriends] = useState([]);
@@ -32,6 +32,7 @@ const Profile = ({
 					setUsername(data.profile.username);
 					setEmail(data.profile.email);
 					setBiography(data.profile.biography);
+					setImageData(data.profile.imageData);
 					setBirthday(data.profile.birthday);
 					setInterests(data.profile.interests);
 					setFriends(data.friends);
@@ -81,6 +82,7 @@ const Profile = ({
 			<h1>{email}</h1>
 			<h1>{biography}</h1>
 			<h1>{birthday}</h1>
+			<img src={imageData} alt=''></img>
 			{myself
 				? friends.map((friend) => {
 						return (

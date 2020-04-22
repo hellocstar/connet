@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Chip from '@material-ui/core/Chip';
+import TextField from '@material-ui/core/TextField';
+import Image from '../Image/Image';
+import DefaultImg from './default-img.jpg';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -21,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
 	noLabel: {
 		marginTop: theme.spacing(3),
 	},
+	inputfield: {
+		width: '84%',
+		marginBottom: 10,
+		marginTop: 10,
+		margin: 'auto',
+	},
 }));
 
 const NewRoom = ({
@@ -37,7 +46,9 @@ const NewRoom = ({
 	const [time, setTime] = useState('');
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
-	// const [photo, setPhoto] = useState('');
+	const [imageName, setImageName] = useState('none');
+	const [imageData, setImageData] = useState('');
+	const [baseImage, setBaseImage] = useState(DefaultImg);
 	const [categories, setCategories] = useState([]);
 	const [maxNoOfParticipants, setMaxNoOfParticipants] = useState(0);
 
@@ -72,6 +83,13 @@ const NewRoom = ({
 			},
 		};
 
+		const getBaseFile = (files) => {
+			// create a local readable base64 instance of an image
+			setBaseImage(files.base64);
+			setImageName('base-image-' + Date.now());
+			setImageData(files.base64.toString());
+		};
+
 		const onSubmit = () => {
 			console.log(createRoomFor);
 			fetch('http://localhost:3000/newroom', {
@@ -87,7 +105,8 @@ const NewRoom = ({
 					location: location,
 					hostID: user.id,
 					description: description,
-					// photo: photo,
+					imageName: imageName,
+					imageData: imageData,
 					categories: categories,
 					maxNoOfParticipants: maxNoOfParticipants,
 				}),
@@ -104,67 +123,92 @@ const NewRoom = ({
 		return (
 			<div>
 				<fieldset id='new_room'>
-					<legend>Create a room!</legend>
-					<div>
-						<label htmlFor='name'>Name of the Room</label>
-						<input
+					<legend>
+						<h2>>Create a room!</h2>
+					</legend>
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='name'
+							label='Room Name'
+							fullWidth='true'
+							variant='filled'
+							required
 							type='text'
 							name='name'
 							id='name'
-							onChange={(event) => setName(event.target.value)}
-						/>
+							onChange={(event) => {
+								setName(event.target.value);
+							}}
+						></TextField>
 					</div>
-					<div>
-						<label htmlFor='date'>Date</label>
-						<input
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='date'
+							label='Date'
+							InputLabelProps={{ shrink: true }}
 							type='date'
+							variant='filled'
+							fullWidth='true'
+							required
 							name='date'
 							id='date'
 							onChange={(event) => setDate(event.target.value)}
-						/>
+						></TextField>
 					</div>
-					<div>
-						<label htmlFor='time'>Time</label>
-						<input
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='time'
+							label='time'
+							InputLabelProps={{ shrink: true }}
 							type='time'
+							variant='filled'
+							fullWidth='true'
+							required
 							name='time'
 							id='time'
 							onChange={(event) => setTime(event.target.value)}
-						/>
+						></TextField>
 					</div>
-					<div>
-						<label htmlFor='location'>Location</label>
-						<input
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='location'
+							label='Venue'
+							fullWidth='true'
+							variant='filled'
+							required
+							multiline
+							rows={2}
 							type='text'
 							name='location'
 							id='location'
 							onChange={(event) =>
 								setLocation(event.target.value)
 							}
-						/>
+						></TextField>
 					</div>
-					<div>
-						<label htmlFor='description'>Description</label>
-						<input
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='description'
+							label='Event Description'
+							fullWidth='true'
+							variant='filled'
+							multiline
+							rows={5}
 							type='text'
 							name='description'
 							id='description'
 							onChange={(event) =>
 								setDescription(event.target.value)
 							}
-						/>
+						></TextField>
 					</div>
-					{/* <div>
-						<label htmlFor='photo'>Photo</label>
-						<input
-							type='text'
-							name='photo'
-							id='photo'
-							onChange={(event) => setPhoto(event.target.value)}
-						/>
-					</div> */}
+					<Image baseImage={baseImage} getBaseFile={getBaseFile} />
+					<div>
+						<label>Catagory (Can select more than one!)</label>
+					</div>
 					<div>
 						<Select
+							// autoWidth='true'
 							labelId='demo-mutiple-chip-label'
 							id='demo-mutiple-chip'
 							multiple
@@ -193,18 +237,20 @@ const NewRoom = ({
 							))}
 						</Select>
 					</div>
-					<div>
-						<label htmlFor='maxNoOfParticipants'>
-							Maximum Number Of Participants
-						</label>
-						<input
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='description'
+							label='Maximum Number Of Participants'
+							fullWidth='true'
+							variant='filled'
+							required
 							type='number'
 							name='maxNoOfParticipants'
 							id='maxNoOfParticipants'
 							onChange={(event) =>
 								setMaxNoOfParticipants(event.target.value)
 							}
-						/>
+						></TextField>
 					</div>
 				</fieldset>
 				<div className=''>
