@@ -105,7 +105,11 @@ const Profile = ({
 						<p
 							onClick={() => {
 								onActivityIDChange(hist.id);
-								onRouteChange('event/' + hist.id);
+								if (hist.type === 'event') {
+									onRouteChange('event/' + hist.id);
+								} else {
+									onRouteChange('room/' + hist.id);
+								}
 							}}
 						>
 							{hist.name}

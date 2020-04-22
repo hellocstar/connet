@@ -89,12 +89,14 @@ const getProfile = async (req, res, next) => {
 					histEvents.push({
 						id: hist._id,
 						name: hist.name,
+						type: 'event',
 					});
 				} else {
 					hist = await Room.findOne({ _id: historyID[i] });
 					histEvents.push({
 						id: hist._id,
 						name: hist.name,
+						type: 'room',
 					});
 				}
 			}
