@@ -132,6 +132,8 @@ const updateProfile = async (req, res, next) => {
 		const result = await Profile.findOneAndUpdate(
 			{ _id: profile.id },
 			{
+				imageName: profile.imageName,
+				imageData: profile.imageData,
 				biography: profile.biography,
 				birthday: profile.birthday,
 				interests: profile.interests,

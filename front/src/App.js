@@ -122,7 +122,6 @@ class App extends Component {
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
 								isSignedIn={isSignedIn}
-								userID={user.id}
 								changeCreateRoomFor={this.changeCreateRoomFor}
 							/>
 						</div>

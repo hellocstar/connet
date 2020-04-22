@@ -40,7 +40,6 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	const [time, setTime] = useState('');
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
-	// const [photo, setPhoto] = useState('');
 	const [imageName, setImageName] = useState('none');
 	const [imageData, setImageData] = useState('');
 	const [baseImage, setBaseImage] = useState(DefaultImg);
@@ -130,14 +129,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							onChange={(event) => {
 								setName(event.target.value);
 							}}
-						>
-							{/* <input
-								onChange={(event) => {
-									console.log(name);
-									setName(event.target.value);
-								}}
-							/> */}
-						</TextField>
+						></TextField>
 					</div>
 					<div className={classes.inputfield}>
 						<TextField
@@ -151,16 +143,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							name='date'
 							id='date'
 							onChange={(event) => setDate(event.target.value)}
-						>
-							{/* <input
-								type='date'
-								name='date'
-								id='date'
-								onChange={(event) =>
-									setDate(event.target.value)
-								}
-							/> */}
-						</TextField>
+						></TextField>
 					</div>
 					<div className={classes.inputfield}>
 						<TextField
@@ -174,16 +157,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							name='time'
 							id='time'
 							onChange={(event) => setTime(event.target.value)}
-						>
-							{/* <input
-								type='time'
-								name='time'
-								id='time'
-								onChange={(event) =>
-									setTime(event.target.value)
-								}
-							/> */}
-						</TextField>
+						></TextField>
 					</div>
 					<div className={classes.inputfield}>
 						<TextField
@@ -200,16 +174,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							onChange={(event) =>
 								setLocation(event.target.value)
 							}
-						>
-							{/* <input
-								type='text'
-								name='location'
-								id='location'
-								onChange={(event) =>
-									setLocation(event.target.value)
-								}
-							/> */}
-						</TextField>
+						></TextField>
 					</div>
 					<div className={classes.inputfield}>
 						<TextField
@@ -225,20 +190,11 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							onChange={(event) =>
 								setDescription(event.target.value)
 							}
-						>
-							{/* <input
-								type='text'
-								name='description'
-								id='description'
-								onChange={(event) =>
-									setDescription(event.target.value)
-								}
-							/> */}
-						</TextField>
+						></TextField>
 					</div>
 					<Image baseImage={baseImage} getBaseFile={getBaseFile} />
 					<div>
-						<label>Event Catagory (Can select more than one)</label>
+						<label>Catagory (Can select more than one!)</label>
 					</div>
 					<div>
 						<Select

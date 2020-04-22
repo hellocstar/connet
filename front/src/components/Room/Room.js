@@ -12,7 +12,7 @@ const Room = ({
 	const [time, setTime] = useState('');
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
-	// const [photo, setPhoto] = useState('');
+	const [imageData, setImageData] = useState('');
 	const [categories, setCategories] = useState([]);
 	const [max, setMax] = useState(-1);
 	const [host, setHost] = useState('');
@@ -31,11 +31,12 @@ const Room = ({
 					setTime(data.room.time);
 					setLocation(data.room.location);
 					setDescription(data.room.description);
+					setImageData(data.room.imageData);
 					setCategories(data.room.categories);
 					setMax(data.room.maxNoOfParticipants);
 					setHost(data.host);
 					setType(data.type);
-					setType(data.typeName);
+					setTypeName(data.typeName);
 					setParticipants(data.participants);
 					for (let i = 0; i < data.participants.length; i++) {
 						if (data.participants[i].id === userID) {
@@ -81,6 +82,7 @@ const Room = ({
 			<h1>{date}</h1>
 			<h1>{time}</h1>
 			<h1>{location}</h1>
+			<img src={imageData} alt=''></img>
 			<h1>{description}</h1>
 			<h1>{categories}</h1>
 			<h1>{max}</h1>

@@ -28,8 +28,14 @@ const roomSchema = new mongoose.Schema({
 	description: {
 		type: String,
 	},
-	photo: {
-		type: String, //datatype to be updated
+	imageName: {
+		type: String,
+		default: 'none',
+		// require: true,
+	},
+	imageData: {
+		type: String,
+		// require: true,
 	},
 	categories: {
 		type: [String],

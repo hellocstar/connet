@@ -8,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import { db } from '../firebase/firebase-config';
 
 const useStyles = makeStyles({
 	root: {
@@ -61,7 +60,6 @@ const Event = ({
 	onRouteChange,
 	onActivityIDChange,
 	isSignedIn,
-	userID,
 	changeCreateRoomFor,
 }) => {
 	const [name, setName] = useState('');
@@ -69,7 +67,6 @@ const Event = ({
 	const [time, setTime] = useState('');
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
-	// const [photo, setPhoto] = useState('');
 	const [imageData, setImageData] = useState('');
 	const [categories, setCategories] = useState([]);
 	const [rooms, setRooms] = useState([]);

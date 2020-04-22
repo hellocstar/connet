@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Chip from '@material-ui/core/Chip';
+import Image from '../Image/Image';
+import DefaultImg from './default-img.jpg';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -31,14 +33,11 @@ const UpdateProfile = ({
 }) => {
 	const classes = useStyles();
 
-	// const [username, setUsername] = useState('');
-	// const [email, setEmail] = useState('');
-	// const [photo, setPhoto] = useState('');
 	const [biography, setBiography] = useState('');
 	const [birthday, setBirthday] = useState(-1);
-	// const [friends, setFriends] = useState([]);
-	//pending_friends
-	// const [history, setHistory] = useState([]);
+	const [imageName, setImageName] = useState('none');
+	const [imageData, setImageData] = useState('');
+	const [baseImage, setBaseImage] = useState(DefaultImg);
 	const [interests, setInterests] = useState([]);
 
 	if (isSignedIn) {
@@ -72,9 +71,16 @@ const UpdateProfile = ({
 			},
 		};
 
+		const getBaseFile = (files) => {
+			// create a local readable base64 instance of an image
+			setBaseImage(files.base64);
+			setImageName('base-image-' + Date.now());
+			setImageData(files.base64.toString());
+		};
+
 		const onSubmit = () => {
 			fetch('http://localhost:3000/updateprofile/' + user.id, {
-				method: 'PUT',
+				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -84,6 +90,8 @@ const UpdateProfile = ({
 					biography: biography,
 					birthday: birthday,
 					interests: interests,
+					imageName: imageName,
+					imageData: imageData,
 				}),
 			})
 				.then((response) => response.text())
@@ -122,15 +130,7 @@ const UpdateProfile = ({
 							}
 						/>
 					</div>
-					{/* <div>
-						<label htmlFor='photo'>Photo</label>
-						<input
-							type='text'
-							name='photo'
-							id='photo'
-							onChange={(event) => setPhoto(event.target.value)}
-						/>
-					</div> */}
+					<Image baseImage={baseImage} getBaseFile={getBaseFile} />
 					<div>
 						<Select
 							labelId='demo-mutiple-chip-label'
