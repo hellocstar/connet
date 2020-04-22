@@ -9,6 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Header from './Header';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -86,6 +87,7 @@ const Search = ({ searchChange }) => {
 	return (
 		<form className={classes.root} noValidate autoComplete='off'>
 			<div>
+				<Box m={1}>
 				<Container maxWidth="lg">
 				<Grid container alignItems='center' direction='row' justify='center'>
 					<Grid item xs={11} alignItems='center'direction='row' justify='center'>
@@ -107,7 +109,7 @@ const Search = ({ searchChange }) => {
 					</Grid>
 				</Grid>
 				</Container>
-				
+				</Box>
 				<CssBaseline />
 				<Container maxWidth="lg">
 				<Header suggestions={suggestions} sections={sections} searchChange={searchChange} />

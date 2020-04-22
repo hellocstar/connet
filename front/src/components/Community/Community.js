@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Header from './Header';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 
 const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 	const [eventList, setEventList] = useState([]);
@@ -54,13 +55,15 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 			<div className='parent'>
 			{searchResult.map((event) => {
 				return (
-					<Grid item key={event} xs={12} sm={6} md={6} spacing={3}>
+					<Grid item key={event} xs={12} sm={6} md={6}>
+						<Box m={1}>
 						<ListItem
 							activity={event}
 							onRouteChange={onRouteChange}
 							onActivityIDChange={onActivityIDChange}
 							type={'event'}
 						/>
+						</Box>
 					</Grid>
 				);
 			})}

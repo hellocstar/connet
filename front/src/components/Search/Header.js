@@ -53,7 +53,7 @@ export default function Header(props) {
   return (
     <React.Fragment>
     <MuiThemeProvider theme={theme}>
-      <Divider variant="middle" />
+      {/* <Divider variant="middle" /> */}
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {/* <Button size="small">Subscribe</Button> */}
         {suggestions.map((suggestions) => (
