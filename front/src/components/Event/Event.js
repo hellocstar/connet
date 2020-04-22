@@ -177,32 +177,62 @@ const Event = ({
 				</Typography>
 				
 				<Grid container spacing={0}>
-				<Grid>
+				<Grid onClick={() => {
+					onActivityIDChange(organiser.id);
+					onRouteChange('profile/' + organiser.id);
+				}}>
 					<Box m={1}>
 					<Avatar src={organiser.imageData} />
 					</Box>					
 				</Grid>
-				<Grid>
-					<Typography variant="h6" gutterBottom align='left'>
+				<Grid onClick={() => {
+					onActivityIDChange(organiser.id);
+					onRouteChange('profile/' + organiser.id);
+				}}>
+					{/* <Box m={1}> */}
+					<Typography variant="p" gutterBottom align='left'>
+						<Box fontWeight="fontWeightBold">
 						{"Hosted by:"}
+						</Box>	
 					</Typography>
-					<Typography variant="p" align='middle'>
+					{/* </Box>	 */}
+					
+					<Typography variant="p" align='left'>
+						<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
 						{organiser.username}
-					</Typography>					
+						</Box>	
+					</Typography>		
+							
+					{/* {organiser.username} */}
+					
 				</Grid>
 				</Grid>
 				
 				<Divider />
+
+				<img src={imageData} alt=''></img>
+				<Typography variant="p" align='left'>
+					<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
+					{'Location: '}
+					{location}
+					</Box>	
+				</Typography>
+				<Typography variant="p" align='left'>
+					<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
+					{'Categories: '}
+					{categories}
+					</Box>	
+				</Typography>
 				
 			</Grid>
 			
 			</Grid>
 			
 			
-			<h1>{date}</h1>
-			<h1>{time}</h1>
+			{/* <h1>{date}</h1>
+			<h1>{time}</h1> */}
 			<h1>{location}</h1>
-			<img src={imageData} alt=''></img>
+			
 			<h1
 				onClick={() => {
 					onActivityIDChange(organiser.id);
@@ -213,14 +243,14 @@ const Event = ({
 			</h1>
 			<h1>{categories}</h1>
 			{isSignedIn ? (
-				<button
+				<Button
 					onClick={() => {
 						changeCreateRoomFor(activityID);
 						onRouteChange('newroom');
 					}}
 				>
 					Host a Room in {name}!
-				</button>
+				</Button>
 			) : null}
 			
 			<div className='parent'>

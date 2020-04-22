@@ -47,7 +47,6 @@ const signOut = async (req, res, next) => {
 
 const signInSuccess = async (req, res, next) => {
 	try {
-		console.log(req.user);
 		res.send('You successfully logged in.');
 	} catch (e) {
 		res.status(500).send(e);
@@ -87,14 +86,14 @@ const getProfile = async (req, res, next) => {
 				let hist = await Event.findOne({ _id: historyID[i] });
 				if (hist) {
 					histEvents.push({
-						id: hist._id,
-						name: hist.name,
+						obj: hist,
+						type: 'event',
 					});
 				} else {
 					hist = await Room.findOne({ _id: historyID[i] });
 					histEvents.push({
-						id: hist._id,
-						name: hist.name,
+						obj: hist,
+						type: 'room',
 					});
 				}
 			}
@@ -105,7 +104,6 @@ const getProfile = async (req, res, next) => {
 			friends: friends,
 			history: histEvents,
 		};
-		console.log(responseObj);
 		res.status(200).send(responseObj);
 	} catch (e) {
 		console.log(e);
@@ -128,7 +126,6 @@ const deleteProfile = async (req, res, next) => {
 const updateProfile = async (req, res, next) => {
 	const profile = req.body;
 	try {
-		// const id = mongoose.Types.ObjectId(JSON.parse(profile.id));
 		const result = await Profile.findOneAndUpdate(
 			{ _id: profile.id },
 			{
@@ -139,7 +136,6 @@ const updateProfile = async (req, res, next) => {
 				interests: profile.interests,
 			}
 		);
-		console.log(result);
 		res.status(200).send(profile.id);
 	} catch (e) {
 		console.log(e);
@@ -151,7 +147,6 @@ const searchUsername = async (req, res, next) => {
 	const username = req.body.username;
 	try {
 		const profile = await Profile.findOne({ username: username });
-		console.log(profile);
 		if (profile) {
 			res.status(200).send(profile);
 		} else {
@@ -169,7 +164,6 @@ const addFriend = async (req, res, next) => {
 			{ _id: req.body.me },
 			{ $push: { friends: req.body.friend } }
 		);
-		console.log(result);
 		res.status(200).send(result);
 	} catch (e) {
 		console.log(e);

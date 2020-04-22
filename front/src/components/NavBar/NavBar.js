@@ -443,16 +443,17 @@ function PrimarySearchAppBar(
 				</DialogContentText> */}
 
 				<TextField
+					autoFocus
 					variant='outlined'
-					margin='normal'
 					required
 					fullWidth
-					id='email'
-					label='Email Address'
-					name='email'
-					autoComplete='email'
-					autoFocus
+					name='username'
+					label='User Name'
+					type='username'
+					id='username'
+					autoComplete='current-username'
 					color='secondary'
+					margin='normal'
 					onChange={onUsernameChange}
 				/>
 				<TextField
