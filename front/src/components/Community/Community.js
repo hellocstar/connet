@@ -24,13 +24,12 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 	];
 
 	const suggestions = [
-		{ title: 'Join a movement'},
-		{ title: 'Learn to cook'},
-		{ title: 'Train fo a marathon'},
-		{ title: 'Build a mobile app'},
-		{ title: 'Hike a mountain'},
-		{ title: 'Practice a language'},
-		
+		{ title: 'Join a movement' },
+		{ title: 'Learn to cook' },
+		{ title: 'Train fo a marathon' },
+		{ title: 'Build a mobile app' },
+		{ title: 'Hike a mountain' },
+		{ title: 'Practice a language' },
 	];
 
 	useEffect(() => {
@@ -48,42 +47,31 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 	});
 
 	return (
-		<Grid
-					container
-					direction='row'
-					justify='center'
-					alignItems='center'
-		>
-		<React.Fragment>
-			<CssBaseline />
-			<Container maxWidth="lg">
-			{/* <Header suggestions={suggestions} sections={sections} /> */}
-			<div className='parent'>
-			{searchResult.map((event) => {
-				return (
-					
-					<Grid 
-						item key={event} 
-						xs={6} 
-						sm={6} 
-						md={6}
-						
-						>
-						<Box m={1}>
-						<ListItem
-							activity={event}
-							onRouteChange={onRouteChange}
-							onActivityIDChange={onActivityIDChange}
-							type={'event'}
-						/>
-						</Box>
-					</Grid>
-					
-				);
-			})}
-			</div>			
-			</Container>
-		</React.Fragment>
+		<Grid container direction='row' justify='center' alignItems='center'>
+			<React.Fragment>
+				<CssBaseline />
+				<Container maxWidth='lg'>
+					{/* <Header suggestions={suggestions} sections={sections} /> */}
+					<div className='parent'>
+						{searchResult.map((event) => {
+							return (
+								<Grid item key={event} xs={6} sm={6} md={6}>
+									<Box m={1}>
+										<ListItem
+											activity={event}
+											onRouteChange={onRouteChange}
+											onActivityIDChange={
+												onActivityIDChange
+											}
+											type={'event'}
+										/>
+									</Box>
+								</Grid>
+							);
+						})}
+					</div>
+				</Container>
+			</React.Fragment>
 		</Grid>
 	);
 };

@@ -217,7 +217,7 @@ class App extends Component {
 								encourages people to build connections and a
 								larger social circle, thereby improving their
 								lives. ConNET is developed in an attempt to be a
-								virtual realm of the real-life community a
+								virtual realm of the real-life community a with
 								shorter distance between people in the online
 								community. The developing team hopes people
 								understand that electronic devices do not always
