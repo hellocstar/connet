@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Banner from './Banner';
 
 const useStyles = makeStyles({
 	root: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 
 function ActivityCard(prop) {
 	const classes = useStyles();
-	return (
+	return (		
 		<Card className={classes.root}>
 			<CardActionArea>
 				<CardMedia
@@ -84,7 +85,9 @@ const Event = ({ activityID, onRouteChange, onActivityIDChange }) => {
 	}, []);
 
 	return (
+		
 		<div>
+			<Banner />
 			<ActivityCard name={name} description={description} />
 			<h1>{date}</h1>
 			<h1>{time}</h1>

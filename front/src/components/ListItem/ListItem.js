@@ -85,12 +85,16 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 			    {"Date: "}
                 {activity.date}
               </Typography>
-              <Typography variant="subtitle1" paragraph>
+              <Typography noWrap variant="subtitle1" paragraph>
 				{activity.description ? (
-					<Typography variant="subtitle1" paragraph>
+					<Typography noWrap variant="subtitle1" paragraph>
 					{activity.description}
 					</Typography>
-				) : "More details about this event......"}
+				) : 
+					<Typography noWrap variant="subtitle1" paragraph>
+					More details about this event......
+					</Typography>
+				}
               </Typography>
               <Typography variant="subtitle1" color="secondary">
                 Continue reading...
