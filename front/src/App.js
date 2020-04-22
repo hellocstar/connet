@@ -18,6 +18,7 @@ import NewRoom from './components/NewRoom/NewRoom';
 import NotFound from './components/NotFound/NotFound';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import StickyFooter from './StickyFooter';
+import TitleBanner from './TitleBanner'
 
 const initialState = {
 	route: 'community',
@@ -115,7 +116,7 @@ class App extends Component {
 						</div>
 					) : route === 'event/' + activityID ? (
 						<div>
-							<Toolbar />
+							<TitleBanner onRouteChange={this.onRouteChange} />
 							<Event
 								activityID={activityID}
 								onRouteChange={this.onRouteChange}

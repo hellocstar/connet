@@ -397,6 +397,7 @@ function PrimarySearchAppBar(
 	})(Button);
 
 	const Copyright = (
+		<Box m={1}>
 		<Typography variant='body2' color='textSecondary' align='center'>
 			{'Copyright © '}
 			<Link color='inherit' href='https://material-ui.com/'>
@@ -405,6 +406,7 @@ function PrimarySearchAppBar(
 			{new Date().getFullYear()}
 			{'.'}
 		</Typography>
+		</Box>
 	);
 
 	const LoginDialogue = (

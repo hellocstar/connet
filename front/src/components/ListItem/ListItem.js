@@ -72,7 +72,7 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 	};
 
 	return (
-		<Grid item xs={12} md={11}>
+		<Grid item xs={12} md={12}>
 		<CardActionArea component="a" onClick={onClickName}>
         <Card className={classes.card} style={{display: 'flex'}}>
           <div className={classes.cardDetails}>

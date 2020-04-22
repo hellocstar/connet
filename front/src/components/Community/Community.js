@@ -48,14 +48,10 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 	});
 
 	return (
-		<Grid
-					container
-					direction='row'
-					justify='center'
-					alignItems='center'
-		>
+		
 		<React.Fragment>
 			<CssBaseline />
+			<Grid item md={12}>
 			<Container maxWidth="lg">
 			{/* <Header suggestions={suggestions} sections={sections} /> */}
 			<div className='parent'>
@@ -83,8 +79,9 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 			})}
 			</div>			
 			</Container>
+			</Grid>
 		</React.Fragment>
-		</Grid>
+		
 	);
 };
 
