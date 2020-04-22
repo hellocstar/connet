@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Chip from '@material-ui/core/Chip';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -21,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
 	noLabel: {
 		marginTop: theme.spacing(3),
 	},
+	inputfield: {
+		width: '84%',
+		marginBottom: 10,
+		marginTop: 10,
+		margin: 'auto',
+	},
 }));
 
 const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
@@ -31,7 +38,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	const [time, setTime] = useState('');
 	const [location, setLocation] = useState('');
 	const [description, setDescription] = useState('');
-	const [photo, setPhoto] = useState('');
+	// const [photo, setPhoto] = useState('');
 	const [categories, setCategories] = useState([]);
 
 	if (isSignedIn) {
@@ -94,69 +101,125 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 		return (
 			<div>
 				<fieldset id='new_event'>
-					<legend>Tell others your idea!</legend>
-					<div>
-						<label htmlFor='name'>Name of the Event</label>
-						<input
-							type='text'
-							name='name'
-							id='name'
-							onChange={(event) => setName(event.target.value)}
-						/>
+					<legend>
+						<h2>Tell others your idea!</h2>
+					</legend>
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='name'
+							label='Event Name'
+							fullWidth='true'
+							variant='filled'
+							required
+							id='standard-required'
+						>
+							<input
+								type='text'
+								name='name'
+								id='name'
+								onChange={(event) =>
+									setName(event.target.value)
+								}
+							/>
+						</TextField>
 					</div>
-					<div>
-						<label htmlFor='date'>Date</label>
-						<input
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='date'
+							label='Date'
+							InputLabelProps={{ shrink: true }}
 							type='date'
-							name='date'
-							id='date'
-							onChange={(event) => setDate(event.target.value)}
-						/>
+							variant='filled'
+							fullWidth='true'
+							required
+							id='standard-required'
+						>
+							<input
+								type='date'
+								name='date'
+								id='date'
+								onChange={(event) =>
+									setDate(event.target.value)
+								}
+							/>
+						</TextField>
 					</div>
-					<div>
-						<label htmlFor='time'>Time</label>
-						<input
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='time'
+							label='time'
+							InputLabelProps={{ shrink: true }}
 							type='time'
-							name='time'
-							id='time'
-							onChange={(event) => setTime(event.target.value)}
-						/>
+							variant='filled'
+							fullWidth='true'
+							required
+							id='standard-required'
+						>
+							<input
+								type='time'
+								name='time'
+								id='time'
+								onChange={(event) =>
+									setTime(event.target.value)
+								}
+							/>
+						</TextField>
 					</div>
-					<div>
-						<label htmlFor='location'>Location</label>
-						<input
-							type='text'
-							name='location'
-							id='location'
-							onChange={(event) =>
-								setLocation(event.target.value)
-							}
-						/>
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='location'
+							label='Venue'
+							fullWidth='true'
+							variant='filled'
+							required
+							id='standard-required'
+							multiline
+							rows={2}
+						>
+							<input
+								type='text'
+								name='location'
+								id='location'
+								onChange={(event) =>
+									setLocation(event.target.value)
+								}
+							/>
+						</TextField>
 					</div>
-					<div>
-						<label htmlFor='description'>Description</label>
-						<input
-							type='text'
-							name='description'
-							id='description'
-							onChange={(event) =>
-								setDescription(event.target.value)
-							}
-						/>
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='description'
+							label='Event Description'
+							fullWidth='true'
+							variant='filled'
+							multiline
+							rows={5}
+						>
+							<input
+								type='text'
+								name='description'
+								id='description'
+								onChange={(event) =>
+									setDescription(event.target.value)
+								}
+							/>
+						</TextField>
 					</div>
-					{/* <div className='process'>
-						<h4>Process: using Multer</h4>
-						<p>Upload an image</p>
+					{/* <div>
 						<label htmlFor='photo'>Photo</label>
 						<input
-							type='file'
-							className='process_upload-btn'
+							type='text'
+							name='photo'
 							id='photo'
-							onChange={(event) => uploadImage(event, 'multer')}
+							onChange={(event) => setPhoto(event.target.value)}
 						/>
 					</div> */}
 					<div>
+						<label>Event Catagory (Can select more than one)</label>
+					</div>
+					<div>
 						<Select
+							// autoWidth='true'
 							labelId='demo-mutiple-chip-label'
 							id='demo-mutiple-chip'
 							multiple
