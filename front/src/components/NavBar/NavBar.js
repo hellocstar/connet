@@ -334,6 +334,7 @@ function PrimarySearchAppBar(
 	};
 
 	const onSubmitSignIn = () => {
+
 		fetch('http://localhost:3000/signin', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },

@@ -19,7 +19,11 @@ const profileSchema = new mongoose.Schema({
 		required: [true, 'Email is required'],
 		unique: true,
 	},
-	photo: {
+	imageName: {
+		type: String,
+		default: 'none',
+	},
+	imageData: {
 		type: String,
 	},
 	biography: {

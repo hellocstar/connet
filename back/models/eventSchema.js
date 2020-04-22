@@ -23,8 +23,12 @@ const eventSchema = new mongoose.Schema({
 	description: {
 		type: String,
 	},
-	photo: {
-		type: String, //datatype to be updated
+	imageName: {
+		type: String,
+		default: 'none',
+	},
+	imageData: {
+		type: String,
 	},
 	categories: {
 		type: [String],

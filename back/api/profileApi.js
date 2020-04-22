@@ -2,7 +2,6 @@ const Profile = require('../models/profileSchema');
 const Event = require('../models/eventSchema');
 const Room = require('../models/roomSchema');
 const Passport = require('../config/passport');
-const mongoose = require('mongoose');
 
 const signIn = async (req, res, next) => {
 	try {
