@@ -74,7 +74,7 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 	return (
 		<Grid item xs={12} md={11}>
 		<CardActionArea component="a" onClick={onClickName}>
-        <Card className={classes.card}>
+        <Card className={classes.card} style={{display: 'flex'}}>
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
