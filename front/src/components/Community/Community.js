@@ -22,6 +22,16 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 		{ title: 'Travel', url: '#' },
 	];
 
+	const suggestions = [
+		{ title: 'Join a movement'},
+		{ title: 'Learn to cook'},
+		{ title: 'Train fo a marathon'},
+		{ title: 'Build a mobile app'},
+		{ title: 'Hike a mountain'},
+		{ title: 'Practice a language'},
+		
+	];
+
 	useEffect(() => {
 		fetch('http://localhost:3000/community')
 			.then((response) => response.json())
@@ -40,7 +50,7 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 		<React.Fragment>
 			<CssBaseline />
 			<Container maxWidth="lg">
-			<Header title="Search for any events here as you like!" sections={sections} />
+			<Header suggestions={suggestions} sections={sections} />
 			<div className='parent'>
 			{searchResult.map((event) => {
 				return (

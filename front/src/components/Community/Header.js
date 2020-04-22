@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, ThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -25,24 +28,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#ffffff',
+			mainGradient: 'linear-gradient(to right, orange, #9c27b0)',
+			contrastText: '#fff',
+		},
+		secondary: {
+			main: '#007bd3',
+		},
+	},
+	typography: {
+		button: {
+			//textTransform: 'none',
+		},
+	},
+});
+
 export default function Header(props) {
   const classes = useStyles();
-  const { sections, title } = props;
+  const { sections, suggestions } = props;
 
   return (
     <React.Fragment>
-      <Toolbar className={classes.toolbar}>
+    <MuiThemeProvider theme={theme}>
+      <Divider variant="middle" />
+      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {/* <Button size="small">Subscribe</Button> */}
-        <Typography
-          component="h2"
-          variant="h5"
-          color="inherit"
-          align="center"
-          noWrap
-          className={classes.toolbarTitle}
-        >
-          {title}
-        </Typography>
+        {suggestions.map((suggestions) => (
+          <Button variant="outlined" color='secondary'>
+            {suggestions.title}
+          </Button>
+        ))}
         {/* <IconButton>
           <SearchIcon />
         </IconButton>
@@ -50,6 +68,7 @@ export default function Header(props) {
           Sign up
         </Button> */}
       </Toolbar>
+      <Divider variant="middle" />
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {sections.map((section) => (
           <Link
@@ -64,6 +83,7 @@ export default function Header(props) {
           </Link>
         ))}
       </Toolbar>
+      </MuiThemeProvider>
     </React.Fragment>
   );
 }
