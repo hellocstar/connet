@@ -8,6 +8,7 @@ const { passportFunction } = require('./config/passport');
 const profileApi = require('./api/profileApi');
 const roomApi = require('./api/roomApi');
 const eventApi = require('./api/eventApi');
+// const ImageRouter = require('./image');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -16,6 +17,7 @@ const app = express();
 initDb();
 passportFunction();
 
+app.use('/uploads', express.static('uploads'));
 app.use(express.static('public'));
 app.use(expressSession);
 app.use(express.json());
@@ -23,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use('/image', ImageRouter);
 
 if (!isProduction) {
 	app.use(errorHandler());
@@ -46,6 +49,7 @@ app.get('/signin-failure', profileApi.signInFail);
 app.post('/mycircle', roomApi.roomList);
 app.post('/newroom', roomApi.createRoom);
 app.get('/room/:roomid', roomApi.getRoom);
+app.post('/joinroom/', roomApi.joinRoom);
 // app.delete('/deleteRoom/:roomname', roomApi.deleteRoom);
 // app.put('/updateRoom/:roomname', roomApi.updateRoom);
 // app.patch('/updateRoom/:roomname', roomApi.updateRoom);

@@ -19,7 +19,11 @@ const profileSchema = new mongoose.Schema({
 		required: [true, 'Email is required'],
 		unique: true,
 	},
-	photo: {
+	imageName: {
+		type: String,
+		default: 'none',
+	},
+	imageData: {
 		type: String,
 	},
 	biography: {
@@ -30,9 +34,6 @@ const profileSchema = new mongoose.Schema({
 	},
 	friends: {
 		type: [String], //id of user friends
-	},
-	pending_friends: {
-		type: [String], //id of friend requests
 	},
 	history: {
 		type: [String], //id of rooms history

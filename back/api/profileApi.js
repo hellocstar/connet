@@ -1,7 +1,7 @@
 const Profile = require('../models/profileSchema');
 const Event = require('../models/eventSchema');
+const Room = require('../models/roomSchema');
 const Passport = require('../config/passport');
-const mongoose = require('mongoose');
 
 const signIn = async (req, res, next) => {
 	try {
@@ -84,11 +84,19 @@ const getProfile = async (req, res, next) => {
 		const historyID = profile.history;
 		async function getHistory() {
 			for (let i = 0; i < historyID.length; i++) {
-				const hist = await Event.findOne({ _id: historyID[i] });
-				histEvents.push({
-					id: hist._id,
-					name: hist.name,
-				});
+				let hist = await Event.findOne({ _id: historyID[i] });
+				if (hist) {
+					histEvents.push({
+						id: hist._id,
+						name: hist.name,
+					});
+				} else {
+					hist = await Room.findOne({ _id: historyID[i] });
+					histEvents.push({
+						id: hist._id,
+						name: hist.name,
+					});
+				}
 			}
 		}
 		await getHistory();

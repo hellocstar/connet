@@ -340,7 +340,6 @@ function PrimarySearchAppBar(
 	};
 
 	const onSubmitSignIn = () => {
-
 		fetch('http://localhost:3000/signin', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
@@ -398,15 +397,15 @@ function PrimarySearchAppBar(
 	})(Button);
 
 	const Copyright = (
-		<Typography variant="body2" color="textSecondary" align="center">
+		<Typography variant='body2' color='textSecondary' align='center'>
 			{'Copyright © '}
-			<Link color="inherit" href="https://material-ui.com/">
+			<Link color='inherit' href='https://material-ui.com/'>
 				ConNET
 			</Link>{' '}
 			{new Date().getFullYear()}
 			{'.'}
 		</Typography>
-	)
+	);
 
 	const LoginDialogue = (
 		<Dialog
@@ -422,16 +421,16 @@ function PrimarySearchAppBar(
 					justify='center'
 					alignItems='center'
 				>
-				<Avatar>
-					<LockOutlinedIcon />
-				</Avatar>
+					<Avatar>
+						<LockOutlinedIcon />
+					</Avatar>
 				</Grid>
-				<Typography component="h1" variant="h5">
+				<Typography component='h1' variant='h5'>
 					Sign in
 				</Typography>
 			</DialogTitle>
 			{/* <Divider variant='middle' /> */}
-			
+
 			<DialogContent>
 				{/* <DialogContentText>
 					<Typography
@@ -440,43 +439,40 @@ function PrimarySearchAppBar(
 						Already have an account? Sign in!
 					</Typography>
 				</DialogContentText> */}
-				
+
 				<TextField
-					variant="outlined"
-					margin="normal"
+					variant='outlined'
+					margin='normal'
 					required
 					fullWidth
-					id="email"
-					label="Email Address"
-					name="email"
-					autoComplete="email"
+					id='email'
+					label='Email Address'
+					name='email'
+					autoComplete='email'
 					autoFocus
 					color='secondary'
 					onChange={onUsernameChange}
-					
 				/>
 				<TextField
-					variant="outlined"
-					margin="normal"
+					variant='outlined'
+					margin='normal'
 					required
 					fullWidth
-					name="password"
-					label="Password"
-					type="password"
-					id="password"
-					autoComplete="current-password"
+					name='password'
+					label='Password'
+					type='password'
+					id='password'
+					autoComplete='current-password'
 					color='secondary'
 					onChange={onPasswordChange}
-					
 				/>
 				<FormControlLabel
-					control={<Checkbox value="remember" color="secondary" />}
-					label="Remember me"
+					control={<Checkbox value='remember' color='secondary' />}
+					label='Remember me'
 				/>
 			</DialogContent>
 			{/* <Divider variant='middle' /> */}
 			<DialogActions>
-				
 				<Grid
 					container
 					direction='row'
@@ -489,18 +485,11 @@ function PrimarySearchAppBar(
 					>
 						Sign In
 					</LoginButton>
-					
 				</Grid>
-				
-				
 			</DialogActions>
-			<Box mt={2}>
-				{Copyright}
-			</Box>
+			<Box mt={2}>{Copyright}</Box>
 		</Dialog>
 	);
-
-	
 
 	const SignupDialogue = (
 		<Dialog
@@ -510,19 +499,19 @@ function PrimarySearchAppBar(
 			maxWidth='xs'
 		>
 			<DialogTitle id='form-dialog-title' style={{ textAlign: 'center' }}>
-			<Grid
+				<Grid
 					container
 					direction='row'
 					justify='center'
 					alignItems='center'
 				>
-			<Avatar className={classes.avatar}>
-			<LockOutlinedIcon />
-			</Avatar>
-			</Grid>
-			<Typography component="h1" variant="h5">
-			Sign up
-			</Typography>
+					<Avatar className={classes.avatar}>
+						<LockOutlinedIcon />
+					</Avatar>
+				</Grid>
+				<Typography component='h1' variant='h5'>
+					Sign up
+				</Typography>
 			</DialogTitle>
 			{/* <Divider variant='middle' /> */}
 			<DialogContent>
@@ -536,51 +525,53 @@ function PrimarySearchAppBar(
 
 				<TextField
 					autoFocus
-					variant="outlined"
+					variant='outlined'
 					required
 					fullWidth
-					name="username"
-					label="User Name"
-					type="username"
-					id="username"
-					autoComplete="current-username"
+					name='username'
+					label='User Name'
+					type='username'
+					id='username'
+					autoComplete='current-username'
 					color='secondary'
-					margin="normal"
+					margin='normal'
 					onChange={onUsernameChange}
-					
 				/>
 				<TextField
-					variant="outlined"
+					variant='outlined'
 					required
 					fullWidth
-					id="email"
-					label="Email Address"
-					name="email"
-					autoComplete="email"
+					id='email'
+					label='Email Address'
+					name='email'
+					autoComplete='email'
 					color='secondary'
-					margin="normal"
+					margin='normal'
 					onChange={onEmailChange}
-					
 				/>
 				<TextField
-					variant="outlined"
+					variant='outlined'
 					required
 					fullWidth
-					name="password"
-					label="Password"
-					type="password"
-					id="password"
-					autoComplete="current-password"
+					name='password'
+					label='Password'
+					type='password'
+					id='password'
+					autoComplete='current-password'
 					color='secondary'
-					margin="normal"
+					margin='normal'
 					onChange={onPasswordChange}
-					
 				/>
 				<Grid item xs={12}>
-				<FormControlLabel
-					control={<Checkbox value="allowExtraEmails" color="secondary" />}
-					label="I want to receive inspiration, marketing promotions and updates via email."					
-				/>
+					<FormControlLabel
+						control={
+							<Checkbox
+								value='allowExtraEmails'
+								color='secondary'
+							/>
+						}
+						label='I want to receive inspiration, marketing promotions and updates via email.'
+					/>
 				</Grid>
 			</DialogContent>
 			{/* <Divider variant='middle' /> */}
@@ -597,13 +588,9 @@ function PrimarySearchAppBar(
 					>
 						Sign Up
 					</LoginButton>
-					
 				</Grid>
-				
 			</DialogActions>
-			<Box mt={2}>
-				{Copyright}
-			</Box>
+			<Box mt={2}>{Copyright}</Box>
 		</Dialog>
 	);
 
@@ -632,7 +619,7 @@ function PrimarySearchAppBar(
 						<SearchIcon />
 					</div>
 					<InputBase
-						placeholder='Search for events…'
+						placeholder='Search for people...'
 						classes={{
 							root: classes.inputRoot,
 							input: classes.inputInput,
