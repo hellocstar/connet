@@ -18,7 +18,7 @@ import NewRoom from './components/NewRoom/NewRoom';
 import NotFound from './components/NotFound/NotFound';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import StickyFooter from './components/StickyFooter/StickyFooter';
-import TitleBanner from './TitleBanner'
+import TitleBanner from './TitleBanner';
 
 const initialState = {
 	pastRoute: 'community',
@@ -29,6 +29,7 @@ const initialState = {
 	user: {
 		id: '',
 		name: '',
+		imageData: '',
 	},
 	createRoomFor: '',
 };
@@ -54,9 +55,9 @@ class App extends Component {
 		this.setState({ activityID: id });
 	};
 
-	onSignIn = (id, name) => {
+	onSignIn = (id, name, imageData) => {
 		this.setState({
-			user: { id: id, name: name },
+			user: { id: id, name: name, imageData: imageData },
 			activityID: id,
 			isSignedIn: true,
 		});
@@ -95,6 +96,7 @@ class App extends Component {
 						onSignIn={this.onSignIn}
 						onSignOut={this.onSignOut}
 						pastRoute={pastRoute}
+						user={user}
 					/>
 					{route === 'community' ? (
 						<div>

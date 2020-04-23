@@ -206,6 +206,7 @@ function PrimarySearchAppBar(
 		onSignIn,
 		onSignOut,
 		pastRoute,
+		user,
 	},
 	props
 ) {
@@ -361,7 +362,7 @@ function PrimarySearchAppBar(
 				if (data) {
 					// console.log(data);
 					handleClose();
-					onSignIn(data._id, data.username);
+					onSignIn(data._id, data.username, data.imageData);
 					onActivityIDChange(data._id);
 					onRouteChange('profile/' + data._id);
 				}
@@ -382,7 +383,7 @@ function PrimarySearchAppBar(
 			.then((data) => {
 				if (data) {
 					handleCloseSignup();
-					onSignIn(data._id, data.username);
+					onSignIn(data._id, data.username, data.imageData);
 					onActivityIDChange(data._id);
 					onRouteChange('updateprofile/' + data._id);
 				}
@@ -620,13 +621,27 @@ function PrimarySearchAppBar(
 					<ArrowBackIcon />
 				</IconButton>
 				{isSignedIn === true ? (
-					<BootstrapButton
-						variant='contained'
-						color='primary'
-						onClick={() => onRouteChange('create')}
-					>
-						Create!
-					</BootstrapButton>
+					<div>
+						<IconButton
+							variant='outlined'
+							className={classes.button}
+							color='primary'
+							size='small'
+							// aria-label='open drawer'
+							onClick={() => {
+								onRouteChange('profile/' + user.id);
+							}}
+						>
+							<Avatar src={user.imageData}>{user.name}</Avatar>
+						</IconButton>
+						<BootstrapButton
+							variant='contained'
+							color='primary'
+							onClick={() => onRouteChange('create')}
+						>
+							Create!
+						</BootstrapButton>
+					</div>
 				) : null}
 				<div className={classes.search}>
 					<div className={classes.searchIcon}>
@@ -745,6 +760,7 @@ const NavBar = ({
 	onSignIn,
 	onSignOut,
 	pastRoute,
+	user,
 }) => {
 	//const bar = <PrimarySearchAppBar onRouteChange={onRouteChange} isSignedIn={isSignedIn} />;
 
@@ -759,6 +775,7 @@ const NavBar = ({
 			onSignIn={onSignIn}
 			onSignOut={onSignOut}
 			pastRoute={pastRoute}
+			user={user}
 		/>
 	);
 };

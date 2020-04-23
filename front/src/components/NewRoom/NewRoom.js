@@ -121,6 +121,7 @@ const NewRoom = ({
 					imageData: imageData,
 					categories: categories,
 					maxNoOfParticipants: maxNoOfParticipants,
+					participants: [user.id],
 				}),
 			})
 				.then((response) => response.json())
