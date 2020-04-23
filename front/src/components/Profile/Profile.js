@@ -155,13 +155,10 @@ const Profile = ({
 							/>
 							<CardContent className={classes.cardContent}>
 								<Typography
-									onClick={() => {
-										onActivityIDChange(friend.id);
-										onRouteChange('profile/' + friend.id);
-										{
-											console.log(friend.id);
-										}
-									}}
+									gutterBottom
+									variant='h5'
+									component='h2'
+									align='left'
 								>
 									{username}
 								</Typography>
@@ -267,14 +264,14 @@ const Profile = ({
 									>
 										<div className='child' key={friend.id}>
 											<Typography
-												onClick={() => {
-													onActivityIDChange(
-														friend.id
-													);
-													onRouteChange(
-														'profile/' + friend.id
-													);
-												}}
+											// onClick={() => {
+											// 	onActivityIDChange(
+											// 		friend.id
+											// 	);
+											// 	onRouteChange(
+											// 		'profile/' + friend.id
+											// 	);
+											// }}
 											>
 												<Box fontWeight='fontWeightBold'>
 													{friend.username}
@@ -284,17 +281,17 @@ const Profile = ({
 												<Avatar
 													alt={friend.username}
 													src={friend.imageData}
-													onClick={() => {
-														console.log(user.id);
-														console.log(friend.id);
-														onActivityIDChange(
-															friend.id
-														);
-														onRouteChange(
-															'profile/' +
-																friend.id
-														);
-													}}
+													// onClick={() => {
+													// 	console.log(user.id);
+													// 	console.log(friend.id);
+													// 	onActivityIDChange(
+													// 		friend.id
+													// 	);
+													// 	onRouteChange(
+													// 		'profile/' +
+													// 			friend.id
+													// 	);
+													// }}
 												>
 													{friend.username}
 												</Avatar>
