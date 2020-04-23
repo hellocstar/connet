@@ -283,7 +283,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							onClick={onSubmit}
 							
 						>
-							Create!
+							Create
 						</Button>
 					</Box>
 				</div>
