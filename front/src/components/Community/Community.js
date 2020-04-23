@@ -14,6 +14,7 @@ const Community = ({
 	onRouteChange,
 	onActivityIDChange,
 	categorySearch,
+	descriptionSearch,
 }) => {
 	const [eventList, setEventList] = useState([]);
 
@@ -64,7 +65,17 @@ const Community = ({
 		return push;
 	});
 
-	const searchResult = catSerach.filter((event) => {
+	const desSearch = catSerach.filter((event) => {
+		if (descriptionSearch === '') {
+			return true;
+		} else {
+			return event.description
+				.toLowerCase()
+				.includes(descriptionSearch.toLowerCase());
+		}
+	});
+
+	const searchResult = desSearch.filter((event) => {
 		return event.name.toLowerCase().includes(searchField.toLowerCase());
 	});
 

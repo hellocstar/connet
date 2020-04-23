@@ -203,100 +203,12 @@ const Profile = ({
 							{/* <Avatar src={imageData} className='classes.avatar' sizes='200'>
 					{username}
 				</Avatar> */}
-				<CardMedia
-                    className={classes.cardMedia}
-                    image={imageData}
-                    title={username}
-				/>
-				<CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2" align='left'>
-						{username}
-                    </Typography>
-                    <Typography align='left'>
-                      {biography}
-                    </Typography>
-					<Typography align='left'>
-						{'Email: '}
-                      {email}
-                    </Typography>
-					<Typography align='left'>
-						{'Birthday: '}
-					  {Moment(birthday).format('YYYY-MM-DD')}
-                    </Typography>
-				</CardContent>
-				<CardActions>
-					{myself ? (
-						<Button
-							variant='contained'
-							color='secondary'
-							startIcon={<EditIcon />}
-							onClick={() => {
-								onRouteChange('updateprofile/' + user.id);
-							}}
-						>
-							update your profile
-						</Button>
-					) : null}
-					{isSignedIn && !isFriend && !myself ? (
-						<Button
-							variant='contained'
-							color='secondary'
-							startIcon={<NotificationsIcon />}
-							onClick={onAddFriend}
-						>
-							follow!
-						</Button>
-					) : null}
-					
-				</CardActions>
-
-			</Card>
-			</Grid>
-
-			
-		</Grid>
-		
-		
-		{isFriend && !myself ? (
-			// <p>You are now following {username}!</p>
-			<Grid container direction='row' justify='center' alignItems='center' >
-			<Typography variant='p' align='left'>
-				<Box
-					fontWeight='fontWeightBold'
-					fontSize='h6.fontSize'
-					m={1}
-				>
-					You are now following {username}!
-				</Box>
-			</Typography>
-			</Grid>
-		) : null}
-
-		{myself ? (
-			<Grid container direction='row' justify='center' alignItems='center' >
-			<Box m={2}>
-			<Typography variant='p' align='left'>
-				<Box
-					fontWeight='fontWeightBold'
-					fontSize='h6.fontSize'
-				>
-					{'Friends ('}
-					{friends.length}
-					{'): '}
-				</Box>
-			</Typography>	
-			</Box>
-			</Grid>
-
-		) : null}
-
-		<Grid container direction='row' justify='center' alignItems='center' >
-			
-			{myself
-				? friends.map((friend) => {
-						return (
-							<Grid item key={friend} xs={1} sm={1} md={1}>
-							<div className='child' key={friend.id}>
+							<CardMedia
+								className={classes.cardMedia}
+								image={imageData}
+								title={username}
+							/>
+							<CardContent className={classes.cardContent}>
 								<Typography
 									gutterBottom
 									variant='h5'
@@ -347,6 +259,26 @@ const Profile = ({
 					</Grid>
 				</Grid>
 
+				{isFriend && !myself ? (
+					// <p>You are now following {username}!</p>
+					<Grid
+						container
+						direction='row'
+						justify='center'
+						alignItems='center'
+					>
+						<Typography variant='p' align='left'>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+								m={1}
+							>
+								You are now following {username}!
+							</Box>
+						</Typography>
+					</Grid>
+				) : null}
+
 				{myself ? (
 					<Grid
 						container
@@ -387,15 +319,14 @@ const Profile = ({
 									>
 										<div className='child' key={friend.id}>
 											<Typography
-											// onClick={() => {
-											// 	console.log(friend._id);
-											// 	onActivityIDChange(
-											// 		friend._id
-											// 	);
-											// 	onRouteChange(
-											// 		'profile/' + friend._id
-											// 	);
-											// }}
+												onClick={() => {
+													onActivityIDChange(
+														friend.id
+													);
+													onRouteChange(
+														'profile/' + friend.id
+													);
+												}}
 											>
 												<Box fontWeight='fontWeightBold'>
 													{friend.username}
@@ -406,8 +337,6 @@ const Profile = ({
 													alt={friend.username}
 													src={friend.imageData}
 													onClick={() => {
-														console.log(user.id);
-														console.log(friend.id);
 														onActivityIDChange(
 															friend.id
 														);

@@ -93,7 +93,12 @@ const suggestions = [
 	{ title: 'Practice a language' },
 ];
 
-const Search = ({ searchChange, onRouteChange, onCategorySearch }) => {
+const Search = ({
+	searchChange,
+	onRouteChange,
+	onCategorySearch,
+	onDescriptionSearch,
+}) => {
 	const classes = useStyles();
 	return (
 		<form className={classes.root} noValidate autoComplete='off'>
@@ -138,6 +143,7 @@ const Search = ({ searchChange, onRouteChange, onCategorySearch }) => {
 						searchChange={searchChange}
 						onRouteChange={onRouteChange}
 						onCategorySearch={onCategorySearch}
+						onDescriptionSearch={onDescriptionSearch}
 					/>
 				</Container>
 			</div>

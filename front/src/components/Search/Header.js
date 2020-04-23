@@ -54,6 +54,7 @@ export default function Header(props) {
 		suggestions,
 		onRouteChange,
 		onCategorySearch,
+		onDescriptionSearch,
 	} = props;
 
 	return (
@@ -66,9 +67,15 @@ export default function Header(props) {
 					className={classes.toolbarSecondary}
 				>
 					{/* <Button size="small">Subscribe</Button> */}
-					{suggestions.map((suggestions) => (
-						<Button variant='outlined' color='secondary'>
-							{suggestions.title}
+					{suggestions.map((suggestion) => (
+						<Button
+							variant='outlined'
+							color='secondary'
+							onClick={() => {
+								onDescriptionSearch(suggestion.title);
+							}}
+						>
+							{suggestion.title}
 						</Button>
 					))}
 					{/* <IconButton>

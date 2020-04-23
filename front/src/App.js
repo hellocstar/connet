@@ -29,6 +29,7 @@ const initialState = {
 	route: 'community',
 	searchField: '',
 	categorySearch: '',
+	descriptionSearch: '',
 	activityID: '',
 	isSignedIn: false,
 	user: {
@@ -53,8 +54,13 @@ class App extends Component {
 		this.setState({ categorySearch: search });
 	};
 
+	onDescriptionSearch = (search) => {
+		this.setState({ descriptionSearch: search });
+	};
+
 	onRouteChange = (route) => {
 		this.setState({ categorySearch: '' });
+		this.setState({ descriptionSearch: '' });
 		this.setState({ pastRoute: this.state.route });
 		this.setState({ route: route });
 		window.scrollTo(0, 0);
@@ -91,6 +97,7 @@ class App extends Component {
 			route,
 			searchField,
 			categorySearch,
+			descriptionSearch,
 			activityID,
 			isSignedIn,
 			user,
@@ -115,6 +122,7 @@ class App extends Component {
 								searchChange={this.onSearchChange}
 								onRouteChange={this.onRouteChange}
 								onCategorySearch={this.onCategorySearch}
+								onDescriptionSearch={this.onDescriptionSearch}
 							/>
 							<Community
 								className='itemlist'
@@ -122,6 +130,7 @@ class App extends Component {
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
 								categorySearch={categorySearch}
+								descriptionSearch={descriptionSearch}
 							/>
 						</div>
 					) : route === 'mycircle' ? (
@@ -131,6 +140,7 @@ class App extends Component {
 								searchChange={this.onSearchChange}
 								onRouteChange={this.onRouteChange}
 								onCategorySearch={this.onCategorySearch}
+								onDescriptionSearch={this.onDescriptionSearch}
 							/>
 							<MyCircle
 								className='itemlist'
@@ -140,6 +150,7 @@ class App extends Component {
 								isSignedIn={isSignedIn}
 								userID={user.id}
 								categorySearch={categorySearch}
+								descriptionSearch={descriptionSearch}
 							/>
 						</div>
 					) : route === 'event/' + activityID ? (
@@ -242,49 +253,53 @@ class App extends Component {
 							<TitleBanner onRouteChange={this.onRouteChange} />
 							<CssBaseline />
 							<Container maxWidth='lg'>
-							
-							<Box m={5}>
-							<Typography variant='h4' align='center'>
-								About Us
-							</Typography>
-							</Box>
-							<Box m={5}>
-							<Typography variant='h6' align='left'>
-								ConNET
-								encourages people to build connections and a
-								larger social circle, thereby improving their
-								lives. ConNET is developed in an attempt to be a
-								virtual realm of the real-life community a with
-								shorter distance between people in the online
-								community. The developing team hopes people
-								understand that electronic devices do not always
-								bring people apart. They are actually the
-								virtuality of us, connected by a network. And
-								ConNET makes use of the network.
-							</Typography>
-							</Box>
-							<Box m={5}>
-							<Typography variant='h6' align='left'>
-								ConNET encourages people to build connections and a
-								larger social circle, thereby improving their
-								lives. ConNET is developed in an attempt to be a
-								virtual realm of the real-life community a with
-								shorter distance between people in the online
-								community. The developing team hopes people
-								understand that electronic devices do not always
-								bring people apart. They are actually the
-								virtuality of us, connected by a network. And
-								ConNET makes use of the network.
-							</Typography>
-							</Box>
-							<Box m={5}>
-							<Typography variant='h6' align='left'>
-								The developing team hopes people understand that electronic devices do not always
-								bring people apart. They are actually the
-								virtuality of us, connected by a network. And
-								ConNET makes use of the network.
-							</Typography>
-							</Box>
+								<Box m={5}>
+									<Typography variant='h4' align='center'>
+										About Us
+									</Typography>
+								</Box>
+								<Box m={5}>
+									<Typography variant='h6' align='left'>
+										ConNET encourages people to build
+										connections and a larger social circle,
+										thereby improving their lives. ConNET is
+										developed in an attempt to be a virtual
+										realm of the real-life community a with
+										shorter distance between people in the
+										online community. The developing team
+										hopes people understand that electronic
+										devices do not always bring people
+										apart. They are actually the virtuality
+										of us, connected by a network. And
+										ConNET makes use of the network.
+									</Typography>
+								</Box>
+								<Box m={5}>
+									<Typography variant='h6' align='left'>
+										ConNET encourages people to build
+										connections and a larger social circle,
+										thereby improving their lives. ConNET is
+										developed in an attempt to be a virtual
+										realm of the real-life community a with
+										shorter distance between people in the
+										online community. The developing team
+										hopes people understand that electronic
+										devices do not always bring people
+										apart. They are actually the virtuality
+										of us, connected by a network. And
+										ConNET makes use of the network.
+									</Typography>
+								</Box>
+								<Box m={5}>
+									<Typography variant='h6' align='left'>
+										The developing team hopes people
+										understand that electronic devices do
+										not always bring people apart. They are
+										actually the virtuality of us, connected
+										by a network. And ConNET makes use of
+										the network.
+									</Typography>
+								</Box>
 							</Container>
 						</div>
 					)}
