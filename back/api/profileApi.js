@@ -83,18 +83,20 @@ const getProfile = async (req, res, next) => {
 		const historyID = profile.history;
 		async function getHistory() {
 			for (let i = 0; i < historyID.length; i++) {
-				let hist = await Event.findOne({ _id: historyID[i] });
-				if (hist) {
+				let EventHist = await Event.findOne({ _id: historyID[i] });
+				const roomHist = await Room.findOne({ _id: historyID[i] });
+				if (EventHist) {
 					histEvents.push({
-						obj: hist,
+						obj: EventHist,
 						type: 'event',
 					});
-				} else {
-					hist = await Room.findOne({ _id: historyID[i] });
+				} else if (roomHist) {
 					histEvents.push({
-						obj: hist,
+						obj: roomHist,
 						type: 'room',
 					});
+				} else {
+					continue;
 				}
 			}
 		}

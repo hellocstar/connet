@@ -9,13 +9,14 @@ const roomList = async (req, res, next) => {
 		const rooms = [];
 		for (let i = 0; i < friends.length; i++) {
 			const friendRooms = await Room.find({ hostID: friends[i] });
-			for (let j = 0; j < friendRooms.length; i++) {
+			for (let j = 0; j < friendRooms.length; j++) {
 				if (friendRooms[j].type === 'mycircle') {
 					rooms.push(friendRooms[j]);
 				}
 			}
 		}
 		const roomByMe = await Room.find({ hostID: user._id });
+		console.log(roomByMe);
 		for (let i = 0; i < roomByMe.length; i++) {
 			if (roomByMe[i].type === 'mycircle') {
 				rooms.push(roomByMe[i]);

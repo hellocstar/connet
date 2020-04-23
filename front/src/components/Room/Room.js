@@ -69,10 +69,11 @@ const Room = ({
 		<div>
 			<button
 				onClick={() => {
-					if (type === 'mycircle') {
+					if (type === 'mycircle' && isSignedIn) {
 						onRouteChange('mycircle');
-					} else {
+					} else if (type === 'event') {
 						onRouteChange('event/' + type);
+					} else {
 					}
 				}}
 			>
