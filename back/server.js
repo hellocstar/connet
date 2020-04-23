@@ -55,7 +55,7 @@ app.post('/joinroom/', roomApi.joinRoom);
 app.get('/community', eventApi.eventList);
 app.post('/newevent', eventApi.createEvent);
 app.get('/event/:eventid', eventApi.getEvent);
-app.post('/categorysearch', eventApi.categorySearch);
+// app.post('/categorysearch', eventApi.categorySearch);
 // app.delete('/deleteRoom/:roomname', eventApi.deleteRoom);
 // app.put('/updateRoom/:roomname', eventApi.updateRoom);
 // app.patch('/updateRoom/:roomname', eventApi.updateRoom);

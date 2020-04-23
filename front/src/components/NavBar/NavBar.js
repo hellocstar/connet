@@ -629,6 +629,7 @@ function PrimarySearchAppBar(
 							size='small'
 							// aria-label='open drawer'
 							onClick={() => {
+								console.log(user.id);
 								onRouteChange('profile/' + user.id);
 							}}
 						>

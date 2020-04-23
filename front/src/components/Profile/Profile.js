@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '../ListItem/ListItem';
 import './Profile.css';
 import Grid from '@material-ui/core/Grid';
@@ -94,7 +94,7 @@ const Profile = ({
 		root: {
 			display: 'flex',
 			'& > *': {
-			  margin: theme.spacing(1),
+				margin: theme.spacing(1),
 			},
 		},
 		avatar: {
@@ -105,22 +105,22 @@ const Profile = ({
 			// right: 0,
 			// margin: '0 auto',
 			width: '90',
-    		height: '90',
+			height: '90',
 		},
 		cardGrid: {
 			paddingTop: theme.spacing(8),
 			paddingBottom: theme.spacing(8),
 		},
 		card: {
-		height: '100%',
-		display: 'flex',
-		flexDirection: 'column',
+			height: '100%',
+			display: 'flex',
+			flexDirection: 'column',
 		},
 		cardMedia: {
-		paddingTop: '56.25%', // 16:9
+			paddingTop: '56.25%', // 16:9
 		},
 		cardContent: {
-		flexGrow: 1,
+			flexGrow: 1,
 		},
 	}));
 
@@ -189,194 +189,237 @@ const Profile = ({
 		// 	})}
 		// </div>
 
-
-
 		<MuiThemeProvider theme={theme}>
-		<CssBaseline />
-		<Container maxWidth='lg'>
-		<Grid container direction='row' justify='center' alignItems='center' >
-			<Grid item xs={12} sm={6} md={4}>
-			<Card className={classes.card}>
-				{/* <Avatar src={imageData} className='classes.avatar' sizes='200'>
+			<CssBaseline />
+			<Container maxWidth='lg'>
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+					<Grid item xs={12} sm={6} md={4}>
+						<Card className={classes.card}>
+							{/* <Avatar src={imageData} className='classes.avatar' sizes='200'>
 					{username}
 				</Avatar> */}
-				<CardMedia
-                    className={classes.cardMedia}
-                    image={imageData}
-                    title={username}
-				/>
-				<CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2" align='left'>
-						{username}
-                    </Typography>
-                    <Typography align='left'>
-                      {biography}
-                    </Typography>
-					<Typography align='left'>
-						{'Email: '}
-                      {email}
-                    </Typography>
-					<Typography align='left'>
-						{'Birthday: '}
-					  {Moment(birthday).format('YYYY-MM-DD')}
-                    </Typography>
-				</CardContent>
-				<CardActions>
-					{myself ? (
-						<Button
-							variant='contained'
-							color='secondary'
-							startIcon={<EditIcon />}
-							onClick={() => {
-								onRouteChange('updateprofile/' + user.id);
-							}}
-						>
-							update your profile
-						</Button>
-					) : null}
-					{isSignedIn && !isFriend && !myself ? (
-						<Button
-							variant='contained'
-							color='secondary'
-							startIcon={<NotificationsIcon />}
-							onClick={onAddFriend}
-						>
-							follow!
-						</Button>
-					) : null}
-					
-				</CardActions>
-
-			</Card>
-			</Grid>
-
-			
-		</Grid>
-
-		{myself ? (
-			<Grid container direction='row' justify='center' alignItems='center' >
-			<Box m={2}>
-			<Typography variant='p' align='left'>
-				<Box
-					fontWeight='fontWeightBold'
-					fontSize='h6.fontSize'
-				>
-					{'Friends ('}
-					{friends.length}
-					{'): '}
-				</Box>
-			</Typography>	
-			</Box>
-			</Grid>
-
-		) : null}
-
-		<Grid container direction='row' justify='center' alignItems='center' >
-			
-			{myself
-				? friends.map((friend) => {
-						return (
-							<Grid item key={friend} xs={1} sm={1} md={1}>
-							<div className='child' key={friend.id}>
-								<Typography
-								
-									onClick={() => {
-										onActivityIDChange(friend.id);
-										onRouteChange('profile/' + friend.id);
-									}}
-								>
-									<Box
-										fontWeight='fontWeightBold'
-										
-									>
-									{friend.username}
-									</Box>
-								</Typography>
-								<IconButton>
-								<Avatar 
-									alt={friend.username} 
-									src={friend.imageData}
-									onClick={() => {
-										onActivityIDChange(friend.id);
-										onRouteChange('profile/' + friend.id);
-									}}>
-									{friend.username}							
-								</Avatar>
-								</IconButton>
-							</div>
-							</Grid>
-						);
-				  })
-				: null}
-		</Grid>
-
-		
-		<Grid container direction='row' justify='center' alignItems='center' >
-		<Box m={2}>
-		<Typography variant='p' align='left'>
-			<Box
-				fontWeight='fontWeightBold'
-				fontSize='h6.fontSize'
-			>
-				{'History ('}
-				{history.length}
-				{'): '}
-			</Box>
-		</Typography>	
-		</Box>
-		</Grid>
-
-		
-
-		<Grid container direction='row' justify='center' alignItems='center' >
-			{history.map((hist) => {
-				return (
-					<Grid item key={hist} xs={6} sm={6} md={6}>
-						<Box m={1}>
-							<ListItem
-								activity={hist.obj}
-								onRouteChange={onRouteChange}
-								onActivityIDChange={onActivityIDChange}
-								type={hist.type}
+							<CardMedia
+								className={classes.cardMedia}
+								image={imageData}
+								title={username}
 							/>
+							<CardContent className={classes.cardContent}>
+								<Typography
+									gutterBottom
+									variant='h5'
+									component='h2'
+									align='left'
+								>
+									{username}
+								</Typography>
+								<Typography align='left'>
+									{biography}
+								</Typography>
+								<Typography align='left'>
+									{'Email: '}
+									{email}
+								</Typography>
+								<Typography align='left'>
+									{'Birthday: '}
+									{Moment(birthday).format('YYYY-MM-DD')}
+								</Typography>
+							</CardContent>
+							<CardActions>
+								{myself ? (
+									<Button
+										variant='contained'
+										color='secondary'
+										startIcon={<EditIcon />}
+										onClick={() => {
+											onRouteChange(
+												'updateprofile/' + user.id
+											);
+										}}
+									>
+										update your profile
+									</Button>
+								) : null}
+								{isSignedIn && !isFriend && !myself ? (
+									<Button
+										variant='contained'
+										color='secondary'
+										startIcon={<NotificationsIcon />}
+										onClick={onAddFriend}
+									>
+										follow!
+									</Button>
+								) : null}
+							</CardActions>
+						</Card>
+					</Grid>
+				</Grid>
+
+				{myself ? (
+					<Grid
+						container
+						direction='row'
+						justify='center'
+						alignItems='center'
+					>
+						<Box m={2}>
+							<Typography variant='p' align='left'>
+								<Box
+									fontWeight='fontWeightBold'
+									fontSize='h6.fontSize'
+								>
+									{'Friends ('}
+									{friends.length}
+									{'): '}
+								</Box>
+							</Typography>
 						</Box>
 					</Grid>
-				);
-			})}
-		</Grid>
+				) : null}
 
-		
-		<Grid container direction='row' justify='center' alignItems='center' >
-		<Box m={2}>
-		<Typography variant='p' align='left'>
-			<Box
-				fontWeight='fontWeightBold'
-				fontSize='h6.fontSize'
-			>
-				{'Interests ('}
-				{interests.length}
-				{'): '}
-			</Box>
-		</Typography>	
-		</Box>
-		</Grid>
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+					{myself
+						? friends.map((friend) => {
+								return (
+									<Grid
+										item
+										key={friend}
+										xs={1}
+										sm={1}
+										md={1}
+									>
+										<div className='child' key={friend.id}>
+											<Typography
+											// onClick={() => {
+											// 	console.log(friend._id);
+											// 	onActivityIDChange(
+											// 		friend._id
+											// 	);
+											// 	onRouteChange(
+											// 		'profile/' + friend._id
+											// 	);
+											// }}
+											>
+												<Box fontWeight='fontWeightBold'>
+													{friend.username}
+												</Box>
+											</Typography>
+											<IconButton>
+												<Avatar
+													alt={friend.username}
+													src={friend.imageData}
+													onClick={() => {
+														console.log(user.id);
+														console.log(friend.id);
+														onActivityIDChange(
+															friend.id
+														);
+														onRouteChange(
+															'profile/' +
+																friend.id
+														);
+													}}
+												>
+													{friend.username}
+												</Avatar>
+											</IconButton>
+										</div>
+									</Grid>
+								);
+						  })
+						: null}
+				</Grid>
 
-		
-
-		<Grid container direction='row' justify='center' alignItems='center' >
-			{interests.map((interest) => {
-				return (
-					// <div className='child' key={interest}>
-					// 	<p>{interest.username}</p>
-					// </div>
-					<Grid item key={interest} xs={1} sm={1} md={1}>
-					<div className='child' key={interest.id}>
-						<Typography>
-							<Box fontWeight='fontWeightBold'>
-							{interest}
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+					<Box m={2}>
+						<Typography variant='p' align='left'>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+							>
+								{'History ('}
+								{history.length}
+								{'): '}
 							</Box>
 						</Typography>
-						{/* <IconButton>
+					</Box>
+				</Grid>
+
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+					{history.map((hist) => {
+						return (
+							<Grid item key={hist} xs={6} sm={6} md={6}>
+								<Box m={1}>
+									<ListItem
+										activity={hist.obj}
+										onRouteChange={onRouteChange}
+										onActivityIDChange={onActivityIDChange}
+										type={hist.type}
+									/>
+								</Box>
+							</Grid>
+						);
+					})}
+				</Grid>
+
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+					<Box m={2}>
+						<Typography variant='p' align='left'>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+							>
+								{'Interests ('}
+								{interests.length}
+								{'): '}
+							</Box>
+						</Typography>
+					</Box>
+				</Grid>
+
+				<Grid
+					container
+					direction='row'
+					justify='center'
+					alignItems='center'
+				>
+					{interests.map((interest) => {
+						return (
+							// <div className='child' key={interest}>
+							// 	<p>{interest.username}</p>
+							// </div>
+							<Grid item key={interest} xs={1} sm={1} md={1}>
+								<div className='child' key={interest.id}>
+									<Typography>
+										<Box fontWeight='fontWeightBold'>
+											{interest}
+										</Box>
+									</Typography>
+									{/* <IconButton>
 						<Avatar 
 							alt={interest.username} 
 							src={interest.imageData}
@@ -387,13 +430,12 @@ const Profile = ({
 							{interest.username}							
 						</Avatar>
 						</IconButton> */}
-					</div>
-					</Grid>
-				);
-			})}
-		</Grid>
-
-		</Container>
+								</div>
+							</Grid>
+						);
+					})}
+				</Grid>
+			</Container>
 		</MuiThemeProvider>
 	);
 };

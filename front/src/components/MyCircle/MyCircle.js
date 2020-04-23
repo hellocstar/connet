@@ -91,8 +91,12 @@ const MyCircle = ({
 							);
 						})}
 					</div>
-					{filtered.length === 0 ? (
-						<img src={no_result} style={{ width: '500px' }} />
+					{searchResult.length === 0 ? (
+						<img
+							src={no_result}
+							style={{ width: '500px' }}
+							alt=''
+						/>
 					) : null}
 				</Container>
 			</React.Fragment>
