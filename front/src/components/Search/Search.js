@@ -11,7 +11,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		'& .MuiTextField-root': {
@@ -59,67 +58,95 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+// const sections = [
+// 	{ title: 'Technology', url: '#' },
+// 	{ title: 'Design', url: '#' },
+// 	{ title: 'Culture', url: '#' },
+// 	{ title: 'Business', url: '#' },
+// 	{ title: 'Politics', url: '#' },
+// 	{ title: 'Opinion', url: '#' },
+// 	{ title: 'Science', url: '#' },
+// 	{ title: 'Health', url: '#' },
+// 	{ title: 'Style', url: '#' },
+// 	{ title: 'Travel', url: '#' },
+// ];
+
 const sections = [
-	{ title: 'Technology', url: '#' },
-	{ title: 'Design', url: '#' },
-	{ title: 'Culture', url: '#' },
-	{ title: 'Business', url: '#' },
-	{ title: 'Politics', url: '#' },
-	{ title: 'Opinion', url: '#' },
-	{ title: 'Science', url: '#' },
-	{ title: 'Health', url: '#' },
-	{ title: 'Style', url: '#' },
-	{ title: 'Travel', url: '#' },
+	'Technology',
+	'Design',
+	'Culture',
+	'Business',
+	'Politics',
+	'Opinion',
+	'Science',
+	'Health',
+	'Style',
+	'Travel',
 ];
 
 const suggestions = [
-	{ title: 'Join a movemcent'},
-	{ title: 'Learn to cook'},
-	{ title: 'Train for a marathon'},
-	{ title: 'Build a mobile app'},
-	{ title: 'Hike a mountain'},
-	{ title: 'Practice a language'},
-	
+	{ title: 'Join a movemcent' },
+	{ title: 'Learn to cook' },
+	{ title: 'Train for a marathon' },
+	{ title: 'Build a mobile app' },
+	{ title: 'Hike a mountain' },
+	{ title: 'Practice a language' },
 ];
 
-const Search = ({ searchChange }) => {
+const Search = ({ searchChange, onRouteChange, onCategorySearch }) => {
 	const classes = useStyles();
 	return (
 		<form className={classes.root} noValidate autoComplete='off'>
 			<div>
 				<Box m={1}>
-				<Container maxWidth="lg">
-				<Grid container alignItems='center' direction='row' justify='center'>
-					<Grid item xs={11} alignItems='center'direction='row' justify='center'>
-					
-					<div className={classes.search}>
-					<div className={classes.searchIcon}>
-						<SearchIcon />
-					</div>
-					<InputBase
-						placeholder='Search for events…'
-						classes={{
-							root: classes.inputRoot,
-							input: classes.inputInput,
-						}}
-						onChange={searchChange}
-					/>
-					</div>
-					
-					</Grid>
-				</Grid>
-				</Container>
+					<Container maxWidth='lg'>
+						<Grid
+							container
+							alignItems='center'
+							direction='row'
+							justify='center'
+						>
+							<Grid
+								item
+								xs={11}
+								alignItems='center'
+								direction='row'
+								justify='center'
+							>
+								<div className={classes.search}>
+									<div className={classes.searchIcon}>
+										<SearchIcon />
+									</div>
+									<InputBase
+										placeholder='Search for events…'
+										classes={{
+											root: classes.inputRoot,
+											input: classes.inputInput,
+										}}
+										onChange={searchChange}
+									/>
+								</div>
+							</Grid>
+						</Grid>
+					</Container>
 				</Box>
 				<CssBaseline />
-				<Container maxWidth="lg">
-				<Header suggestions={suggestions} sections={sections} searchChange={searchChange} />
+				<Container maxWidth='lg'>
+					<Header
+						suggestions={suggestions}
+						sections={sections}
+						searchChange={searchChange}
+						onRouteChange={onRouteChange}
+						onCategorySearch={onCategorySearch}
+					/>
 				</Container>
 			</div>
 		</form>
 	);
 };
 
-{/* <div className={classes.search}>
+{
+	/* <div className={classes.search}>
 					<div className={classes.searchIcon}>
 						<SearchIcon />
 					</div>
@@ -131,6 +158,7 @@ const Search = ({ searchChange }) => {
 						}}
 						onChange={searchChange}
 					/>
-				</div> */}
+				</div> */
+}
 
 export default Search;

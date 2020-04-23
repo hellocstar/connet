@@ -29,10 +29,10 @@ if (!isProduction) {
 
 //Profile
 app.get('/profile/:profileid', profileApi.getProfile);
-// app.delete('/deleteUser/:username', profileApi.deleteProfile);
 app.post('/updateprofile/:profileid', profileApi.updateProfile);
 app.post('/search', profileApi.searchUsername);
 app.post('/addfriend/', profileApi.addFriend);
+// app.delete('/deleteUser/:username', profileApi.deleteProfile);
 
 //Sign In
 app.post('/signin', passport.authenticate('local'), profileApi.signIn);
@@ -55,6 +55,7 @@ app.post('/joinroom/', roomApi.joinRoom);
 app.get('/community', eventApi.eventList);
 app.post('/newevent', eventApi.createEvent);
 app.get('/event/:eventid', eventApi.getEvent);
+app.post('/categorysearch', eventApi.categorySearch);
 // app.delete('/deleteRoom/:roomname', eventApi.deleteRoom);
 // app.put('/updateRoom/:roomname', eventApi.updateRoom);
 // app.patch('/updateRoom/:roomname', eventApi.updateRoom);

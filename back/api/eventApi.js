@@ -5,6 +5,18 @@ const Profile = require('../models/profileSchema');
 const eventList = async (req, res, next) => {
 	try {
 		const events = await Event.find({});
+		console.log('hi');
+		res.status(200).send(events);
+	} catch (e) {
+		console.log(e);
+		res.status(500).send(e);
+	}
+};
+
+const categorySearch = async (req, res, next) => {
+	try {
+		const events = await Event.find({ categories: req.search });
+		console.log(events);
 		res.status(200).send(events);
 	} catch (e) {
 		console.log(e);
@@ -103,6 +115,7 @@ module.exports = {
 	eventList,
 	createEvent,
 	getEvent,
+	categorySearch,
 	// deleteRoom,
 	// updateRoom,
 	// joinRoom,

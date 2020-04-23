@@ -65,23 +65,36 @@ const NewRoom = ({
 	const [maxNoOfParticipants, setMaxNoOfParticipants] = useState(0);
 
 	if (isSignedIn) {
+		// const categoriesList = [
+		// 	'Outdoors & Adventure',
+		// 	'Tech',
+		// 	'Family',
+		// 	'Health & Wellness',
+		// 	'Sports & Fitness',
+		// 	'Learning',
+		// 	'Photography',
+		// 	'Food & Drink',
+		// 	'Writing',
+		// 	'Language & Culture',
+		// 	'Music',
+		// 	'Film',
+		// 	'Beliefs',
+		// 	'Arts',
+		// 	'Fashion & Beauty',
+		// 	'Career & Business',
+		// ];
+
 		const categoriesList = [
-			'Outdoors & Adventure',
-			'Tech',
-			'Family',
-			'Health & Wellness',
-			'Sports & Fitness',
-			'Learning',
-			'Photography',
-			'Food & Drink',
-			'Writing',
-			'Language & Culture',
-			'Music',
-			'Film',
-			'Beliefs',
-			'Arts',
-			'Fashion & Beauty',
-			'Career & Business',
+			'Technology',
+			'Design',
+			'Culture',
+			'Business',
+			'Politics',
+			'Opinion',
+			'Science',
+			'Health',
+			'Style',
+			'Travel',
 		];
 
 		const ITEM_HEIGHT = 48;

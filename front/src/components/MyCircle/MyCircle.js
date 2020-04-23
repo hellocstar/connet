@@ -12,6 +12,7 @@ const MyCircle = ({
 	onActivityIDChange,
 	isSignedIn,
 	userID,
+	categorySearch,
 }) => {
 	const [roomList, setRoomList] = useState([]);
 
@@ -32,8 +33,23 @@ const MyCircle = ({
 			});
 	}, []);
 
-	const filtered = roomList.filter((rooms) => {
-		return rooms.name.toLowerCase().includes(searchField.toLowerCase());
+	const catSerach = roomList.filter((event) => {
+		let push = false;
+		if (categorySearch === '') {
+			push = true;
+		} else {
+			for (let i = 0; i < event.categories.length; i++) {
+				if (event.categories[i] === categorySearch) {
+					push = true;
+					break;
+				}
+			}
+		}
+		return push;
+	});
+
+	const searchResult = catSerach.filter((event) => {
+		return event.name.toLowerCase().includes(searchField.toLowerCase());
 	});
 
 	return (
@@ -52,29 +68,31 @@ const MyCircle = ({
 		// 	})}
 		// </div>
 		<Grid container direction='row' justify='center' alignItems='center'>
-		<React.Fragment>
-			<CssBaseline />
-			<Container maxWidth='lg'>
-				{/* <Header suggestions={suggestions} sections={sections} /> */}
-				<div className='parent'>
-					{filtered.map((room) => {
-						return (
-							<Grid item key={room._id} xs={6} sm={6} md={6}>
-								<Box m={1}>
-								<ListItem
-									activity={room}
-									onRouteChange={onRouteChange}
-									onActivityIDChange={onActivityIDChange}
-									type={'room'}
-								/>
-								</Box>
-							</Grid>
-						);
-					})}
-				</div>
-			</Container>
-		</React.Fragment>
-	</Grid>
+			<React.Fragment>
+				<CssBaseline />
+				<Container maxWidth='lg'>
+					{/* <Header suggestions={suggestions} sections={sections} /> */}
+					<div className='parent'>
+						{searchResult.map((room) => {
+							return (
+								<Grid item key={room._id} xs={6} sm={6} md={6}>
+									<Box m={1}>
+										<ListItem
+											activity={room}
+											onRouteChange={onRouteChange}
+											onActivityIDChange={
+												onActivityIDChange
+											}
+											type={'room'}
+										/>
+									</Box>
+								</Grid>
+							);
+						})}
+					</div>
+				</Container>
+			</React.Fragment>
+		</Grid>
 	);
 };
 

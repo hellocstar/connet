@@ -24,6 +24,7 @@ const initialState = {
 	pastRoute: 'community',
 	route: 'community',
 	searchField: '',
+	categorySearch: '',
 	activityID: '',
 	isSignedIn: false,
 	user: {
@@ -44,11 +45,15 @@ class App extends Component {
 		this.setState({ searchField: search.target.value });
 	};
 
+	onCategorySearch = (search) => {
+		this.setState({ categorySearch: search });
+	};
+
 	onRouteChange = (route) => {
+		this.setState({ categorySearch: '' });
 		this.setState({ pastRoute: this.state.route });
 		this.setState({ route: route });
 		window.scrollTo(0, 0);
-		// console.log(route)
 	};
 
 	onActivityIDChange = (id) => {
@@ -81,6 +86,7 @@ class App extends Component {
 			pastRoute,
 			route,
 			searchField,
+			categorySearch,
 			activityID,
 			isSignedIn,
 			user,
@@ -101,18 +107,27 @@ class App extends Component {
 					{route === 'community' ? (
 						<div>
 							<Banner onRouteChange={this.onRouteChange} />
-							<Search searchChange={this.onSearchChange} />
+							<Search
+								searchChange={this.onSearchChange}
+								onRouteChange={this.onRouteChange}
+								onCategorySearch={this.onCategorySearch}
+							/>
 							<Community
 								className='itemlist'
 								searchField={searchField}
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
+								categorySearch={categorySearch}
 							/>
 						</div>
 					) : route === 'mycircle' ? (
 						<div>
 							<Banner onRouteChange={this.onRouteChange} />
-							<Search searchChange={this.onSearchChange} />
+							<Search
+								searchChange={this.onSearchChange}
+								onRouteChange={this.onRouteChange}
+								onCategorySearch={this.onCategorySearch}
+							/>
 							<MyCircle
 								className='itemlist'
 								searchField={searchField}
@@ -120,6 +135,7 @@ class App extends Component {
 								onActivityIDChange={this.onActivityIDChange}
 								isSignedIn={isSignedIn}
 								userID={user.id}
+								categorySearch={categorySearch}
 							/>
 						</div>
 					) : route === 'event/' + activityID ? (
