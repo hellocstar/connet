@@ -17,6 +17,7 @@ import Divider from '@material-ui/core/Divider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
 const theme = createMuiTheme({
 	palette: {
@@ -68,6 +69,25 @@ const useStyles = makeStyles((theme) => ({
 	},
 	mainGrid: {
 		marginTop: theme.spacing(3),
+	},
+	large: {
+		width: theme.spacing(7),
+		height: theme.spacing(7),
+	},
+	card: {
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	cardMedia: {
+	paddingTop: '56.25%', // 16:9
+	},
+	cardContent: {
+	flexGrow: 1,
+	},
+	cardGrid: {
+		paddingTop: theme.spacing(1),
+		paddingBottom: theme.spacing(1),
 	},
 }));
 
@@ -152,7 +172,7 @@ const Room = ({
 					>
 						<div className={classes.overlay} />
 						<Grid container>
-							<Grid item md={6}>
+							<Grid item md={1}>
 								<div
 									className={classes.mainFeaturedPostContent}
 								>
@@ -175,6 +195,7 @@ const Room = ({
 										{description}
 									</Typography>
 
+									<Grid item md={6}>
 									{isSignedIn && type === 'mycircle' ? (
 										<Button 
 											variant='contained'
@@ -199,12 +220,14 @@ const Room = ({
 											{typeName}
 										</Button>
 									) : null}
+									</Grid>
 
 									{/* <Link variant="subtitle1" href="#">
 						{"fuck u"}
 						</Link> */}
 								</div>
 							</Grid>
+							
 						</Grid>
 					</Paper>
 				</Box>
@@ -235,11 +258,137 @@ const Room = ({
 
 			<Grid container spacing={5} className={classes.mainGrid}>
 				<Grid item xs={12} md={8}>
-					
+						<Typography variant='h6' gutterBottom align='left'>
+							{/* {date} */}
+							{Moment(date).format('YYYY-MM-DD')}
+							{' '}
+							{time}
+						</Typography>
+						<Typography variant='h4' gutterBottom align='left'>
+							{name}
+						</Typography>
+
+						<Grid container spacing={0}>
+							<Grid
+								onClick={() => {
+									onActivityIDChange(host._id);
+									onRouteChange('profile/' + host._id);
+								}}
+							>
+								<Box m={1}>
+									<Avatar src={host.imageData} />
+									{/* {console.log(organiser.imageData)} */}
+								</Box>
+							</Grid>
+							<Grid
+								onClick={() => {
+									onActivityIDChange(host._id);
+									onRouteChange('profile/' + host._id);
+								}}
+							>
+								{/* <Box m={1}> */}
+								<Typography
+									variant='p'
+									gutterBottom
+									align='left'
+								>
+									<Box fontWeight='fontWeightBold'>
+										{'Hosted by:'}
+									</Box>
+								</Typography>
+								{/* </Box>	 */}
+
+								<Typography variant='p' align='left'>
+									<Box
+										fontWeight='fontWeightBold'
+										fontSize='h6.fontSize'
+									>
+										{host.username}
+									</Box>
+								</Typography>
+
+								{/* {organiser.username} */}
+							</Grid>
+						</Grid>
+
+						<Divider />
+
+						{imageData ? (
+							<Box m={5}>
+								<img src={imageData} alt=''></img>
+							</Box>
+						) : null}
+
+						<Typography variant='p' align='left'>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+							>
+								{'Location: '}
+							</Box>
+						</Typography>
+						<Typography variant='p' align='left'>
+							<Box fontSize='h6.fontSize'>{location}</Box>
+						</Typography>
+
+						<Typography variant='p' align='left'>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+							>
+								{'Description: '}
+							</Box>
+						</Typography>
+						<Typography variant='p' align='left'>
+							<Box fontSize='h6.fontSize'>{description}</Box>
+						</Typography>
+
+						<Typography variant='p' align='left'>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+							>
+								{'Categories: '}
+							</Box>
+						</Typography>
+						<Typography variant='p' align='left'>
+							<Box fontSize='h6.fontSize'>{categories}</Box>
+						</Typography>
+
+						{joined ? <Box m={1}><p>You are a participant of this room! </p></Box> : null}
+
+						{/* {!joined && isSignedIn ? (
+							<Box m={1}>
+							<Button onClick={() => joinRoom(userID, activityID)}>
+								Join the room!
+							</Button>
+							</Box>
+						) : null} */}
+
+						<Box m={5}>
+							{!joined && isSignedIn ? (
+								<div>
+								<Divider variant="middle" />
+								{/* <Grid item md={4}> */}
+								<Box m={1}>
+								<Button
+									onClick={() => joinRoom(userID, activityID)}
+									variant="contained"
+									color='secondary'
+								>
+									Join the room!
+								</Button>
+								</Box>
+								{/* <Divider variant="middle" /> */}
+								{/* </Grid> */}
+								</div>
+							) : null}
+						</Box>
+
 				</Grid>
 			</Grid>
 			
-			<h1>{name}</h1>
+			{/* <h1>{name}</h1>
 			<h1>{Moment(date).format('YYYY-MM-DD')}</h1>
 			<h1>{time}</h1>
 			<h1>{location}</h1>
@@ -260,23 +409,76 @@ const Room = ({
 				<button onClick={() => joinRoom(userID, activityID)}>
 					Join the room!
 				</button>
-			) : null}
-			<div className='parent'>
+			) : null} */}
+			<Typography variant='p' align='left'>
+				<Box
+					fontWeight='fontWeightBold'
+					fontSize='h6.fontSize'
+				>
+					{'Participants ('}
+					{participants.length}
+					{'): '}
+				</Box>
+			</Typography>
+			
+			{/* <Container className={classes.cardGrid} maxWidth="md">
+				<Grid container spacing={1}> */}
+				<AvatarGroup max={8}>
 				{participants.map((participant) => {
 					return (
-						<div className='child' key={participant.id}>
-							<p
-								onClick={() => {
-									onActivityIDChange(participant.id);
-									onRouteChange('profile/' + participant.id);
-								}}
-							>
-								{participant.username}
-							</p>
-						</div>
+						// <div className='child' key={participant.id}>
+						// 	<p
+						// 		onClick={() => {
+						// 			onActivityIDChange(participant.id);
+						// 			onRouteChange('profile/' + participant.id);
+						// 		}}
+						// 	>
+						// 		{participant.username}
+						// 	</p>
+						// </div>
+
+
+						// <Grid item key={participant} xs={12} sm={6} md={4}>
+						// 	<Card className={classes.card}>
+						// 	<CardMedia
+						// 		className={classes.cardMedia}
+						// 		image={participant.imageData}
+						// 		title={participant.username}
+						// 	/>
+						// 	<CardContent className={classes.cardContent}>
+						// 		<Typography gutterBottom variant="h5" component="h2" align='center'>
+						// 		{participant.username}
+						// 		</Typography>
+						// 	</CardContent>
+						// 	<CardActions>
+						// 		<Button 
+						// 			size="small" 
+						// 			color="secondary"
+						// 			onClick={() => {
+						// 				onActivityIDChange(participant.id);
+						// 				onRouteChange('profile/' + participant.id);
+						// 			}}>
+						// 		View
+						// 		</Button>
+						// 	</CardActions>
+						// 	</Card>
+
+						// </Grid>
+						<Avatar 
+							alt={participant.username} 
+							src={participant.imageData}
+							onClick={() => {
+								onActivityIDChange(participant.id);
+								onRouteChange('profile/' + participant.id);
+							}}>
+							{participant.username}							
+						</Avatar>
+						
 					);
 				})}
-			</div>
+				</AvatarGroup>
+				{/* </Grid>
+			</Container> */}
 			</Container>
 			</MuiThemeProvider>
 		</div>

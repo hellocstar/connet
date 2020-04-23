@@ -301,9 +301,13 @@ const Event = ({
 						>
 							<Box fontSize='h6.fontSize'>{description}</Box>
 						</Typography>
-
+						
 						<Box m={5}>
 							{isSignedIn ? (
+								<div>
+								<Divider variant="middle" />
+								{/* <Grid item md={4}> */}
+								<Box m={1}>
 								<Button
 									onClick={() => {
 										changeCreateRoomFor(activityID);
@@ -314,8 +318,13 @@ const Event = ({
 								>
 									Host a Room in {name}!
 								</Button>
+								</Box>
+								{/* <Divider variant="middle" /> */}
+								{/* </Grid> */}
+								</div>
 							) : null}
 						</Box>
+						
 					</Grid>
 				</Grid>
 
