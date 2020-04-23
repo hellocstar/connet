@@ -6,7 +6,7 @@ const Image = ({ baseImage, getBaseFile }) => {
 	return (
 		<div className='image-container'>
 			<div className='process'>
-				<p>Upload an image!</p>
+				{/* <p>Upload an image!</p> */}
 				<div className='process__upload-btn'>
 					<FileBase
 						type='file'

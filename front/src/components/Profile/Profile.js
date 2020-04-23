@@ -78,7 +78,7 @@ const Profile = ({
 				<button onClick={onAddFriend}>Follow!</button>
 			) : null}
 			{isFriend && !myself ? (
-				<p>You are now following {username}</p>
+				<p>You are now following {username}!</p>
 			) : null}
 			<h1>{username}</h1>
 			<h1>{email}</h1>

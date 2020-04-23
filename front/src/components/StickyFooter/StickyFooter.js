@@ -37,6 +37,7 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
     footer: {
       // backgroundColor: 'orange',
+      background: footerbg,
       // marginTop: theme.spacing(8),
       // padding: theme.spacing(6, 0),
     },
@@ -60,7 +61,7 @@ export default function StickyFooter(props) {
         {/* <img src={footerbg} style={{width:'100%'}} /> */}
       
       <footer className={classes.footer}>
-      <img src={footerbg} style={{width:'100%'}} />
+      <img src={footerbg} style={{width:'100%', margin: '0 auto', alignSelf: 'flex-end'}} />
       
         {/* <Container maxWidth="lg">
           <Typography variant="h6" align="center" gutterBottom>

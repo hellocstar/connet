@@ -46,9 +46,9 @@ const roomSchema = new mongoose.Schema({
 	participants: {
 		type: [String], //id of participant
 	},
-	pending_parti: {
-		type: [String], //id of pending participant
-	},
+	// pending_parti: {
+	// 	type: [String], //id of pending participant
+	// },
 });
 
 const Room = mongoose.model('room', roomSchema);

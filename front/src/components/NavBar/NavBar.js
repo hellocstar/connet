@@ -199,7 +199,14 @@ ElevationScroll.propTypes = {
 
 // const topButtonProp = {className={classes.button} color="primary" size="small"};
 function PrimarySearchAppBar(
-	{ onRouteChange, isSignedIn, onActivityIDChange, onSignIn, onSignOut, pastRoute },
+	{
+		onRouteChange,
+		isSignedIn,
+		onActivityIDChange,
+		onSignIn,
+		onSignOut,
+		pastRoute,
+	},
 	props
 ) {
 	const [search, setSearch] = React.useState('');
@@ -399,14 +406,14 @@ function PrimarySearchAppBar(
 
 	const Copyright = (
 		<Box m={1}>
-		<Typography variant='body2' color='textSecondary' align='center'>
-			{'Copyright © '}
-			<Link color='inherit' href='https://material-ui.com/'>
-				ConNET
-			</Link>{' '}
-			{new Date().getFullYear()}
-			{'.'}
-		</Typography>
+			<Typography variant='body2' color='textSecondary' align='center'>
+				{'Copyright © '}
+				<Link color='inherit' href='https://material-ui.com/'>
+					ConNET
+				</Link>{' '}
+				{new Date().getFullYear()}
+				{'.'}
+			</Typography>
 		</Box>
 	);
 
@@ -599,7 +606,6 @@ function PrimarySearchAppBar(
 	);
 
 	const CustomAppBar = (
-		
 		<AppBar style={{ background: 'transparent', boxShadow: 'none' }}>
 			<Toolbar>
 				<IconButton
@@ -607,10 +613,11 @@ function PrimarySearchAppBar(
 					className={classes.menuButton}
 					color='inherit'
 					aria-label='open drawer'
-					onClick={() => onRouteChange(pastRoute)}
+					onClick={() => {
+						onRouteChange(pastRoute[pastRoute.length - 1]);
+					}}
 				>
 					<ArrowBackIcon />
-					
 				</IconButton>
 				{isSignedIn === true ? (
 					<BootstrapButton
@@ -737,7 +744,7 @@ const NavBar = ({
 	onActivityIDChange,
 	onSignIn,
 	onSignOut,
-	pastRoute
+	pastRoute,
 }) => {
 	//const bar = <PrimarySearchAppBar onRouteChange={onRouteChange} isSignedIn={isSignedIn} />;
 

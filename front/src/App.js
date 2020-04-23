@@ -44,7 +44,7 @@ class App extends Component {
 	};
 
 	onRouteChange = (route) => {
-		this.setState({ pastRoute: this.state.route});
+		this.setState({ pastRoute: this.state.route });
 		this.setState({ route: route });
 		// console.log(route)
 		console.log(this.state.pastRoute);
@@ -86,7 +86,7 @@ class App extends Component {
 			createRoomFor,
 		} = this.state;
 		return (
-			<ErrorBoundary>
+			<ErrorBoundary onRouteChange={this.onRouteChange}>
 				<div className='App'>
 					<NavBar
 						isSignedIn={isSignedIn}
