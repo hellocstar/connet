@@ -12,20 +12,20 @@ import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  toolbarSecondary: {
-    justifyContent: 'space-between',
-    overflowX: 'auto',
-  },
-  toolbarLink: {
-    padding: theme.spacing(1),
-    flexShrink: 0,
-  },
+	toolbar: {
+		borderBottom: `1px solid ${theme.palette.divider}`,
+	},
+	toolbarTitle: {
+		flex: 1,
+	},
+	toolbarSecondary: {
+		justifyContent: 'space-between',
+		overflowX: 'auto',
+	},
+	toolbarLink: {
+		padding: theme.spacing(1),
+		flexShrink: 0,
+	},
 }));
 
 const theme = createMuiTheme({
@@ -47,51 +47,70 @@ const theme = createMuiTheme({
 });
 
 export default function Header(props) {
-  const classes = useStyles();
-  const { searchChange, sections, suggestions } = props;
+	const classes = useStyles();
+	const {
+		searchChange,
+		sections,
+		suggestions,
+		onRouteChange,
+		onCategorySearch,
+	} = props;
 
-  return (
-    <React.Fragment>
-    <MuiThemeProvider theme={theme}>
-      {/* <Divider variant="middle" /> */}
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-        {/* <Button size="small">Subscribe</Button> */}
-        {suggestions.map((suggestions) => (
-          <Button variant="outlined" color='secondary'>
-            {suggestions.title}
-          </Button>
-        ))}
-        {/* <IconButton>
+	return (
+		<React.Fragment>
+			<MuiThemeProvider theme={theme}>
+				{/* <Divider variant="middle" /> */}
+				<Toolbar
+					component='nav'
+					variant='dense'
+					className={classes.toolbarSecondary}
+				>
+					{/* <Button size="small">Subscribe</Button> */}
+					{suggestions.map((suggestions) => (
+						<Button variant='outlined' color='secondary'>
+							{suggestions.title}
+						</Button>
+					))}
+					{/* <IconButton>
           <SearchIcon />
         </IconButton>
         <Button variant="outlined" size="small">
           Sign up
         </Button> */}
-      </Toolbar>
-      <Divider variant="middle" />
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-        {sections.map((section) => (
-           // <Link
-          //   color="inherit"
-          //   noWrap
-          //   key={section.title}
-          //   variant="body2"
-          //   href={section.url}
-          //   className={classes.toolbarLink}
-          // >
-          //   {section.title}
-          // </Link>
-          <Button color='inherit'>
-          {section.title}
-          </Button>
-        ))}
-      </Toolbar>
-      </MuiThemeProvider>
-    </React.Fragment>
-  );
+				</Toolbar>
+				<Divider variant='middle' />
+				<Toolbar
+					component='nav'
+					variant='dense'
+					className={classes.toolbarSecondary}
+				>
+					{sections.map((section) => (
+						// <Link
+						//   color="inherit"
+						//   noWrap
+						//   key={section.title}
+						//   variant="body2"
+						//   href={section.url}
+						//   className={classes.toolbarLink}
+						// >
+						//   {section.title}
+						// </Link>
+						<Button
+							color='inherit'
+							onClick={() => {
+								onCategorySearch(section);
+							}}
+						>
+							{section}
+						</Button>
+					))}
+				</Toolbar>
+			</MuiThemeProvider>
+		</React.Fragment>
+	);
 }
 
 Header.propTypes = {
-  sections: PropTypes.array,
-  title: PropTypes.string,
+	sections: PropTypes.array,
+	title: PropTypes.string,
 };

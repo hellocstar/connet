@@ -9,7 +9,12 @@ import Box from '@material-ui/core/Box';
 import no_result from './no_result.png';
 import Zoom from '@material-ui/core/Zoom';
 
-const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
+const Community = ({
+	searchField,
+	onRouteChange,
+	onActivityIDChange,
+	categorySearch,
+}) => {
 	const [eventList, setEventList] = useState([]);
 
 	const sections = [
@@ -44,7 +49,22 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 			});
 	}, []);
 
-	const searchResult = eventList.filter((event) => {
+	const catSerach = eventList.filter((event) => {
+		let push = false;
+		if (categorySearch === '') {
+			push = true;
+		} else {
+			for (let i = 0; i < event.categories.length; i++) {
+				if (event.categories[i] === categorySearch) {
+					push = true;
+					break;
+				}
+			}
+		}
+		return push;
+	});
+
+	const searchResult = catSerach.filter((event) => {
 		return event.name.toLowerCase().includes(searchField.toLowerCase());
 	});
 
