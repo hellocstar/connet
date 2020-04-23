@@ -371,17 +371,8 @@ const Profile = ({
 					// </div>
 					<Grid item key={interest} xs={1} sm={1} md={1}>
 					<div className='child' key={interest.id}>
-						<Typography
-						
-							onClick={() => {
-								onActivityIDChange(interest.id);
-								onRouteChange('profile/' + interest.id);
-							}}
-						>
-							<Box
-								fontWeight='fontWeightBold'
-								
-							>
+						<Typography>
+							<Box fontWeight='fontWeightBold'>
 							{interest}
 							</Box>
 						</Typography>
