@@ -85,7 +85,7 @@ const sections = [
 ];
 
 const suggestions = [
-	{ title: 'Join a movemcent' },
+	{ title: 'Hang out with friends' },
 	{ title: 'Learn to cook' },
 	{ title: 'Train for a marathon' },
 	{ title: 'Build a mobile app' },
