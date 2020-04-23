@@ -47,7 +47,6 @@ class App extends Component {
 		this.setState({ pastRoute: this.state.route });
 		this.setState({ route: route });
 		// console.log(route)
-		console.log(this.state.pastRoute);
 	};
 
 	onActivityIDChange = (id) => {

@@ -7,6 +7,7 @@ const eventList = async (req, res, next) => {
 		const events = await Event.find({});
 		res.status(200).send(events);
 	} catch (e) {
+		console.log(e);
 		res.status(500).send(e);
 	}
 };
@@ -45,7 +46,6 @@ const getEvent = async (req, res, next) => {
 			rooms: rooms,
 			organiser: organiser,
 		};
-		console.log(responseObj);
 		res.status(200).send(responseObj);
 	} catch (e) {
 		console.log(e);

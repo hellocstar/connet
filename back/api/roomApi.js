@@ -16,13 +16,11 @@ const roomList = async (req, res, next) => {
 			}
 		}
 		const roomByMe = await Room.find({ hostID: user._id });
-		console.log(roomByMe);
 		for (let i = 0; i < roomByMe.length; i++) {
 			if (roomByMe[i].type === 'mycircle') {
 				rooms.push(roomByMe[i]);
 			}
 		}
-		console.log(rooms);
 		res.status(200).send(rooms);
 	} catch (e) {
 		res.status(500).send(e);

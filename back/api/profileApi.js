@@ -63,7 +63,6 @@ const signInFail = async (req, res, next) => {
 
 const getProfile = async (req, res, next) => {
 	try {
-		console.log(req.params.profileid);
 		const profile = await Profile.findOne({
 			_id: req.params.profileid,
 		});
