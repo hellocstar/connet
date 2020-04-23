@@ -188,7 +188,7 @@ const Event = ({
 										color='inherit'
 										paragraph
 									>
-										{description}
+										{Moment(date).format('YYYY-MM-DD')}
 									</Typography>
 									{/* <Link variant="subtitle1" href="#">
 						{"fuck u"}

@@ -118,7 +118,7 @@ const Search = ({ searchChange, onRouteChange, onCategorySearch }) => {
 										<SearchIcon />
 									</div>
 									<InputBase
-										placeholder='Search for events…'
+										placeholder='Search on!'
 										classes={{
 											root: classes.inputRoot,
 											input: classes.inputInput,
