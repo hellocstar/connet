@@ -358,7 +358,15 @@ const Room = ({
 
 							{joined ? (
 								<Box m={1}>
-									<p>You are a participant of this room! </p>
+									{/* <p>You are a participant of this room! </p> */}
+									<Typography variant='p' align='left'>
+										<Box
+											fontWeight='fontWeightBold'
+											fontSize='h6.fontSize'
+										>
+											{'You are a participant of this room!'}
+										</Box>
+									</Typography>
 								</Box>
 							) : null}
 
