@@ -46,6 +46,7 @@ class App extends Component {
 	onRouteChange = (route) => {
 		this.setState({ pastRoute: this.state.route });
 		this.setState({ route: route });
+		window.scrollTo(0, 0);
 		// console.log(route)
 	};
 

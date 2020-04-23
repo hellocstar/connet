@@ -168,6 +168,7 @@ const Event = ({
 							backgroundImage: `url(https://source.unsplash.com/random)`,
 						}}
 					>
+						<div className={classes.overlay} />
 						<Grid container>
 							<Grid item md={6}>
 								<div
@@ -179,6 +180,7 @@ const Event = ({
 										color='inherit'
 										gutterBottom
 									>
+										
 										{name}
 									</Typography>
 									<Typography

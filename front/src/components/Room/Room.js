@@ -16,6 +16,60 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#ffffff',
+			mainGradient: 'linear-gradient(to right, orange, #9c27b0)',
+			contrastText: '#fff',
+		},
+		secondary: {
+			main: '#e91e63',
+		},
+	},
+});
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		maxWidth: 1300,
+		margin: 'auto',
+		margintop: '20px',
+	},
+	media: {
+		height: 350,
+	},
+	mainFeaturedPost: {
+		position: 'relative',
+		backgroundColor: theme.palette.grey[800],
+		color: theme.palette.common.white,
+		marginBottom: theme.spacing(4),
+		backgroundImage: 'url(https://source.unsplash.com/random)',
+		backgroundSize: 'cover',
+		backgroundRepeat: 'no-repeat',
+		backgroundPosition: 'center',
+	},
+	overlay: {
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		backgroundColor: 'rgba(0,0,0,.3)',
+	},
+	mainFeaturedPostContent: {
+		position: 'relative',
+		padding: theme.spacing(3),
+		[theme.breakpoints.up('md')]: {
+			padding: theme.spacing(6),
+			paddingRight: 0,
+		},
+	},
+	mainGrid: {
+		marginTop: theme.spacing(3),
+	},
+}));
 
 const Room = ({
 	activityID,
@@ -82,28 +136,109 @@ const Room = ({
 			});
 	};
 
+	const classes = useStyles();
+
 	return (
 		<div>
-			{isSignedIn && type === 'mycircle' ? (
-				<button
+			<MuiThemeProvider theme={theme}>
+			<CssBaseline />
+			<Container maxWidth='lg'>
+			<Box m={6}>
+					<Paper
+						className={classes.mainFeaturedPost}
+						style={{
+							backgroundImage: `url(https://source.unsplash.com/random)`,
+						}}
+					>
+						<div className={classes.overlay} />
+						<Grid container>
+							<Grid item md={6}>
+								<div
+									className={classes.mainFeaturedPostContent}
+								>
+									<Typography
+										component='h1'
+										variant='h3'
+										color='inherit'
+										align='left'
+										gutterBottom
+									>
+										
+										{name}
+									</Typography>
+									<Typography
+										variant='h5'
+										color='inherit'
+										align='left'
+										paragraph
+									>
+										{description}
+									</Typography>
+
+									{isSignedIn && type === 'mycircle' ? (
+										<Button 
+											variant='contained'
+											color='secondary'
+											onClick={() => {
+												onRouteChange('mycircle');
+											}}
+										>
+											{typeName}
+										</Button>
+									) : null}
+
+									{type !== 'mycircle' ? (
+										<Button 
+											variant='contained'
+											color='secondary'
+											onClick={() => {
+												onActivityIDChange(type);
+												onRouteChange('event/' + type);
+											}}
+										>
+											{typeName}
+										</Button>
+									) : null}
+
+									{/* <Link variant="subtitle1" href="#">
+						{"fuck u"}
+						</Link> */}
+								</div>
+							</Grid>
+						</Grid>
+					</Paper>
+				</Box>
+
+			{/* {isSignedIn && type === 'mycircle' ? (
+				<Button 
+					variant='contained'
+					color='secondary'
 					onClick={() => {
 						onRouteChange('mycircle');
 					}}
 				>
 					{typeName}
-				</button>
+				</Button>
 			) : null}
 			{type !== 'mycircle' ? (
-				<button
+				<Button 
+					variant='contained'
+					color='secondary'
 					onClick={() => {
 						onActivityIDChange(type);
 						onRouteChange('event/' + type);
 					}}
 				>
 					{typeName}
-					{console.log(typeName)}
-				</button>
-			) : null}
+				</Button>
+			) : null} */}
+
+			<Grid container spacing={5} className={classes.mainGrid}>
+				<Grid item xs={12} md={8}>
+					
+				</Grid>
+			</Grid>
+			
 			<h1>{name}</h1>
 			<h1>{Moment(date).format('YYYY-MM-DD')}</h1>
 			<h1>{time}</h1>
@@ -142,6 +277,8 @@ const Room = ({
 					);
 				})}
 			</div>
+			</Container>
+			</MuiThemeProvider>
 		</div>
 	);
 };
