@@ -683,7 +683,7 @@ function PrimarySearchAppBar(
 							size='small'
 							onClick={() => onRouteChange('mycircle')}
 						>
-							My Circle
+							MyCircle
 						</Button>
 					) : null}
 					<Button
