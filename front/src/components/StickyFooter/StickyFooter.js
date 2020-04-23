@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import footerbg from './footer_bg.png';
 
 const theme = createMuiTheme({
 	palette: {
@@ -35,10 +36,18 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
     footer: {
-      backgroundColor: 'orange',
+      // backgroundColor: 'orange',
       // marginTop: theme.spacing(8),
-      padding: theme.spacing(6, 0),
+      // padding: theme.spacing(6, 0),
     },
+    overlay: {
+      position: 'absolute',
+      zIndex: 1,
+      top: 0,
+      left: 0,
+      right: 0,
+      margin: '0 auto',
+    }
   }));
 
 export default function StickyFooter(props) {
@@ -46,18 +55,25 @@ export default function StickyFooter(props) {
     const { description, title } = props;
   
     return (
+      
       <MuiThemeProvider theme={theme}>
+        {/* <img src={footerbg} style={{width:'100%'}} /> */}
+      
       <footer className={classes.footer}>
-        <Container maxWidth="lg">
+      <img src={footerbg} style={{width:'100%'}} />
+      
+        {/* <Container maxWidth="lg">
           <Typography variant="h6" align="center" gutterBottom>
             {title}
           </Typography>
-          <Typography variant="subtitle1" align="center" component="p">
+          <Typography variant="subtitle1" align="center" color="white" component="p">
             {description}
           </Typography>
           <Copyright />
-        </Container>
+        </Container> */}
+        
       </footer>
+      
       </MuiThemeProvider>
     );
 }

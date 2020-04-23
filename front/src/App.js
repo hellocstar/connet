@@ -17,7 +17,7 @@ import NewEvent from './components/NewEvent/NewEvent';
 import NewRoom from './components/NewRoom/NewRoom';
 import NotFound from './components/NotFound/NotFound';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import StickyFooter from './StickyFooter';
+import StickyFooter from './components/StickyFooter/StickyFooter';
 import TitleBanner from './TitleBanner'
 
 const initialState = {

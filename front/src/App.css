@@ -38,6 +38,7 @@ body {
   /* background-color: black;  */
   max-width: 100%;
   overflow-x: hidden;
+  background: './footer_bg.png' repeat-y -280px 0;
 }
 
 body::before {
