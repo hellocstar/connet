@@ -53,7 +53,7 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 			<React.Fragment>
 				<CssBaseline />
 				<Container maxWidth='lg'>
-					{console.log(searchResult.length)}
+					{/* {console.log(searchResult.length)} */}
 					{/* <Header suggestions={suggestions} sections={sections} /> */}
 					<div className='parent'>
 						{searchResult.map((event) => {
@@ -61,14 +61,14 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 								<Grid item key={event} xs={6} sm={6} md={6}>
 									<Box m={1}>
 										<Zoom in='true'>
-										<ListItem
-											activity={event}
-											onRouteChange={onRouteChange}
-											onActivityIDChange={
-												onActivityIDChange
-											}
-											type={'event'}
-										/>
+											<ListItem
+												activity={event}
+												onRouteChange={onRouteChange}
+												onActivityIDChange={
+													onActivityIDChange
+												}
+												type={'event'}
+											/>
 										</Zoom>
 									</Box>
 								</Grid>
@@ -76,11 +76,14 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 						})}
 					</div>
 					{/* <img src={no_result} style={{width:'500px'}} /> */}
-					
+
 					{searchResult.length === 0 ? (
-						<img src={no_result} style={{width:'500px'}} />
+						<img
+							src={no_result}
+							style={{ width: '500px' }}
+							alt=''
+						/>
 					) : null}
-					
 				</Container>
 			</React.Fragment>
 		</Grid>

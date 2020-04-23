@@ -64,6 +64,7 @@ const getRoom = async (req, res, next) => {
 				participants.push({
 					id: parti._id,
 					username: parti.username,
+					imageData: parti.imageData,
 				});
 			}
 		}
