@@ -133,6 +133,7 @@ const NewRoom = ({
 
 		const onSubmit = () => {
 			console.log(createRoomFor);
+			if (name && date && time && location && maxNoOfParticipants){
 			fetch('http://localhost:3000/newroom', {
 				method: 'post',
 				headers: {
@@ -160,6 +161,7 @@ const NewRoom = ({
 						onRouteChange('room/' + id);
 					}
 				});
+			}
 		};
 
 		return (
