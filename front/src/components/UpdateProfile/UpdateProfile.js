@@ -6,6 +6,10 @@ import Input from '@material-ui/core/Input';
 import Chip from '@material-ui/core/Chip';
 import Image from '../Image/Image';
 import DefaultImg from './default-img.jpg';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -23,6 +27,24 @@ const useStyles = makeStyles((theme) => ({
 	noLabel: {
 		marginTop: theme.spacing(3),
 	},
+	inputfield: {
+		width: '84%',
+		marginBottom: 10,
+		marginTop: 10,
+		margin: 'auto',
+	},
+	box: {
+		width: '84%',
+		margin: 'auto',
+		color: 'grey',
+		marginBottom: 10,
+		marginTop: 10,
+		padding: 10,
+	},
+	button: {
+		marginBottom: 20,
+		marginTop: 20,
+	},
 }));
 
 const UpdateProfile = ({
@@ -34,7 +56,7 @@ const UpdateProfile = ({
 	const classes = useStyles();
 
 	const [biography, setBiography] = useState('');
-	const [birthday, setBirthday] = useState(-1);
+	const [birthday, setBirthday] = useState('-1');
 	const [imageName, setImageName] = useState('none');
 	const [imageData, setImageData] = useState('');
 	const [baseImage, setBaseImage] = useState(DefaultImg);
@@ -85,7 +107,6 @@ const UpdateProfile = ({
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					// photo: photo,
 					id: user.id,
 					biography: biography,
 					birthday: birthday,
@@ -106,31 +127,54 @@ const UpdateProfile = ({
 		return (
 			<div>
 				<fieldset id='update-profile'>
-					<legend>Update your profile</legend>
-
-					<div>
-						<label htmlFor='biography'>Biography</label>
-						<input
+					<legend>
+						<Typography variant='button'>
+							<h2>Update Your Profile</h2>
+						</Typography>
+					</legend>
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='biography'
+							label='Tell us something about yourself'
+							fullWidth='true'
+							variant='filled'
 							type='text'
 							name='biography'
 							id='biography'
-							onChange={(event) =>
-								setBiography(event.target.value)
-							}
-						/>
+							multiline
+							rows={5}
+							onChange={(event) => {
+								setBiography(event.target.value);
+							}}
+						></TextField>
 					</div>
-					<div>
-						<label htmlFor='birthday'>Birthday</label>
-						<input
+					<div className={classes.inputfield}>
+						<TextField
+							htmlFor='birthday'
+							label='Date of Birth'
+							InputLabelProps={{ shrink: true }}
 							type='date'
+							variant='filled'
+							fullWidth='true'
+							required
 							name='birthday'
 							id='birthday'
 							onChange={(event) =>
 								setBirthday(event.target.value)
 							}
-						/>
+						></TextField>
 					</div>
-					<Image baseImage={baseImage} getBaseFile={getBaseFile} />
+					<div>
+						<Box className={classes.box} bgcolor='#e0e0e0'>
+							<Typography align='left'>
+								Upload an Image of Youself
+							</Typography>
+							<Image
+								baseImage={baseImage}
+								getBaseFile={getBaseFile}
+							/>
+						</Box>
+					</div>
 					<div>
 						<Select
 							labelId='demo-mutiple-chip-label'
@@ -163,7 +207,16 @@ const UpdateProfile = ({
 					</div>
 				</fieldset>
 				<div className=''>
-					<input onClick={onSubmit} type='submit' value='Create!' />
+					<label>
+						<Button
+							variant='contained'
+							color='secondary'
+							component='span'
+							onClick={onSubmit}
+						>
+							Update
+						</Button>
+					</label>
 				</div>
 			</div>
 		);

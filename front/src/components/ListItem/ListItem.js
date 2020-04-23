@@ -46,10 +46,10 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 	},
 	cardDetails: {
-	flex: 1,
+		flex: 1,
 	},
 	cardMedia: {
-	width: 160,
+		width: 160,
 	},
 }));
 
@@ -79,60 +79,90 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 
 	// }
 
-
-	
-
 	return (
 		<Grid item xs={12} md={12}>
-		<CardActionArea component="a" onClick={onClickName}>
-        <Card className={classes.card} style={{display: 'flex'}}>
-          <div className={classes.cardDetails}>
-            <CardContent>
-              <Typography component="h2" align="left" variant="h5">
-				
-                {activity.name}
-              </Typography>
-              <Typography variant="subtitle1" align="left" color="textSecondary">
-			    {"Date: "}
-                {activity.date}
-              </Typography>
-              <Typography noWrap variant="subtitle1" align="left" paragraph>
-				{activity.description ? (
-					<Typography noWrap variant="subtitle1" align="left" paragraph>
-					{activity.description}
-					</Typography>
-				) : 
-					<Typography noWrap variant="subtitle1" align="left" paragraph>
-					More details about this {type}......
-					</Typography>
-					
-				}
-              </Typography>
-              <Typography variant="subtitle1" align="left" color="secondary">
-                Continue reading...
-              </Typography>
-            </CardContent>
-          </div>
-          <Hidden xsDown>
-			{activity.imageData ? (
-				<CardMedia 
-				className={classes.cardMedia} 
-				image={activity.imageData} 
-				title={activity.name} />
-			) : 
-				<CardMedia 
-				className={classes.cardMedia} 
-				image={'https://source.unsplash.com/random'} 
-				title={activity.name} />
-			}
-          </Hidden>
-        </Card>
-      	</CardActionArea>
+			<CardActionArea component='a' onClick={onClickName}>
+				<Card className={classes.card} style={{ display: 'flex' }}>
+					<div className={classes.cardDetails}>
+						<CardContent>
+							<Typography
+								component='h2'
+								align='left'
+								variant='h5'
+							>
+								{activity.name}
+							</Typography>
+							<Typography
+								variant='subtitle1'
+								align='left'
+								color='textSecondary'
+							>
+								{'Date: '}
+								{new Intl.DateTimeFormat('en-GB', {
+									year: 'numeric',
+									month: 'long',
+									day: '2-digit',
+								}).format(Date.parse(activity.date))}
+								{/* {activity.date} */}
+							</Typography>
+							<Typography
+								noWrap
+								variant='subtitle1'
+								align='left'
+								paragraph
+							>
+								{activity.description ? (
+									<Typography
+										noWrap
+										variant='subtitle1'
+										align='left'
+										paragraph
+									>
+										{activity.description}
+									</Typography>
+								) : (
+									<Typography
+										noWrap
+										variant='subtitle1'
+										align='left'
+										paragraph
+									>
+										More details about this {type}......
+									</Typography>
+								)}
+							</Typography>
+							<Typography
+								variant='subtitle1'
+								align='left'
+								color='secondary'
+							>
+								Continue reading...
+							</Typography>
+						</CardContent>
+					</div>
+					<Hidden xsDown>
+						{activity.imageData ? (
+							<CardMedia
+								className={classes.cardMedia}
+								image={activity.imageData}
+								title={activity.name}
+							/>
+						) : (
+							<CardMedia
+								className={classes.cardMedia}
+								image={'https://source.unsplash.com/random'}
+								title={activity.name}
+							/>
+						)}
+					</Hidden>
+				</Card>
+			</CardActionArea>
 		</Grid>
 	);
 };
 
-{/* <Grid item xs={12} md={6}>
+{
+	/* <Grid item xs={12} md={6}>
       <CardActionArea component="a" onClick={onClickName}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
@@ -156,6 +186,7 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
           </Hidden>
         </Card>
       </CardActionArea>
-    </Grid> */}
+    </Grid> */
+}
 
 export default ListItem;

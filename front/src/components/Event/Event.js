@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Moment from 'moment';
 import ListItem from '../ListItem/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -37,20 +38,20 @@ const useStyles = makeStyles((theme) => ({
 		backgroundPosition: 'center',
 	},
 	overlay: {
-	position: 'absolute',
-	top: 0,
-	bottom: 0,
-	right: 0,
-	left: 0,
-	backgroundColor: 'rgba(0,0,0,.3)',
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		backgroundColor: 'rgba(0,0,0,.3)',
 	},
 	mainFeaturedPostContent: {
-	position: 'relative',
-	padding: theme.spacing(3),
-	[theme.breakpoints.up('md')]: {
-		padding: theme.spacing(6),
-		paddingRight: 0,
-	},
+		position: 'relative',
+		padding: theme.spacing(3),
+		[theme.breakpoints.up('md')]: {
+			padding: theme.spacing(6),
+			paddingRight: 0,
+		},
 	},
 	mainGrid: {
 		marginTop: theme.spacing(3),
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ActivityCard(prop) {
 	const classes = useStyles();
-	return (		
+	return (
 		<Card className={classes.root}>
 			<CardActionArea>
 				<CardMedia
@@ -128,8 +129,8 @@ const Event = ({
 	}, []);
 
 	const mainFeaturedPost = {
-		title: {name},
-		description: {description},
+		title: { name },
+		description: { description },
 		image: 'https://source.unsplash.com/random',
 		imgText: 'main image description',
 		linkText: 'Continue reading…',
@@ -138,142 +139,169 @@ const Event = ({
 	const classes = useStyles();
 
 	return (
-		
 		<div>
 			<CssBaseline />
-			<Container maxWidth="lg">
-			{/* <Banner /> */}
-			{/* <ActivityCard name={name} description={description} /> */}
-			{/* <MainFeaturedPost post={mainFeaturedPost} /> */}
-			<Box m={6}>
-			<Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(https://source.unsplash.com/random)` }}>
-				<Grid container>
-					<Grid item md={6}>
-					<div className={classes.mainFeaturedPostContent}>
-						<Typography component="h1" variant="h3" color="inherit" gutterBottom>
-						{name}
-						</Typography>
-						<Typography variant="h5" color="inherit" paragraph>
-						{description}
-						</Typography>
-						{/* <Link variant="subtitle1" href="#">
+			<Container maxWidth='lg'>
+				{/* <Banner /> */}
+				{/* <ActivityCard name={name} description={description} /> */}
+				{/* <MainFeaturedPost post={mainFeaturedPost} /> */}
+				<Box m={6}>
+					<Paper
+						className={classes.mainFeaturedPost}
+						style={{
+							backgroundImage: `url(https://source.unsplash.com/random)`,
+						}}
+					>
+						<Grid container>
+							<Grid item md={6}>
+								<div
+									className={classes.mainFeaturedPostContent}
+								>
+									<Typography
+										component='h1'
+										variant='h3'
+										color='inherit'
+										gutterBottom
+									>
+										{name}
+									</Typography>
+									<Typography
+										variant='h5'
+										color='inherit'
+										paragraph
+									>
+										{description}
+									</Typography>
+									{/* <Link variant="subtitle1" href="#">
 						{"fuck u"}
 						</Link> */}
-					</div>
+								</div>
+							</Grid>
+						</Grid>
+					</Paper>
+				</Box>
+
+				<Grid container spacing={5} className={classes.mainGrid}>
+					<Grid item xs={12} md={8}>
+						<Typography variant='h6' gutterBottom align='left'>
+							{/* {date} */}
+							{Moment(date).format('YYYY-MM-DD')}
+						</Typography>
+						<Typography variant='h4' gutterBottom align='left'>
+							{name}
+						</Typography>
+
+						<Grid container spacing={0}>
+							<Grid
+								onClick={() => {
+									onActivityIDChange(organiser.id);
+									onRouteChange('profile/' + organiser.id);
+								}}
+							>
+								<Box m={1}>
+									<Avatar src={organiser.imageData} />
+								</Box>
+							</Grid>
+							<Grid
+								onClick={() => {
+									onActivityIDChange(organiser.id);
+									onRouteChange('profile/' + organiser.id);
+								}}
+							>
+								{/* <Box m={1}> */}
+								<Typography
+									variant='p'
+									gutterBottom
+									align='left'
+								>
+									<Box fontWeight='fontWeightBold'>
+										{'Hosted by:'}
+									</Box>
+								</Typography>
+								{/* </Box>	 */}
+
+								<Typography variant='p' align='left'>
+									<Box
+										fontWeight='fontWeightBold'
+										fontSize='h6.fontSize'
+									>
+										{organiser.username}
+									</Box>
+								</Typography>
+
+								{/* {organiser.username} */}
+							</Grid>
+						</Grid>
+
+						<Divider />
+
+						{imageData ? (
+							<Box m={5}>
+								<img src={imageData} alt=''></img>
+							</Box>
+						) : null}
+
+						<Typography variant='p' align='left'>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+							>
+								{'Location: '}
+							</Box>
+						</Typography>
+						<Typography variant='p' align='left'>
+							<Box fontSize='h6.fontSize'>{location}</Box>
+						</Typography>
+						<Typography variant='p' align='left'>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+							>
+								{'Categories: '}
+							</Box>
+						</Typography>
+						<Typography variant='p' align='left'>
+							<Box fontSize='h6.fontSize'>{categories}</Box>
+						</Typography>
+						<Typography
+							variant='p'
+							align='left'
+							style={{ whiteSpace: 'pre-line' }}
+						>
+							<Box
+								fontWeight='fontWeightBold'
+								fontSize='h6.fontSize'
+							>
+								{'Description: \n'}
+							</Box>
+						</Typography>
+						<Typography
+							variant='p'
+							align='left'
+							style={{ whiteSpace: 'pre-line' }}
+						>
+							<Box fontSize='h6.fontSize'>{description}</Box>
+						</Typography>
+
+						<Box mt={5}>
+							{isSignedIn ? (
+								<Button
+									onClick={() => {
+										changeCreateRoomFor(activityID);
+										onRouteChange('newroom');
+									}}
+									color='primary'
+								>
+									Host a Room in {name}!
+								</Button>
+							) : null}
+						</Box>
 					</Grid>
 				</Grid>
-			</Paper>
-			</Box>
 
-			
-			<Grid container spacing={5} className={classes.mainGrid}>
-			
-			<Grid item xs={12} md={8}>
-				<Typography variant="h6" gutterBottom align='left'>
-					{date}
-				</Typography>
-				<Typography variant="h4" gutterBottom align='left'>
-					{name}
-				</Typography>
-				
-				<Grid container spacing={0}>
-				<Grid onClick={() => {
-					onActivityIDChange(organiser.id);
-					onRouteChange('profile/' + organiser.id);
-				}}>
-					<Box m={1}>
-					<Avatar src={organiser.imageData} />
-					</Box>					
-				</Grid>
-				<Grid onClick={() => {
-					onActivityIDChange(organiser.id);
-					onRouteChange('profile/' + organiser.id);
-				}}>
-					{/* <Box m={1}> */}
-					<Typography variant="p" gutterBottom align='left'>
-						<Box fontWeight="fontWeightBold">
-						{"Hosted by:"}
-						</Box>	
-					</Typography>
-					{/* </Box>	 */}
-					
-					<Typography variant="p" align='left'>
-						<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
-						{organiser.username}
-						</Box>	
-					</Typography>		
-							
-					{/* {organiser.username} */}
-					
-				</Grid>
-				</Grid>
-				
-				<Divider />
-
-				{imageData ? (
-					<Box m={5}>
-					<img src={imageData} alt=''></img>
-					</Box>
-				) : null}
-				
-
-				<Typography variant="p" align='left'>
-					<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
-					{'Location: '}
-					
-					</Box>	
-				</Typography>
-				<Typography variant="p" align='left'>
-					<Box fontSize="h6.fontSize">
-					
-					{location}
-					</Box>	
-				</Typography>
-				<Typography variant="p" align='left'>
-					<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
-					{'Categories: '}
-					
-					</Box>	
-				</Typography>
-				<Typography variant="p" align='left'>
-					<Box fontSize="h6.fontSize">
-					
-					{categories}
-					</Box>	
-				</Typography>
-				<Typography variant="p" align='left' style={{whiteSpace: 'pre-line'}}>
-					<Box fontWeight="fontWeightBold" fontSize="h6.fontSize">
-					{'Description: \n'}
-					</Box>	
-				</Typography>
-				<Typography variant="p" align='left' style={{whiteSpace: 'pre-line'}}>
-					<Box fontSize="h6.fontSize">
-					{description}
-					</Box>	
-				</Typography>
-				
-				<Box mt={5}>
-				{isSignedIn ? (
-				<Button
-					onClick={() => {
-						changeCreateRoomFor(activityID);
-						onRouteChange('newroom');
-					}}
-					color = 'primary'
-				>
-					Host a Room in {name}!
-				</Button>
-				) : null}
-				</Box>
-				
-			</Grid>
-			
-			</Grid>
-			
-			
-			{/* <h1>{date}</h1>
+				{/* <h1>{date}</h1>
 			<h1>{time}</h1> */}
-			{/* <h1>{location}</h1>
+				{/* <h1>{location}</h1>
 			
 			<h1
 				onClick={() => {
@@ -295,24 +323,23 @@ const Event = ({
 					Host a Room in {name}!
 				</Button>
 			) : null} */}
-			
-			<div className='parent'>
-				{rooms.map((room) => {
-					return (
-						<div className='child' key={room._id}>
-							<ListItem
-								activity={room}
-								onRouteChange={onRouteChange}
-								onActivityIDChange={onActivityIDChange}
-								type={'room'}
-							/>
-						</div>
-					);
-				})}
-			</div>
+
+				<div className='parent'>
+					{rooms.map((room) => {
+						return (
+							<div className='child' key={room._id}>
+								<ListItem
+									activity={room}
+									onRouteChange={onRouteChange}
+									onActivityIDChange={onActivityIDChange}
+									type={'room'}
+								/>
+							</div>
+						);
+					})}
+				</div>
 			</Container>
 		</div>
-		
 	);
 };
 

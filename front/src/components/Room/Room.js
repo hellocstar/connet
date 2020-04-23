@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Moment from 'moment';
 
 const Room = ({
 	activityID,
@@ -67,20 +68,26 @@ const Room = ({
 
 	return (
 		<div>
-			<button
-				onClick={() => {
-					if (type === 'mycircle' && isSignedIn) {
+			{isSignedIn && type === 'mycircle' ? (
+				<button
+					onClick={() => {
 						onRouteChange('mycircle');
-					} else if (type === 'event') {
+					}}
+				>
+					{typeName}
+				</button>
+			) : null}
+			{type !== 'mycircle' ? (
+				<button
+					onClick={() => {
 						onRouteChange('event/' + type);
-					} else {
-					}
-				}}
-			>
-				{typeName}
-			</button>
+					}}
+				>
+					{typeName}
+				</button>
+			) : null}
 			<h1>{name}</h1>
-			<h1>{date}</h1>
+			<h1>{Moment(date).format('YYYY-MM-DD')}</h1>
 			<h1>{time}</h1>
 			<h1>{location}</h1>
 			<img src={imageData} alt=''></img>

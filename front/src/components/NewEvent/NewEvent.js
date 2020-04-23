@@ -5,6 +5,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Input from '@material-ui/core/Input';
 import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import FormControl from '@material-ui/core/FormControl';
 import Image from '../Image/Image';
 import DefaultImg from './default-img.jpg';
 
@@ -29,6 +32,14 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: 10,
 		marginTop: 10,
 		margin: 'auto',
+	},
+	box: {
+		width: '84%',
+		margin: 'auto',
+		color: 'grey',
+		marginBottom: 10,
+		marginTop: 10,
+		padding: 10,
 	},
 }));
 
@@ -192,40 +203,54 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 							}
 						></TextField>
 					</div>
-					<Image baseImage={baseImage} getBaseFile={getBaseFile} />
+					<Box className={classes.box} bgcolor='#e0e0e0'>
+						<Typography align='left'>
+							Upload an Image of Your Activity
+						</Typography>
+						<Image
+							baseImage={baseImage}
+							getBaseFile={getBaseFile}
+						/>
+					</Box>
 					<div>
-						<label>Catagory (Can select more than one!)</label>
-					</div>
-					<div>
-						<Select
-							// autoWidth='true'
-							labelId='demo-mutiple-chip-label'
-							id='demo-mutiple-chip'
-							multiple
-							value={categories}
-							onChange={(event) =>
-								setCategories(event.target.value)
-							}
-							input={<Input id='select-multiple-chip' />}
-							renderValue={(selected) => (
-								<div className={classes.chips}>
-									{selected.map((value) => (
-										<Chip
-											key={value}
-											label={value}
-											className={classes.chip}
-										/>
+						<Box className={classes.box} bgcolor='#e0e0e0'>
+							<div>
+								<Typography align='left'>
+									Catagory (Can select more than one!)
+								</Typography>
+							</div>
+							<FormControl className={classes.box}>
+								<Select
+									// autoWidth='true'
+									labelId='demo-mutiple-chip-label'
+									id='demo-mutiple-chip'
+									multiple
+									value={categories}
+									onChange={(event) =>
+										setCategories(event.target.value)
+									}
+									input={<Input id='select-multiple-chip' />}
+									renderValue={(selected) => (
+										<div className={classes.chips}>
+											{selected.map((value) => (
+												<Chip
+													key={value}
+													label={value}
+													className={classes.chip}
+												/>
+											))}
+										</div>
+									)}
+									MenuProps={MenuProps}
+								>
+									{categoriesList.map((cat) => (
+										<MenuItem key={cat} value={cat}>
+											{cat}
+										</MenuItem>
 									))}
-								</div>
-							)}
-							MenuProps={MenuProps}
-						>
-							{categoriesList.map((cat) => (
-								<MenuItem key={cat} value={cat}>
-									{cat}
-								</MenuItem>
-							))}
-						</Select>
+								</Select>
+							</FormControl>
+						</Box>
 					</div>
 				</fieldset>
 				<div className=''>
