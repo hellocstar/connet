@@ -17,6 +17,20 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#ffffff',
+			mainGradient: 'linear-gradient(to right, orange, #9c27b0)',
+			contrastText: '#fff',
+		},
+		secondary: {
+			main: '#e91e63',
+		},
+	},
+});
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -61,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 function ActivityCard(prop) {
 	const classes = useStyles();
 	return (
+
 		<Card className={classes.root}>
 			<CardActionArea>
 				<CardMedia
@@ -140,6 +155,7 @@ const Event = ({
 
 	return (
 		<div>
+			<MuiThemeProvider theme={theme}>
 			<CssBaseline />
 			<Container maxWidth='lg'>
 				{/* <Banner /> */}
@@ -194,18 +210,19 @@ const Event = ({
 						<Grid container spacing={0}>
 							<Grid
 								onClick={() => {
-									onActivityIDChange(organiser.id);
-									onRouteChange('profile/' + organiser.id);
+									onActivityIDChange(organiser._id);
+									onRouteChange('profile/' + organiser._id);
 								}}
 							>
 								<Box m={1}>
 									<Avatar src={organiser.imageData} />
+									{/* {console.log(organiser.imageData)} */}
 								</Box>
 							</Grid>
 							<Grid
 								onClick={() => {
-									onActivityIDChange(organiser.id);
-									onRouteChange('profile/' + organiser.id);
+									onActivityIDChange(organiser._id);
+									onRouteChange('profile/' + organiser._id);
 								}}
 							>
 								{/* <Box m={1}> */}
@@ -283,14 +300,15 @@ const Event = ({
 							<Box fontSize='h6.fontSize'>{description}</Box>
 						</Typography>
 
-						<Box mt={5}>
+						<Box m={5}>
 							{isSignedIn ? (
 								<Button
 									onClick={() => {
 										changeCreateRoomFor(activityID);
 										onRouteChange('newroom');
 									}}
-									color='primary'
+									variant="contained"
+									color='secondary'
 								>
 									Host a Room in {name}!
 								</Button>
@@ -339,6 +357,7 @@ const Event = ({
 					})}
 				</div>
 			</Container>
+			</MuiThemeProvider>
 		</div>
 	);
 };

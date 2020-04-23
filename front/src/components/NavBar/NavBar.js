@@ -614,7 +614,7 @@ function PrimarySearchAppBar(
 					color='inherit'
 					aria-label='open drawer'
 					onClick={() => {
-						onRouteChange(pastRoute[pastRoute.length - 1]);
+						onRouteChange(pastRoute);
 					}}
 				>
 					<ArrowBackIcon />

@@ -72,10 +72,7 @@ const getRoom = async (req, res, next) => {
 		await getParti();
 		const responseObj = {
 			room: room,
-			host: {
-				id: host._id,
-				username: host.username,
-			},
+			host: host,
 			type: room.type,
 			typeName: typeName,
 			participants: participants,

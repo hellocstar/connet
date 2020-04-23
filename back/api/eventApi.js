@@ -43,10 +43,7 @@ const getEvent = async (req, res, next) => {
 		const responseObj = {
 			event: event,
 			rooms: rooms,
-			organiser: {
-				id: organiser._id,
-				username: organiser.username,
-			},
+			organiser: organiser,
 		};
 		console.log(responseObj);
 		res.status(200).send(responseObj);
