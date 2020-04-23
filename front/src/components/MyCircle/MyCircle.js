@@ -91,7 +91,7 @@ const MyCircle = ({
 							);
 						})}
 					</div>
-					{filtered.length === 0 ? (
+					{searchResult.length === 0 ? (
 						<img src={no_result} style={{ width: '500px' }} />
 					) : null}
 				</Container>
