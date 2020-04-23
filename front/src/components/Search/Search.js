@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 			width: '20ch',
 		},
 	},
+	
 }));
 
 const sections = [
@@ -97,12 +98,13 @@ const Search = ({ searchChange }) => {
 						<SearchIcon />
 					</div>
 					<InputBase
-						placeholder='Search for events…'
+						placeholder='Search on!'
 						classes={{
 							root: classes.inputRoot,
 							input: classes.inputInput,
 						}}
 						onChange={searchChange}
+						
 					/>
 					</div>
 					

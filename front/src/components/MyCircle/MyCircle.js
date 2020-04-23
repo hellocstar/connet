@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import no_result from './no_result.png';
 
 const MyCircle = ({
 	searchField,
@@ -72,6 +73,9 @@ const MyCircle = ({
 						);
 					})}
 				</div>
+				{filtered.length === 0 ? (
+					<img src={no_result} style={{width:'500px'}} />
+				) : null}
 			</Container>
 		</React.Fragment>
 	</Grid>
