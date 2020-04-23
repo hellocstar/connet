@@ -131,13 +131,24 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 									</Typography>
 								)}
 							</Typography>
-							<Typography
-								variant='subtitle1'
-								align='left'
-								color='secondary'
-							>
-								Continue reading...
-							</Typography>
+							
+							{type === 'event' ? (
+								<Typography
+									variant='subtitle1'
+									align='left'
+									color='secondary'
+								>
+									Continue reading...
+								</Typography>
+							) : (
+								<Typography
+									variant='subtitle1'
+									align='left'
+									color='secondary'
+								>
+									Enter room
+								</Typography>
+							)}
 						</CardContent>
 					</div>
 					<Hidden xsDown>

@@ -47,7 +47,7 @@ class App extends Component {
 		this.setState({ pastRoute: this.state.route });
 		this.setState({ route: route });
 		// console.log(route)
-		console.log(this.state.pastRoute);
+		// console.log(this.state.pastRoute);
 	};
 
 	onActivityIDChange = (id) => {
@@ -162,7 +162,7 @@ class App extends Component {
 						</div>
 					) : route === 'create' ? (
 						<div>
-							<Toolbar />
+							<TitleBanner onRouteChange={this.onRouteChange} />
 							<Create
 								onRouteChange={this.onRouteChange}
 								isSignedIn={isSignedIn}
@@ -171,7 +171,7 @@ class App extends Component {
 						</div>
 					) : route === 'profile/' + activityID ? (
 						<div>
-							<Toolbar />
+							<TitleBanner onRouteChange={this.onRouteChange} />
 							<Profile
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
@@ -182,7 +182,7 @@ class App extends Component {
 						</div>
 					) : route === 'updateprofile/' + activityID ? (
 						<div>
-							<Toolbar />
+							<TitleBanner onRouteChange={this.onRouteChange} />
 							<UpdateProfile
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
@@ -192,7 +192,7 @@ class App extends Component {
 						</div>
 					) : route === 'newevent' ? (
 						<div>
-							<Toolbar />
+							<TitleBanner onRouteChange={this.onRouteChange} />
 							<NewEvent
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
@@ -202,6 +202,7 @@ class App extends Component {
 						</div>
 					) : route === 'newroom' ? (
 						<div>
+							<TitleBanner onRouteChange={this.onRouteChange} />
 							<NewRoom
 								onRouteChange={this.onRouteChange}
 								onActivityIDChange={this.onActivityIDChange}
@@ -216,7 +217,7 @@ class App extends Component {
 						</div>
 					) : (
 						<div>
-							<Toolbar />
+							<TitleBanner onRouteChange={this.onRouteChange} />
 							<p>
 								ConNET is a user-friendly, multi-functional web
 								application which provides an online platform
