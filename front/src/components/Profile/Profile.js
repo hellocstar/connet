@@ -128,6 +128,11 @@ const Profile = ({
 	// const useStyles = makeStyles(styles);
 	const classes = useStyles();
 
+	if (!imageData) {
+		// imageData = './profile.jpg';
+		setImageData('./profile.jpg');
+	}
+
 	return (
 		<MuiThemeProvider theme={theme}>
 			<CssBaseline />
@@ -150,10 +155,13 @@ const Profile = ({
 							/>
 							<CardContent className={classes.cardContent}>
 								<Typography
-									gutterBottom
-									variant='h5'
-									component='h2'
-									align='left'
+									onClick={() => {
+										onActivityIDChange(friend.id);
+										onRouteChange('profile/' + friend.id);
+										{
+											console.log(friend.id);
+										}
+									}}
 								>
 									{username}
 								</Typography>

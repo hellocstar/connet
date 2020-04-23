@@ -125,6 +125,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 		};
 
 		const onSubmit = () => {
+			if(name && date && time && location){
 			fetch('http://localhost:3000/newevent', {
 				method: 'post',
 				headers: {
@@ -149,6 +150,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 						onRouteChange('event/' + id);
 					}
 				});
+			}
 		};
 
 		return (

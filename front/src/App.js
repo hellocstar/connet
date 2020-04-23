@@ -23,6 +23,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 
 const initialState = {
 	pastRoute: 'community',
@@ -253,46 +254,51 @@ class App extends Component {
 							<TitleBanner onRouteChange={this.onRouteChange} />
 							<CssBaseline />
 							<Container maxWidth='lg'>
-								<Box m={5}>
-									<Typography variant='h4' align='center'>
-										About Us
-									</Typography>
-								</Box>
-								<Box m={5}>
-									<Typography variant='h6' align='left'>
-										ConNET is a user-friendly,
-										multi-functional web application which
-										provides an online platform for users to
-										join, as well as organise various kinds
-										of real-life events and meet-ups.
-									</Typography>
-								</Box>
-								<Box m={5}>
-									<Typography variant='h6' align='left'>
-										ConNET encourages people to build
-										connections and a larger social circle,
-										thereby improving their lives. ConNET is
-										developed in an attempt to be a virtual
-										realm of the real-life community a with
-										shorter distance between people in the
-										online community. The developing team
-										hopes people understand that electronic
-										devices do not always bring people
-										apart. They are actually the virtuality
-										of us, connected by a network. And
-										ConNET makes use of the network.
-									</Typography>
-								</Box>
-								<Box m={5}>
-									<Typography variant='h6' align='left'>
-										The developing team hopes people
-										understand that electronic devices do
-										not always bring people apart. They are
-										actually the virtuality of us, connected
-										by a network. And ConNET makes use of
-										the network.
-									</Typography>
-								</Box>
+								<Paper variant='outlined'>
+									<Box m={5}>
+										<Typography variant='h4' align='center'>
+											About Us
+										</Typography>
+									</Box>
+									<Box m={5}>
+										<Typography variant='h6' align='left'>
+											ConNET is a user-friendly,
+											multi-functional web application
+											which provides an online platform
+											for users to join, as well as
+											organise various kinds of real-life
+											events and meet-ups.
+										</Typography>
+									</Box>
+									<Box m={5}>
+										<Typography variant='h6' align='left'>
+											ConNET encourages people to build
+											connections and a larger social
+											circle, thereby improving their
+											lives. ConNET is developed in an
+											attempt to be a virtual realm of the
+											real-life community a with shorter
+											distance between people in the
+											online community. The developing
+											team hopes people understand that
+											electronic devices do not always
+											bring people apart. They are
+											actually the virtuality of us,
+											connected by a network. And ConNET
+											makes use of the network.
+										</Typography>
+									</Box>
+									<Box m={5}>
+										<Typography variant='h6' align='left'>
+											The developing team hopes people
+											understand that electronic devices
+											do not always bring people apart.
+											They are actually the virtuality of
+											us, connected by a network. And
+											ConNET makes use of the network.
+										</Typography>
+									</Box>
+								</Paper>
 							</Container>
 						</div>
 					)}
