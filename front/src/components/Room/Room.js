@@ -80,6 +80,7 @@ const Room = ({
 			{type !== 'mycircle' ? (
 				<button
 					onClick={() => {
+						onActivityIDChange(type);
 						onRouteChange('event/' + type);
 					}}
 				>
