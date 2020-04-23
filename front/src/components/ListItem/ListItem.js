@@ -112,6 +112,7 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 								paragraph
 							>
 								{activity.description ? (
+									<div style={{overflow: "hidden", textOverflow: "ellipsis", width: '20rem'}}> 
 									<Typography
 										noWrap
 										variant='subtitle1'
@@ -120,7 +121,9 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 									>
 										{activity.description}
 									</Typography>
+									</div>
 								) : (
+									<div style={{overflow: "hidden", textOverflow: "ellipsis", width: '20rem'}}> 
 									<Typography
 										noWrap
 										variant='subtitle1'
@@ -129,6 +132,7 @@ const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
 									>
 										More details about this {type}......
 									</Typography>
+									</div>
 								)}
 							</Typography>
 							

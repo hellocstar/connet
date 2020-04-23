@@ -6,6 +6,8 @@ import Header from './Header';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import no_result from './no_result.png';
+import Zoom from '@material-ui/core/Zoom';
 
 const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 	const [eventList, setEventList] = useState([]);
@@ -51,12 +53,14 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 			<React.Fragment>
 				<CssBaseline />
 				<Container maxWidth='lg'>
+					{console.log(searchResult.length)}
 					{/* <Header suggestions={suggestions} sections={sections} /> */}
 					<div className='parent'>
 						{searchResult.map((event) => {
 							return (
 								<Grid item key={event} xs={6} sm={6} md={6}>
 									<Box m={1}>
+										<Zoom in='true'>
 										<ListItem
 											activity={event}
 											onRouteChange={onRouteChange}
@@ -65,11 +69,18 @@ const Community = ({ searchField, onRouteChange, onActivityIDChange }) => {
 											}
 											type={'event'}
 										/>
+										</Zoom>
 									</Box>
 								</Grid>
 							);
 						})}
 					</div>
+					{/* <img src={no_result} style={{width:'500px'}} /> */}
+					
+					{searchResult.length === 0 ? (
+						<img src={no_result} style={{width:'500px'}} />
+					) : null}
+					
 				</Container>
 			</React.Fragment>
 		</Grid>
