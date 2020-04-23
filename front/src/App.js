@@ -250,17 +250,10 @@ class App extends Component {
 							</Box>
 							<Box m={5}>
 							<Typography variant='h6' align='left'>
-								ConNET
-								encourages people to build connections and a
-								larger social circle, thereby improving their
-								lives. ConNET is developed in an attempt to be a
-								virtual realm of the real-life community a with
-								shorter distance between people in the online
-								community. The developing team hopes people
-								understand that electronic devices do not always
-								bring people apart. They are actually the
-								virtuality of us, connected by a network. And
-								ConNET makes use of the network.
+								ConNET is a user-friendly, multi-functional web
+								application which provides an online platform
+								for users to join, as well as organise various
+								kinds of real-life events and meet-ups.
 							</Typography>
 							</Box>
 							<Box m={5}>
