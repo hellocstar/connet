@@ -457,7 +457,7 @@ function PrimarySearchAppBar(
 					required
 					fullWidth
 					name='username'
-					label='User Name'
+					label='Username'
 					type='username'
 					id='username'
 					autoComplete='current-username'
@@ -544,7 +544,7 @@ function PrimarySearchAppBar(
 					required
 					fullWidth
 					name='username'
-					label='User Name'
+					label='Username'
 					type='username'
 					id='username'
 					autoComplete='current-username'

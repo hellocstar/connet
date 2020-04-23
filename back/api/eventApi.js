@@ -5,7 +5,6 @@ const Profile = require('../models/profileSchema');
 const eventList = async (req, res, next) => {
 	try {
 		const events = await Event.find({});
-		console.log('hi');
 		res.status(200).send(events);
 	} catch (e) {
 		console.log(e);
@@ -16,7 +15,6 @@ const eventList = async (req, res, next) => {
 const categorySearch = async (req, res, next) => {
 	try {
 		const events = await Event.find({ categories: req.search });
-		console.log(events);
 		res.status(200).send(events);
 	} catch (e) {
 		console.log(e);
