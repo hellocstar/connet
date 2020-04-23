@@ -252,6 +252,22 @@ const Profile = ({
 
 			
 		</Grid>
+		
+		
+		{isFriend && !myself ? (
+			// <p>You are now following {username}!</p>
+			<Grid container direction='row' justify='center' alignItems='center' >
+			<Typography variant='p' align='left'>
+				<Box
+					fontWeight='fontWeightBold'
+					fontSize='h6.fontSize'
+					m={1}
+				>
+					You are now following {username}!
+				</Box>
+			</Typography>
+			</Grid>
+		) : null}
 
 		{myself ? (
 			<Grid container direction='row' justify='center' alignItems='center' >
