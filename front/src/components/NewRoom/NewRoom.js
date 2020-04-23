@@ -11,6 +11,22 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#ffffff',
+			mainGradient: 'linear-gradient(to right, orange, #9c27b0)',
+			contrastText: '#fff',
+		},
+		secondary: {
+			main: '#e91e63',
+		},
+	},
+});
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -148,6 +164,9 @@ const NewRoom = ({
 
 		return (
 			<div>
+				<MuiThemeProvider theme={theme}>
+				<CssBaseline />
+				<Container maxWidth='lg'>
 				<fieldset id='new_room'>
 					<legend>
 						<Typography variant='button'>
@@ -297,6 +316,7 @@ const NewRoom = ({
 				</fieldset>
 				<div className=''>
 					<label>
+					<Box m={3}>
 						<Button
 							variant='contained'
 							color='secondary'
@@ -305,8 +325,11 @@ const NewRoom = ({
 						>
 							Create
 						</Button>
+					</Box>
 					</label>
 				</div>
+				</Container>
+				</MuiThemeProvider>
 			</div>
 		);
 	} else {
