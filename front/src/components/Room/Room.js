@@ -97,8 +97,8 @@ const Room = ({
 			<h1>{max}</h1>
 			<h1
 				onClick={() => {
-					onActivityIDChange(host.id);
-					onRouteChange('profile/' + host.id);
+					onActivityIDChange(host._id);
+					onRouteChange('profile/' + host._id);
 				}}
 			>
 				{host.username}

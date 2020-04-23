@@ -194,8 +194,8 @@ const Event = ({
 						<Grid container spacing={0}>
 							<Grid
 								onClick={() => {
-									onActivityIDChange(organiser.id);
-									onRouteChange('profile/' + organiser.id);
+									onActivityIDChange(organiser._id);
+									onRouteChange('profile/' + organiser._id);
 								}}
 							>
 								<Box m={1}>
@@ -204,8 +204,8 @@ const Event = ({
 							</Grid>
 							<Grid
 								onClick={() => {
-									onActivityIDChange(organiser.id);
-									onRouteChange('profile/' + organiser.id);
+									onActivityIDChange(organiser._id);
+									onRouteChange('profile/' + organiser._id);
 								}}
 							>
 								{/* <Box m={1}> */}
