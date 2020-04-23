@@ -357,7 +357,7 @@ const Room = ({
 							</Typography>
 
 							{joined ? (
-								<Box m={1}>
+								<Box mt={1}>
 									{/* <p>You are a participant of this room! </p> */}
 									<Typography variant='p' align='left'>
 										<Box

@@ -477,6 +477,9 @@ function PrimarySearchAppBar(
 					autoComplete='current-password'
 					color='secondary'
 					onChange={onPasswordChange}
+					onKeyPress={(e) => {
+						if (e.key === 'Enter') onSubmitSignIn();
+					}}
 				/>
 				<FormControlLabel
 					control={<Checkbox value='remember' color='secondary' />}
