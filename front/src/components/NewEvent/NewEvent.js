@@ -10,6 +10,23 @@ import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 import Image from '../Image/Image';
 import DefaultImg from './default-img.jpg';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#ffffff',
+			mainGradient: 'linear-gradient(to right, orange, #9c27b0)',
+			contrastText: '#fff',
+		},
+		secondary: {
+			main: '#e91e63',
+		},
+	},
+});
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -123,6 +140,9 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 
 		return (
 			<div>
+				<MuiThemeProvider theme={theme}>
+				<CssBaseline />
+				<Container maxWidth='lg'>
 				<fieldset id='new_event'>
 					<legend>
 						<h2>Tell others your idea!</h2>
@@ -254,8 +274,21 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 					</div>
 				</fieldset>
 				<div className=''>
-					<input onClick={onSubmit} type='submit' value='Create!' />
+					{/* <input onClick={onSubmit} type='submit' value='Create!' /> */}
+					<Box m={3}>
+						<Button
+							variant='contained'
+							color='secondary'
+							component='span'
+							onClick={onSubmit}
+							
+						>
+							Create!
+						</Button>
+					</Box>
 				</div>
+				</Container>
+				</MuiThemeProvider>
 			</div>
 		);
 	} else {
