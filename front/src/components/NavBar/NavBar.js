@@ -370,6 +370,7 @@ function PrimarySearchAppBar(
 	};
 
 	const onSubmitSignUp = () => {
+		if(username && email && password){
 		fetch('http://localhost:3000/signup', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
@@ -388,6 +389,7 @@ function PrimarySearchAppBar(
 					onRouteChange('updateprofile/' + data._id);
 				}
 			});
+		}
 	};
 
 	const LoginButton = withStyles({

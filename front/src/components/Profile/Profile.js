@@ -127,6 +127,11 @@ const Profile = ({
 	// const useStyles = makeStyles(styles);
 	const classes = useStyles();
 
+	if (!imageData) {
+		// imageData = './profile.jpg';
+		setImageData('./profile.jpg');
+	}
+
 	return (
 		// <div>
 		// 	<h1>Profile</h1>
@@ -188,6 +193,8 @@ const Profile = ({
 		// 		);
 		// 	})}
 		// </div>
+
+		
 
 
 
@@ -299,6 +306,7 @@ const Profile = ({
 									onClick={() => {
 										onActivityIDChange(friend.id);
 										onRouteChange('profile/' + friend.id);
+										{console.log(friend.id)}
 									}}
 								>
 									<Box
