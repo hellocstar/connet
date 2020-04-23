@@ -23,6 +23,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 
 const initialState = {
 	pastRoute: 'community',
@@ -242,7 +243,7 @@ class App extends Component {
 							<TitleBanner onRouteChange={this.onRouteChange} />
 							<CssBaseline />
 							<Container maxWidth='lg'>
-							
+							<Paper variant="outlined">
 							<Box m={5}>
 							<Typography variant='h4' align='center'>
 								About Us
@@ -278,6 +279,7 @@ class App extends Component {
 								ConNET makes use of the network.
 							</Typography>
 							</Box>
+							</Paper>
 							</Container>
 						</div>
 					)}
