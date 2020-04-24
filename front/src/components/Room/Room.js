@@ -172,7 +172,7 @@ const Room = ({
 						>
 							<div className={classes.overlay} />
 							<Grid container>
-								<Grid item md={1}>
+								<Grid item md={6}>
 									<div
 										className={
 											classes.mainFeaturedPostContent
@@ -182,7 +182,7 @@ const Room = ({
 											component='h1'
 											variant='h3'
 											color='inherit'
-											align='left'
+											align='center'
 											gutterBottom
 										>
 											{name}
@@ -196,7 +196,7 @@ const Room = ({
 											{description}
 										</Typography> */}
 
-										<Grid item md={6}>
+										<Grid item md={12}>
 											{isSignedIn &&
 											type === 'mycircle' ? (
 												<Button

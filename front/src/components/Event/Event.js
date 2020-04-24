@@ -279,9 +279,19 @@ const Event = ({
 								{'Categories: '}
 							</Box>
 						</Typography>
+
 						<Typography variant='p' align='left'>
-							<Box fontSize='h6.fontSize'>{categories}</Box>
+							<Box fontSize='h6.fontSize'>{categories.join(' ')}</Box>
 						</Typography>
+
+						{/* <Typography variant='p' align='left'><Box fontSize='h6.fontSize'>
+						{categories.map((cate) => {
+							return (
+								
+							)
+						})}
+						</Box></Typography> */}
+
 						<Typography
 							variant='p'
 							align='left'
