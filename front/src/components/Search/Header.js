@@ -55,7 +55,38 @@ export default function Header(props) {
 		onRouteChange,
 		onCategorySearch,
 		onDescriptionSearch,
+		
 	} = props;
+
+	const [categoryFocused, setCategoryFocused] = React.useState('');
+	// let categoryFocused = '';
+	const pressCategory = (category) => {
+		// console.log(categoryFocused);
+		if (categoryFocused === category){
+			setCategoryFocused('');
+			onCategorySearch('');
+		} else {
+			setCategoryFocused(category);
+			onCategorySearch(category);
+		}
+		// onCategorySearch(categoryFocused);
+		// console.log(categoryFocused);
+	}
+
+	const [descriptionFocused, setDescriptionFocused] = React.useState('');
+	// let categoryFocused = '';
+	const pressDescription = (description) => {
+		// console.log(categoryFocused);
+		if (descriptionFocused === description){
+			setDescriptionFocused('');
+			onDescriptionSearch('');
+		} else {
+			setDescriptionFocused(description);
+			onDescriptionSearch(description);
+		}
+		// onCategorySearch(categoryFocused);
+		// console.log(categoryFocused);
+	}
 
 	return (
 		<React.Fragment>
@@ -68,15 +99,44 @@ export default function Header(props) {
 				>
 					{/* <Button size="small">Subscribe</Button> */}
 					{suggestions.map((suggestion) => (
-						<Button
-							variant='outlined'
-							color='secondary'
-							onClick={() => {
-								onDescriptionSearch(suggestion.title);
-							}}
-						>
-							{suggestion.title}
-						</Button>
+												
+						// <Button
+						// 	variant='outlined'
+						// 	color='secondary'
+						// 	onClick={() => {
+						// 		categoryFocused = suggestion.title;
+						// 		onDescriptionSearch(categoryFocused);
+						// 	}}
+						// >
+						// 	{suggestion.title}
+						// </Button>
+
+						<div>
+						{suggestion.title === descriptionFocused ? (
+							<Button
+								variant='contained'
+								color='secondary'
+								onClick={() => {
+									pressDescription(suggestion.title);
+									
+								}}
+							>
+								{suggestion.title}
+							</Button>
+						) : <Button
+								variant='outlined'
+								color='secondary'
+								onClick={() => {
+									pressDescription(suggestion.title);
+									
+								}}
+							>
+								{suggestion.title}
+							</Button>}
+						</div>
+
+						
+						
 					))}
 					{/* <IconButton>
           <SearchIcon />
@@ -92,24 +152,39 @@ export default function Header(props) {
 					className={classes.toolbarSecondary}
 				>
 					{sections.map((section) => (
-						// <Link
-						//   color="inherit"
-						//   noWrap
-						//   key={section.title}
-						//   variant="body2"
-						//   href={section.url}
-						//   className={classes.toolbarLink}
+						
+						// <Button
+						// 	color='inherit'
+						// 	onClick={() => {
+						// 		onCategorySearch(section);
+						// 	}}
 						// >
-						//   {section.title}
-						// </Link>
-						<Button
-							color='inherit'
-							onClick={() => {
-								onCategorySearch(section);
-							}}
-						>
-							{section}
-						</Button>
+						// 	{section}
+						// </Button>
+
+						<div>
+							{section === categoryFocused ? (
+								<Button
+									
+									color='secondary'
+									onClick={() => {
+										pressCategory(section);
+										
+									}}
+								>
+									{section}
+								</Button>
+							) : <Button									
+									color='inherit'
+									onClick={() => {
+										pressCategory(section);
+										
+									}}
+								>
+									{section}
+								</Button>}
+
+						</div>
 					))}
 				</Toolbar>
 			</MuiThemeProvider>

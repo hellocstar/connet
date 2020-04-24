@@ -84,6 +84,12 @@ const sections = [
 	'Travel',
 ];
 
+// const [search, setSearch] = React.useState('');
+// let buttonStates = [];
+// for (let i=0; i<=sections.length-1; i++){
+// 	buttonStates.push(false);
+// }
+
 const suggestions = [
 	{ title: 'Hang out with friends' },
 	{ title: 'Learn to cook' },
@@ -144,6 +150,7 @@ const Search = ({
 						onRouteChange={onRouteChange}
 						onCategorySearch={onCategorySearch}
 						onDescriptionSearch={onDescriptionSearch}
+						
 					/>
 				</Container>
 			</div>
