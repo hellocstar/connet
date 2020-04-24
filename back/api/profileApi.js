@@ -75,6 +75,7 @@ const getProfile = async (req, res, next) => {
 					id: frd._id,
 					username: frd.username,
 					imageData: frd.imageData,
+					friends: frd.friends,
 				});
 			}
 		}

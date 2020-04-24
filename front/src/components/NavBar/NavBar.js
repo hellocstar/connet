@@ -362,7 +362,12 @@ function PrimarySearchAppBar(
 				if (data) {
 					// console.log(data);
 					handleClose();
-					onSignIn(data._id, data.username, data.imageData);
+					onSignIn(
+						data._id,
+						data.username,
+						data.imageData,
+						data.friends
+					);
 					onActivityIDChange(data._id);
 					onRouteChange('profile/' + data._id);
 				}
@@ -384,7 +389,12 @@ function PrimarySearchAppBar(
 				.then((data) => {
 					if (data) {
 						handleCloseSignup();
-						onSignIn(data._id, data.username, data.imageData);
+						onSignIn(
+							data._id,
+							data.username,
+							data.imageData,
+							data.friends
+						);
 						onActivityIDChange(data._id);
 						onRouteChange('updateprofile/' + data._id);
 					}
@@ -458,7 +468,7 @@ function PrimarySearchAppBar(
 					variant='outlined'
 					required
 					fullWidth
-					name='username'
+					name='text'
 					label='Username'
 					type='username'
 					id='username'
@@ -547,7 +557,7 @@ function PrimarySearchAppBar(
 					fullWidth
 					name='username'
 					label='Username'
-					type='username'
+					type='text'
 					id='username'
 					autoComplete='current-username'
 					color='secondary'

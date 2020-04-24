@@ -38,6 +38,7 @@ const Profile = ({
 	isSignedIn,
 	user,
 	activityID,
+	onFollow,
 }) => {
 	const [username, setUsername] = useState('Loading...');
 	const [email, setEmail] = useState('');
@@ -47,11 +48,20 @@ const Profile = ({
 	const [friends, setFriends] = useState([]);
 	const [history, setHistory] = useState([]);
 	const [interests, setInterests] = useState([]);
-	const [isFriend, setIsFriends] = useState(false);
+	const [isFriend, setIsFriend] = useState(false);
+	const [myFriends, setMyFriends] = useState(user.friends);
 
 	let myself = false;
+	let isFriend2 = false;
 	if (user.id === activityID) {
 		myself = true;
+	} else if (isSignedIn) {
+		for (let i = 0; i < user.friends.length; i++) {
+			if (user.friends[i] === activityID) {
+				isFriend2 = true;
+				break;
+			}
+		}
 	}
 
 	useEffect(() => {
@@ -59,7 +69,6 @@ const Profile = ({
 			.then((response) => response.json())
 			.then((data) => {
 				if (data) {
-					console.log(activityID);
 					setUsername(data.profile.username);
 					setEmail(data.profile.email);
 					setBiography(data.profile.biography);
@@ -70,7 +79,7 @@ const Profile = ({
 					setHistory(data.history);
 				}
 			});
-	}, [isFriend]);
+	}, [isFriend, activityID]);
 
 	const onAddFriend = () => {
 		fetch('http://localhost:3000/addfriend/', {
@@ -86,7 +95,9 @@ const Profile = ({
 			.then((response) => response.json())
 			.then((data) => {
 				if (data) {
-					setIsFriends(true);
+					onFollow(data.friends);
+					setIsFriend(true);
+					isFriend2 = true;
 				}
 			});
 	};
@@ -129,7 +140,6 @@ const Profile = ({
 	const classes = useStyles();
 
 	if (!imageData) {
-		// imageData = './profile.jpg';
 		setImageData('./profile.jpg');
 	}
 
@@ -189,7 +199,10 @@ const Profile = ({
 										update your profile
 									</Button>
 								) : null}
-								{isSignedIn && !isFriend && !myself ? (
+								{isSignedIn &&
+								!isFriend &&
+								!myself &&
+								!isFriend2 ? (
 									<Button
 										variant='contained'
 										color='secondary'
@@ -204,8 +217,7 @@ const Profile = ({
 					</Grid>
 				</Grid>
 
-				{isFriend && !myself ? (
-					// <p>You are now following {username}!</p>
+				{(isFriend || isFriend2) && !myself ? (
 					<Grid
 						container
 						direction='row'
@@ -218,7 +230,7 @@ const Profile = ({
 								fontSize='h6.fontSize'
 								m={1}
 							>
-								You are now following {username}!
+								You are following {username}!
 							</Box>
 						</Typography>
 					</Grid>
@@ -281,17 +293,15 @@ const Profile = ({
 												<Avatar
 													alt={friend.username}
 													src={friend.imageData}
-													// onClick={() => {
-													// 	console.log(user.id);
-													// 	console.log(friend.id);
-													// 	onActivityIDChange(
-													// 		friend.id
-													// 	);
-													// 	onRouteChange(
-													// 		'profile/' +
-													// 			friend.id
-													// 	);
-													// }}
+													onClick={() => {
+														onActivityIDChange(
+															friend.id
+														);
+														onRouteChange(
+															'profile/' +
+																friend.id
+														);
+													}}
 												>
 													{friend.username}
 												</Avatar>

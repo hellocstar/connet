@@ -37,6 +37,7 @@ const initialState = {
 		id: '',
 		name: '',
 		imageData: '',
+		friends: '',
 	},
 	createRoomFor: '',
 };
@@ -71,9 +72,26 @@ class App extends Component {
 		this.setState({ activityID: id });
 	};
 
-	onSignIn = (id, name, imageData) => {
+	onFollow = (friends) => {
 		this.setState({
-			user: { id: id, name: name, imageData: imageData },
+			user: {
+				id: this.state.user.id,
+				name: this.state.user.name,
+				imageData: this.state.user.imageData,
+				friends: friends,
+			},
+		});
+		console.log(this.state.user);
+	};
+
+	onSignIn = (id, name, imageData, friends) => {
+		this.setState({
+			user: {
+				id: id,
+				name: name,
+				imageData: imageData,
+				friends: friends,
+			},
 			activityID: id,
 			isSignedIn: true,
 		});
@@ -81,7 +99,7 @@ class App extends Component {
 
 	onSignOut = () => {
 		this.setState({
-			user: { id: '', name: '' },
+			user: { id: '', name: '', imageData: '', friends: [] },
 			activityID: '',
 			isSignedIn: false,
 		});
@@ -212,6 +230,7 @@ class App extends Component {
 								isSignedIn={isSignedIn}
 								user={user}
 								activityID={activityID}
+								onFollow={this.onFollow}
 							/>
 						</div>
 					) : route === 'updateprofile/' + activityID ? (
