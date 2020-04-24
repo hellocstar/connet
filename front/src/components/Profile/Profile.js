@@ -18,6 +18,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import defaultPic from './profile.png'
 
 const theme = createMuiTheme({
 	palette: {
@@ -139,8 +140,17 @@ const Profile = ({
 	// const useStyles = makeStyles(styles);
 	const classes = useStyles();
 
-	if (!imageData) {
-		setImageData('./profile.jpg');
+	// if (!imageData) {
+	// 	setImageData({defaultPic});
+	// 	console.log('nopropic!');
+	// }
+	// else {
+	// 	console.log('havepropic!');
+	// }
+
+	const defaultPropic = (e) => {
+		e.target.onerror = null;
+		e.target.src = {defaultPic};
 	}
 
 	return (
@@ -158,17 +168,34 @@ const Profile = ({
 							{/* <Avatar src={imageData} className='classes.avatar' sizes='200'>
 					{username}
 				</Avatar> */}
-							<CardMedia
+
+							{/* <CardMedia
 								className={classes.cardMedia}
-								image={imageData}
+								image={defaultPic}
 								title={username}
-							/>
+								onError={defaultPropic}
+							/> */}
+							{imageData ? (
+								<CardMedia
+									className={classes.cardMedia}
+									image={imageData}
+									title={username}
+									
+								/>
+							) : <CardMedia
+									className={classes.cardMedia}
+									image={defaultPic}
+									title={username}
+									
+								/>}
+
+
 							<CardContent className={classes.cardContent}>
 								<Typography
 									gutterBottom
 									variant='h5'
 									component='h2'
-									align='left'
+									align='left'									
 								>
 									{username}
 								</Typography>
