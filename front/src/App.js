@@ -25,6 +25,32 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Zoom from '@material-ui/core/Zoom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { withStyles, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#ffffff',
+			mainGradient: 'linear-gradient(to right, orange, #9c27b0)',
+			contrastText: '#fff',
+		},
+		secondary: {
+			main: '#e91e63',
+		},
+	},
+	typography: {
+		button: {
+			//textTransform: 'none',
+		},
+	},
+});
+
+
+
 
 const initialState = {
 	pastRoute: 'community',
@@ -124,6 +150,7 @@ class App extends Component {
 			createRoomFor,
 		} = this.state;
 		return (
+			<MuiThemeProvider theme={theme}>
 			<ErrorBoundary onRouteChange={this.onRouteChange}>
 				<div className='App'>
 					<NavBar
@@ -329,6 +356,7 @@ class App extends Component {
 					/>
 				</div>
 			</ErrorBoundary>
+			</MuiThemeProvider>
 		);
 	}
 }
