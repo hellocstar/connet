@@ -90,7 +90,7 @@ const suggestions = [
 	{ title: 'Train for a marathon' },
 	{ title: 'Build a mobile app' },
 	{ title: 'Hike a mountain' },
-	{ title: 'Practice a language' },
+	{ title: 'Practise a language' },
 ];
 
 const Search = ({
