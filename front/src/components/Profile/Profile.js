@@ -335,8 +335,8 @@ const Profile = ({
 								<Box m={1}>
 									<ListItem
 										activity={hist.obj}
-										onRouteChange={onRouteChange}
 										onActivityIDChange={onActivityIDChange}
+										onRouteChange={onRouteChange}
 										type={hist.type}
 									/>
 								</Box>

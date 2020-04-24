@@ -187,14 +187,14 @@ const Room = ({
 										>
 											{name}
 										</Typography>
-										<Typography
+										{/* <Typography
 											variant='h5'
 											color='inherit'
 											align='left'
 											paragraph
 										>
 											{description}
-										</Typography>
+										</Typography> */}
 
 										<Grid item md={6}>
 											{isSignedIn &&
@@ -364,7 +364,9 @@ const Room = ({
 											fontWeight='fontWeightBold'
 											fontSize='h6.fontSize'
 										>
-											{'You are a participant of this room!'}
+											{
+												'You are a participant of this room!'
+											}
 										</Box>
 									</Typography>
 								</Box>

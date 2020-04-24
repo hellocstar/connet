@@ -370,25 +370,25 @@ function PrimarySearchAppBar(
 	};
 
 	const onSubmitSignUp = () => {
-		if(username && email && password){
-		fetch('http://localhost:3000/signup', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				username: username,
-				email: email,
-				password: password,
-			}),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				if (data) {
-					handleCloseSignup();
-					onSignIn(data._id, data.username, data.imageData);
-					onActivityIDChange(data._id);
-					onRouteChange('updateprofile/' + data._id);
-				}
-			});
+		if (username && email && password) {
+			fetch('http://localhost:3000/signup', {
+				method: 'post',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					username: username,
+					email: email,
+					password: password,
+				}),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					if (data) {
+						handleCloseSignup();
+						onSignIn(data._id, data.username, data.imageData);
+						onActivityIDChange(data._id);
+						onRouteChange('updateprofile/' + data._id);
+					}
+				});
 		}
 	};
 
@@ -634,7 +634,7 @@ function PrimarySearchAppBar(
 							size='small'
 							// aria-label='open drawer'
 							onClick={() => {
-								console.log(user.id);
+								onActivityIDChange(user.id);
 								onRouteChange('profile/' + user.id);
 							}}
 						>
