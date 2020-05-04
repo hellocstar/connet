@@ -9,6 +9,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import EventIcon from '@material-ui/icons/Event';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+//contains methods, theme and styles for componenets to render the create page
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

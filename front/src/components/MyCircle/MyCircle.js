@@ -7,6 +7,8 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import no_result from './no_result.png';
 
+//contains methods, theme and styles for componenets to render the my circle page, similar to the community page
+
 const MyCircle = ({
 	searchField,
 	onRouteChange,

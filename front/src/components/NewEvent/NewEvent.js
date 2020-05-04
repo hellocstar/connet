@@ -15,6 +15,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
+//contains methods, theme and styles for componenets to render the create new event page
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

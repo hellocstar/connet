@@ -15,6 +15,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
+//contains methods, theme and styles for componenets to render the create new room page
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

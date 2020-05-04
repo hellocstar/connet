@@ -42,6 +42,11 @@ import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 
+//contains methods, theme and styles for componenets to render the navigation bar on top of every page
+//handle search event with the search bar for username
+//handle page switching between pages of the app
+//contains code for pop-up of sign in and sign up functions
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

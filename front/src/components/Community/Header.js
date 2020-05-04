@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
 
+//contains methods, theme and styles for componenets to render the community page
+
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,

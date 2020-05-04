@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import './NotFound.css';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+//contains methods, theme and styles for componenets to render the no result found page
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

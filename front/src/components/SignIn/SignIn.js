@@ -1,5 +1,7 @@
 import React from 'react';
 
+//contains methods, theme and styles for componenets to render the sign in page, currently obselete
+
 class SignIn extends React.Component {
 	constructor(props) {
 		super(props);

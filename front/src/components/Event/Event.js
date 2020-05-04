@@ -19,6 +19,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+//contains methods, theme and styles for componenets to render the event page
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

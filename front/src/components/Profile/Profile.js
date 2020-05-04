@@ -20,6 +20,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import defaultPic from './profile.png'
 
+//contains methods, theme and styles for componenets to render the profile page
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

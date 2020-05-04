@@ -2,6 +2,8 @@ import React from 'react';
 import './Image.css';
 import FileBase from 'react-file-base64';
 
+//contains methods, theme and styles for componenets to render the area for user to upload pictures
+
 const Image = ({ baseImage, getBaseFile }) => {
 	return (
 		<div className='image-container'>

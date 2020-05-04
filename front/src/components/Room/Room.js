@@ -19,6 +19,8 @@ import Avatar from '@material-ui/core/Avatar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
+//contains methods, theme and styles for componenets to render the room page
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

@@ -19,6 +19,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 
+//contains methods, theme and styles for componenets to render a list of items (events or rooms)
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		maxWidth: 345,

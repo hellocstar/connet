@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import './ErrorBoundary.css';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+//contains methods, theme and styles for componenets to render the error page when error occured
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

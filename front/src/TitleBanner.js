@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Container from '@material-ui/core/Container';
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({           //material ui custom theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -26,7 +26,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({             //material ui custom style
 	Banner: {
 		position: 'relative',
 		backgroundColor: theme.palette.grey[800],
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const sections = [
+const sections = [                    //section for categories
 	{ title: 'Technology', url: '#' },
 	{ title: 'Design', url: '#' },
 	{ title: 'Culture', url: '#' },
@@ -82,7 +82,7 @@ const sections = [
 	{ title: 'Travel', url: '#' },
 ];
 
-export default function TitleBanner(props) {
+export default function TitleBanner(props) {            //create a banner with buttons on top of the page
 	const classes = useStyles();
 	//const { post } = props;
 

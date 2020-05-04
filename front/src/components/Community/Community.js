@@ -9,6 +9,8 @@ import Box from '@material-ui/core/Box';
 import no_result from './no_result.png';
 import Zoom from '@material-ui/core/Zoom';
 
+//contains methods, theme and styles for componenets to render the header
+
 const Community = ({
 	searchField,
 	onRouteChange,

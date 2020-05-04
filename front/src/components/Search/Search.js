@@ -11,6 +11,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 
+//contains methods, theme and styles for componenets to render the search bar, with suggested description and categories
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		'& .MuiTextField-root': {

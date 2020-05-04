@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import footerbg from './footer_bg.png';
 
+//contains methods, theme and styles for componenets to render the footer of the webpage
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

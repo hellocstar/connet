@@ -15,6 +15,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
+//contains methods, theme and styles for componenets to render the update profile page
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {

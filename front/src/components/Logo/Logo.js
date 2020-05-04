@@ -3,6 +3,8 @@ import Tilt from 'react-tilt';
 import './Logo.css';
 import connet from './connet_icon.png';
 
+//contains methods, theme and styles for componenets to render the logo
+
 const Logo = () => {
 	return (
 		<div className='ma4 mt0'>

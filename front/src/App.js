@@ -31,7 +31,7 @@ import Zoom from '@material-ui/core/Zoom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { withStyles, ThemeProvider } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({       //custom material ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -44,7 +44,7 @@ const theme = createMuiTheme({
 	},
 	typography: {
 		button: {
-			//textTransform: 'none',
+			
 		},
 	},
 });
@@ -52,7 +52,7 @@ const theme = createMuiTheme({
 
 
 
-const initialState = {
+const initialState = {     //state for the entire web app
 	pastRoute: 'community',
 	route: 'community',
 	searchField: '',
@@ -69,25 +69,25 @@ const initialState = {
 	createRoomFor: '',
 };
 
-class App extends Component {
+class App extends Component {     //class for the whole web app
 	constructor() {
 		super();
 		this.state = initialState;
 	}
 
-	onSearchChange = (search) => {
+	onSearchChange = (search) => {      //handle search
 		this.setState({ searchField: search.target.value });
 	};
 
-	onCategorySearch = (search) => {
+	onCategorySearch = (search) => {       //handle search
 		this.setState({ categorySearch: search });
 	};
 
-	onDescriptionSearch = (search) => {
+	onDescriptionSearch = (search) => {        //handle search
 		this.setState({ descriptionSearch: search });
 	};
 
-	onRouteChange = (route) => {
+	onRouteChange = (route) => {        //handle page change
 		this.setState({ categorySearch: '' });
 		this.setState({ descriptionSearch: '' });
 		this.setState({ pastRoute: this.state.route });
@@ -95,11 +95,11 @@ class App extends Component {
 		window.scrollTo(0, 0);
 	};
 
-	onActivityIDChange = (id) => {
+	onActivityIDChange = (id) => {            //handle page change
 		this.setState({ activityID: id });
 	};
 
-	onFollow = (friends) => {
+	onFollow = (friends) => {        //handle follow action
 		this.setState({
 			user: {
 				id: this.state.user.id,
@@ -111,7 +111,7 @@ class App extends Component {
 		console.log(this.state.user);
 	};
 
-	onSignIn = (id, name, imageData, friends) => {
+	onSignIn = (id, name, imageData, friends) => {             //handle sign in
 		this.setState({
 			user: {
 				id: id,
@@ -124,7 +124,7 @@ class App extends Component {
 		});
 	};
 
-	onSignOut = () => {
+	onSignOut = () => {               //handle sign out
 		this.setState({
 			user: { id: '', name: '', imageData: '', friends: [] },
 			activityID: '',
@@ -133,11 +133,11 @@ class App extends Component {
 		this.onRouteChange('community');
 	};
 
-	changeCreateRoomFor = (forWhat) => {
+	changeCreateRoomFor = (forWhat) => {       //handle create room
 		this.setState({ createRoomFor: forWhat });
 	};
 
-	render() {
+	render() {         //method for rendering the app 
 		const {
 			pastRoute,
 			route,
@@ -150,10 +150,10 @@ class App extends Component {
 			createRoomFor,
 		} = this.state;
 		return (
-			<MuiThemeProvider theme={theme}>
+			<MuiThemeProvider theme={theme}>           
 			<ErrorBoundary onRouteChange={this.onRouteChange}>
 				<div className='App'>
-					<NavBar
+					<NavBar                                  
 						isSignedIn={isSignedIn}
 						onRouteChange={this.onRouteChange}
 						onActivityIDChange={this.onActivityIDChange}

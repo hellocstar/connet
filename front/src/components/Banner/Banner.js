@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({               //custom material ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -24,6 +24,8 @@ const theme = createMuiTheme({
 		},
 	},
 });
+
+//custom style for components
 
 const logostyle = {
 	//position:"relative",
