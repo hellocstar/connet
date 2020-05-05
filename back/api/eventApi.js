@@ -2,6 +2,8 @@ const Event = require('../models/eventSchema');
 const Room = require('../models/roomSchema');
 const Profile = require('../models/profileSchema');
 
+//contains api for event related communication with database and server
+
 const eventList = async (req, res, next) => {
 	try {
 		const events = await Event.find({});

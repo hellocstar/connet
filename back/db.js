@@ -4,6 +4,8 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 let _db;
 
+//contains necessary code for communicating with database
+
 const connecionString =
 	'mongodb+srv://admin:CSCI3100@cluster-tqoug.azure.mongodb.net/test?retryWrites=true&w=majority';
 

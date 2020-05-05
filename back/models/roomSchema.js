@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+//contains all of room-related data types
+
 const roomSchema = new mongoose.Schema({
 	type: {
 		type: String,

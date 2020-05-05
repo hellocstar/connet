@@ -2,6 +2,8 @@ const Profile = require('../models/profileSchema');
 const Room = require('../models/roomSchema');
 const Event = require('../models/eventSchema');
 
+//contains api for room related communication with database and server
+
 const roomList = async (req, res, next) => {
 	try {
 		const user = await Profile.findOne({ _id: req.body.id });

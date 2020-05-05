@@ -3,6 +3,8 @@ const Event = require('../models/eventSchema');
 const Room = require('../models/roomSchema');
 const Passport = require('../config/passport');
 
+//contains api for profile related communication with database and server
+
 const signIn = async (req, res, next) => {
 	try {
 		res.status(200).send(req.user);

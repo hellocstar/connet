@@ -4,6 +4,8 @@ const crypto = require('crypto');
 
 const Profile = require('../models/profileSchema');
 
+//contains api for passport related communication with database and server
+
 function validPassword(password, hash, salt) {
 	const hashVerify = crypto
 		.pbkdf2Sync(password, salt, 10000, 64, 'sha512')

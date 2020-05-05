@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+//contains all of profile-related data types
+
 const profileSchema = new mongoose.Schema({
 	username: {
 		type: String,
