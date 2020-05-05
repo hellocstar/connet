@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+//contains all of event-related data types
+
 const eventSchema = new mongoose.Schema({
 	name: {
 		type: String,
