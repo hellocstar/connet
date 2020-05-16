@@ -21,7 +21,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 //contains methods, theme and styles for componenets to render the event page
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({       //custom material ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -34,7 +34,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({           //custom material ui style
 	root: {
 		maxWidth: 1300,
 		margin: 'auto',
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function ActivityCard(prop) {
+function ActivityCard(prop) {              //code for activity card
 	const classes = useStyles();
 	return (
 
@@ -109,9 +109,10 @@ function ActivityCard(prop) {
 		</Card>
 	);
 }
+ 
 
 const Event = ({
-	activityID,
+	activityID, 
 	onRouteChange,
 	onActivityIDChange,
 	isSignedIn,
@@ -145,7 +146,7 @@ const Event = ({
 			});
 	}, []);
 
-	const mainFeaturedPost = {
+	const mainFeaturedPost = {            //attributes for the top banner
 		title: { name },
 		description: { description },
 		image: 'https://source.unsplash.com/random',
@@ -155,7 +156,7 @@ const Event = ({
 
 	const classes = useStyles();
 
-	return (
+	return (            //rendering the event page
 		<div>
 			<MuiThemeProvider theme={theme}>
 			<CssBaseline />

@@ -17,7 +17,7 @@ import Container from '@material-ui/core/Container';
 
 //contains methods, theme and styles for componenets to render the create new room page
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({      //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -30,7 +30,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({           //custom material-ui style
 	formControl: {
 		margin: theme.spacing(1),
 		minWidth: 120,
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const NewRoom = ({
+const NewRoom = ({         //render the create new room panel
 	onActivityIDChange,
 	onRouteChange,
 	isSignedIn,

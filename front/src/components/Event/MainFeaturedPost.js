@@ -8,7 +8,7 @@ import Link from '@material-ui/core/Link';
 
 //contains methods, theme and styles for componenets to render the individual post of event
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({         //custom material-ui style
   mainFeaturedPost: {
     position: 'relative',
     backgroundColor: theme.palette.grey[800],
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MainFeaturedPost(props) {
+export default function MainFeaturedPost(props) {             //render the main activity card in the event page
   const classes = useStyles();
   const { post } = props;
   

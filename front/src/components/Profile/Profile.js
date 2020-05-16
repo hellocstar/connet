@@ -22,7 +22,7 @@ import defaultPic from './profile.png'
 
 //contains methods, theme and styles for componenets to render the profile page
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({        //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -35,7 +35,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const Profile = ({
+const Profile = ({        //render the user profile page
 	onRouteChange,
 	onActivityIDChange,
 	isSignedIn,
@@ -84,7 +84,7 @@ const Profile = ({
 			});
 	}, [isFriend, activityID]);
 
-	const onAddFriend = () => {
+	const onAddFriend = () => {             //handle add friend function
 		fetch('http://localhost:3000/addfriend/', {
 			method: 'POST',
 			headers: {
@@ -105,7 +105,7 @@ const Profile = ({
 			});
 	};
 
-	const useStyles = makeStyles((theme) => ({
+	const useStyles = makeStyles((theme) => ({           //custom material-ui theme
 		root: {
 			display: 'flex',
 			'& > *': {

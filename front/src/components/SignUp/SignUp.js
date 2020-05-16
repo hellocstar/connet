@@ -12,19 +12,19 @@ class SignUp extends React.Component {
 		};
 	}
 
-	onUsernameChange = (name) => {
+	onUsernameChange = (name) => {         //handle username input changes
 		this.setState({ username: name.target.value });
 	};
 
-	onEmailChange = (email) => {
+	onEmailChange = (email) => {             //handle email input changes
 		this.setState({ email: email.target.value });
 	};
 
-	onPasswordChange = (password) => {
+	onPasswordChange = (password) => {               //handle password input changes
 		this.setState({ password: password.target.value });
 	};
-
-	onSubmitSignUp = () => {
+ 
+	onSubmitSignUp = () => {                   //handle submit signup actions
 		fetch('http://localhost:3000/signup', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
@@ -44,7 +44,7 @@ class SignUp extends React.Component {
 			});
 	};
 
-	render() {
+	render() {             //code for rendering the signup page
 		return (
 			<div>
 				<p>Sign Up to reach out to the world!</p>

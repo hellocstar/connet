@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box';
 
 //contains methods, theme and styles for componenets to render the search bar, with suggested description and categories
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({        //custom material-ui style
 	root: {
 		'& .MuiTextField-root': {
 			margin: theme.spacing(1),
@@ -101,7 +101,7 @@ const suggestions = [
 	{ title: 'Practise a language' },
 ];
 
-const Search = ({
+const Search = ({              //render the search area in different page
 	searchChange,
 	onRouteChange,
 	onCategorySearch,

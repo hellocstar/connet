@@ -47,7 +47,7 @@ import Zoom from '@material-ui/core/Zoom';
 //handle page switching between pages of the app
 //contains code for pop-up of sign in and sign up functions
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({      //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -65,7 +65,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({     //custom material-ui style
 	root: {
 		position: 'fixed',
 		bottom: theme.spacing(2),
@@ -137,7 +137,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const BootstrapButton = withStyles({
+const BootstrapButton = withStyles({        //custom material-ui button
 	root: {
 		boxShadow: 'none',
 		textTransform: 'none',
@@ -167,7 +167,7 @@ const BootstrapButton = withStyles({
 	},
 })(Button);
 
-function ElevationScroll(props) {
+function ElevationScroll(props) {           //handle user scroll event, useful for nav bar animation and back-to-top button
 	const { children, window } = props;
 	// Note that you normally won't need to set the window ref as useScrollTrigger
 	// will default to window.
@@ -197,7 +197,7 @@ function ElevationScroll(props) {
 	);
 }
 
-ElevationScroll.propTypes = {
+ElevationScroll.propTypes = {              //fit in window
 	children: PropTypes.element.isRequired,
 	/**
 	 * Injected by the documentation to work in an iframe.
@@ -206,7 +206,7 @@ ElevationScroll.propTypes = {
 	window: PropTypes.func,
 };
 
-function ScrollTop(props) {
+function ScrollTop(props) {            //scroll back to the top of the page
 	const { children, window } = props;
 	const classes = useStyles();
 	// Note that you normally won't need to set the window ref as useScrollTrigger
@@ -249,7 +249,7 @@ ScrollTop.propTypes = {
 // // }
 
 // const topButtonProp = {className={classes.button} color="primary" size="small"};
-function PrimarySearchAppBar(
+function PrimarySearchAppBar(          //rendering the app bar
 	{
 		onRouteChange,
 		isSignedIn,
@@ -365,6 +365,9 @@ function PrimarySearchAppBar(
 			</MenuItem>
 		</Menu>
 	);
+
+	//handle sign in and sign up logics
+	//sign in and sign up windows are shown in pop up windows 
 
 	const [open, setOpen] = React.useState(false);
 	const [openSignup, setOpenSignup] = React.useState(false);

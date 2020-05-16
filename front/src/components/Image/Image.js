@@ -4,7 +4,7 @@ import FileBase from 'react-file-base64';
 
 //contains methods, theme and styles for componenets to render the area for user to upload pictures
 
-const Image = ({ baseImage, getBaseFile }) => {
+const Image = ({ baseImage, getBaseFile }) => {    //redner the image upload panel, preview and buttons
 	return (
 		<div className='image-container'>
 			<div className='process'>

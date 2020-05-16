@@ -37,7 +37,7 @@ const MyCircle = ({
 			});
 	}, []);
 
-	const catSerach = roomList.filter((event) => {
+	const catSerach = roomList.filter((event) => {           //handle category search
 		let push = false;
 		if (categorySearch === '') {
 			push = true;
@@ -52,7 +52,7 @@ const MyCircle = ({
 		return push;
 	});
 
-	const desSearch = catSerach.filter((event) => {
+	const desSearch = catSerach.filter((event) => {        //handle description search
 		if (descriptionSearch === '') {
 			return true;
 		} else {
@@ -62,25 +62,12 @@ const MyCircle = ({
 		}
 	});
 
-	const searchResult = desSearch.filter((event) => {
+	const searchResult = desSearch.filter((event) => {              //filter the searched result and reurn an array
 		return event.name.toLowerCase().includes(searchField.toLowerCase());
 	});
 
-	return (
-		// <div className='parent'>
-		// 	{filtered.map((room) => {
-		// 		return (
-		// 			<div className='child' key={room._id}>
-		// 				<ListItem
-		// 					activity={room}
-		// 					onRouteChange={onRouteChange}
-		// 					onActivityIDChange={onActivityIDChange}
-		// 					type={'room'}
-		// 				/>
-		// 			</div>
-		// 		);
-		// 	})}
-		// </div>
+	return (       //render the mycircle page
+		
 		<Grid container direction='row' justify='center' alignItems='center'>
 			<React.Fragment>
 				<CssBaseline />

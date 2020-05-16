@@ -21,7 +21,7 @@ import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
 //contains methods, theme and styles for componenets to render the room page
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({          //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -34,7 +34,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({          //custom material-ui style
 	root: {
 		maxWidth: 1300,
 		margin: 'auto',
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Room = ({
+const Room = ({           //render the room page
 	activityID,
 	onRouteChange,
 	onActivityIDChange,
@@ -141,7 +141,7 @@ const Room = ({
 			});
 	}, [joined]);
 
-	const joinRoom = (userID, roomID) => {
+	const joinRoom = (userID, roomID) => {          //handle join room event
 		fetch('http://localhost:3000/joinroom', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
@@ -160,7 +160,7 @@ const Room = ({
 
 	const classes = useStyles();
 
-	return (
+	return (               //render the room ui
 		<div>
 			<MuiThemeProvider theme={theme}>
 				<CssBaseline />

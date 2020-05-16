@@ -4,7 +4,7 @@ const Profile = require('../models/profileSchema');
 
 //contains api for event related communication with database and server
 
-const eventList = async (req, res, next) => {
+const eventList = async (req, res, next) => {             //find event list method
 	try {
 		const events = await Event.find({});
 		res.status(200).send(events);
@@ -14,7 +14,7 @@ const eventList = async (req, res, next) => {
 	}
 };
 
-const categorySearch = async (req, res, next) => {
+const categorySearch = async (req, res, next) => {        //search for category method
 	try {
 		const events = await Event.find({ categories: req.search });
 		res.status(200).send(events);
@@ -24,7 +24,7 @@ const categorySearch = async (req, res, next) => {
 	}
 };
 
-const createEvent = async (req, res, next) => {
+const createEvent = async (req, res, next) => {          //create event method
 	try {
 		const event = new Event(req.body);
 		const result = await event.save();
@@ -40,7 +40,7 @@ const createEvent = async (req, res, next) => {
 	}
 };
 
-const getEvent = async (req, res, next) => {
+const getEvent = async (req, res, next) => {           //get event method
 	try {
 		const event = await Event.findOne({ _id: req.params.eventid });
 		let rooms = [];
@@ -111,7 +111,7 @@ const getEvent = async (req, res, next) => {
 // 	}
 // };
 
-module.exports = {
+module.exports = {       //encapsulation of the event api module
 	eventList,
 	createEvent,
 	getEvent,

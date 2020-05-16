@@ -21,7 +21,7 @@ import Hidden from '@material-ui/core/Hidden';
 
 //contains methods, theme and styles for componenets to render a list of items (events or rooms)
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({    //custom material-ui style
 	root: {
 		maxWidth: 345,
 		margin: 'auto',
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {
+const ListItem = ({ activity, onRouteChange, onActivityIDChange, type }) => {     //render different items in a list, used in event or myroom page
 	const onClickName = () => {
 		if (type === 'event') {
 			onActivityIDChange(activity._id);

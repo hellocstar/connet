@@ -10,7 +10,7 @@ import footerbg from './footer_bg.png';
 
 //contains methods, theme and styles for componenets to render the footer of the webpage
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({            //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -23,7 +23,7 @@ const theme = createMuiTheme({
 	},
 });
 
-function Copyright() {
+function Copyright() {              //for showing copyright logo and sentence
   return (
     <Typography variant="body2" color="textSecondary">
       {'Copyright © '}
@@ -36,7 +36,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({               ////custom material-ui style
     footer: {
       // backgroundColor: 'orange',
       background: footerbg,
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-export default function StickyFooter(props) {
+export default function StickyFooter(props) {               //function for rendering the webpage footer
     const classes = useStyles();
     const { description, title } = props;
   

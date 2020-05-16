@@ -17,8 +17,8 @@ import Grid from '@material-ui/core/Grid';
 
 //contains methods, theme and styles for componenets to render the update profile page
 
-const theme = createMuiTheme({
-	palette: {
+const theme = createMuiTheme({        //custom material-ui theme
+	palette: { 
 		primary: {
 			main: '#ffffff',
 			mainGradient: 'linear-gradient(to right, orange, #9c27b0)',
@@ -30,7 +30,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({      //custom material-ui style
 	formControl: {
 		margin: theme.spacing(1),
 		minWidth: 120,
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const UpdateProfile = ({
+const UpdateProfile = ({                  //for rendering the updtae profile panel
 	onRouteChange,
 	onActivityIDChange,
 	isSignedIn,
@@ -82,24 +82,7 @@ const UpdateProfile = ({
 	const [interests, setInterests] = useState([]);
 
 	if (isSignedIn) {
-		// const categoriesList = [
-		// 	'Outdoors & Adventure',
-		// 	'Tech',
-		// 	'Family',
-		// 	'Health & Wellness',
-		// 	'Sports & Fitness',
-		// 	'Learning',
-		// 	'Photography',
-		// 	'Food & Drink',
-		// 	'Writing',
-		// 	'Language & Culture',
-		// 	'Music',
-		// 	'Film',
-		// 	'Beliefs',
-		// 	'Arts',
-		// 	'Fashion & Beauty',
-		// 	'Career & Business',
-		// ];
+		
 
 		const categoriesList = [
 			'Technology',

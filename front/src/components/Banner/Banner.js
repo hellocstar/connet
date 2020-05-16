@@ -105,7 +105,7 @@ const OldBanner = ({ onRouteChange }) => {
 	);
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({          //custom material-ui style
 	Banner: {
 	  position: 'relative',
 	  backgroundColor: theme.palette.grey[800],
@@ -134,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
 	},
   }));
 
-export default function Banner(props) {
+export default function Banner(props) {                //for rendering a banner with random picures from the internet
 const classes = useStyles();
 //const { post } = props;
 

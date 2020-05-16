@@ -11,7 +11,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 //contains methods, theme and styles for componenets to render the create page
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({     //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -24,7 +24,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const Create = ({ isSignedIn, onRouteChange, changeCreateRoomFor }) => {
+const Create = ({ isSignedIn, onRouteChange, changeCreateRoomFor }) => {         //rendering the create panel
 	if (isSignedIn) {
 		return (
 			// <div>

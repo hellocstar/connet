@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 
 //contains methods, theme and styles for componenets to render the create new event page
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({      //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -30,7 +30,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({          //custom material-ui style
 	formControl: {
 		margin: theme.spacing(1),
 		minWidth: 120,
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
+const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {        //rendering the create new event panel
 	const classes = useStyles();
 
 	const [name, setName] = useState('');
@@ -76,24 +76,7 @@ const NewEvent = ({ onActivityIDChange, onRouteChange, isSignedIn, user }) => {
 	const [categories, setCategories] = useState([]);
 
 	if (isSignedIn) {
-		// const categoriesList = [
-		// 	'Outdoors & Adventure',
-		// 	'Tech',
-		// 	'Family',
-		// 	'Health & Wellness',
-		// 	'Sports & Fitness',
-		// 	'Learning',
-		// 	'Photography',
-		// 	'Food & Drink',
-		// 	'Writing',
-		// 	'Language & Culture',
-		// 	'Music',
-		// 	'Film',
-		// 	'Beliefs',
-		// 	'Arts',
-		// 	'Fashion & Beauty',
-		// 	'Career & Business',
-		// ];
+		
 
 		const categoriesList = [
 			'Technology',

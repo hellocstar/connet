@@ -5,7 +5,7 @@ import connet from './connet_icon.png';
 
 //contains methods, theme and styles for componenets to render the logo
 
-const Logo = () => {
+const Logo = () => {      //render the logo
 	return (
 		<div className='ma4 mt0'>
 			<Tilt

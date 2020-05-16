@@ -5,7 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 //contains methods, theme and styles for componenets to render the no result found page
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({   //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -18,7 +18,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const NotFound = ({ onRouteChange }) => {
+const NotFound = ({ onRouteChange }) => {     //render the not found message, and direct user to another page
 	return (
 		<MuiThemeProvider theme={theme}>
 		<div id='notfound'>

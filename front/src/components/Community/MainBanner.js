@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({     //custom material-ui style
   mainBanner: {
     position: 'relative',
     backgroundColor: theme.palette.grey[800],
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MainBanner(props) {
+export default function MainBanner(props) {              //render the main banner in the webpage
   const classes = useStyles();
   const { post } = props;
 

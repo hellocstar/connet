@@ -5,7 +5,7 @@ const Passport = require('../config/passport');
 
 //contains api for profile related communication with database and server
 
-const signIn = async (req, res, next) => {
+const signIn = async (req, res, next) => {        //signin method
 	try {
 		res.status(200).send(req.user);
 	} catch (e) {
@@ -17,7 +17,7 @@ const signIn = async (req, res, next) => {
 	}
 };
 
-const signUp = async (req, res, next) => {
+const signUp = async (req, res, next) => {          //signup method
 	try {
 		const hashPw = Passport.genPassword(req.body.password);
 		const user = {
@@ -37,8 +37,8 @@ const signUp = async (req, res, next) => {
 		}
 	}
 };
-
-const signOut = async (req, res, next) => {
+ 
+const signOut = async (req, res, next) => {          //sign out method
 	try {
 		req.logout();
 		res.redirect('/signin');
@@ -47,7 +47,7 @@ const signOut = async (req, res, next) => {
 	}
 };
 
-const signInSuccess = async (req, res, next) => {
+const signInSuccess = async (req, res, next) => {          //check signin success method
 	try {
 		res.send('You successfully logged in.');
 	} catch (e) {
@@ -55,7 +55,7 @@ const signInSuccess = async (req, res, next) => {
 	}
 };
 
-const signInFail = async (req, res, next) => {
+const signInFail = async (req, res, next) => {         //check signin fail method
 	try {
 		res.send('Username or password is incorrect.');
 	} catch (e) {
@@ -63,7 +63,7 @@ const signInFail = async (req, res, next) => {
 	}
 };
 
-const getProfile = async (req, res, next) => {
+const getProfile = async (req, res, next) => {           //get data of user profile method
 	try {
 		const profile = await Profile.findOne({
 			_id: req.params.profileid,
@@ -116,7 +116,7 @@ const getProfile = async (req, res, next) => {
 	}
 };
 
-const deleteProfile = async (req, res, next) => {
+const deleteProfile = async (req, res, next) => {           //delete data of user profile method
 	try {
 		const result = await Profile.deleteOne({
 			username: req.params.username,
@@ -128,7 +128,7 @@ const deleteProfile = async (req, res, next) => {
 	}
 };
 
-const updateProfile = async (req, res, next) => {
+const updateProfile = async (req, res, next) => {         //update data of user profile method
 	const profile = req.body;
 	try {
 		const result = await Profile.findOneAndUpdate(
@@ -148,7 +148,7 @@ const updateProfile = async (req, res, next) => {
 	}
 };
 
-const searchUsername = async (req, res, next) => {
+const searchUsername = async (req, res, next) => {       //search for username method
 	const username = req.body.username;
 	try {
 		const profile = await Profile.findOne({ username: username });
@@ -163,7 +163,7 @@ const searchUsername = async (req, res, next) => {
 	}
 };
 
-const addFriend = async (req, res, next) => {
+const addFriend = async (req, res, next) => {            //add friend method
 	try {
 		const result = await Profile.findOneAndUpdate(
 			{ _id: req.body.me },
@@ -176,7 +176,7 @@ const addFriend = async (req, res, next) => {
 	}
 };
 
-module.exports = {
+module.exports = {           //encapsulation of the entire module
 	signIn,
 	signUp,
 	signOut,

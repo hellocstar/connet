@@ -12,7 +12,7 @@ import Link from '@material-ui/core/Link';
 
 //contains methods, theme and styles for componenets to render a banner with material card
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({           //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -46,7 +46,7 @@ const imgCenterStyle = {
 
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({            //custom material-ui style
 	Banner: {
 	  position: 'relative',
 	  backgroundColor: theme.palette.grey[800],
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
 	},
   }));
 
-export default function Banner(props) {
+export default function Banner(props) {             //render the banner shown
 const classes = useStyles();
 //const { post } = props;
 

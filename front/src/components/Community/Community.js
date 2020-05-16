@@ -20,8 +20,8 @@ const Community = ({
 }) => {
 	const [eventList, setEventList] = useState([]);
 
-	const sections = [
-		{ title: 'Technology', url: '#' },
+	const sections = [                   //all sections
+		{ title: 'Technology', url: '#' },                
 		{ title: 'Design', url: '#' },
 		{ title: 'Culture', url: '#' },
 		{ title: 'Business', url: '#' },
@@ -33,7 +33,7 @@ const Community = ({
 		{ title: 'Travel', url: '#' },
 	];
 
-	const suggestions = [
+	const suggestions = [                //all suggestion
 		{ title: 'Join a movement' },
 		{ title: 'Learn to cook' },
 		{ title: 'Train fo a marathon' },
@@ -52,7 +52,7 @@ const Community = ({
 			});
 	}, []);
 
-	const catSerach = eventList.filter((event) => {
+	const catSerach = eventList.filter((event) => {              //handle category search
 		let push = false;
 		if (categorySearch === '') {
 			push = true;
@@ -67,7 +67,7 @@ const Community = ({
 		return push;
 	});
 
-	const desSearch = catSerach.filter((event) => {
+	const desSearch = catSerach.filter((event) => {                 //handle description search
 		if (descriptionSearch === '') {
 			return true;
 		} else {
@@ -77,11 +77,11 @@ const Community = ({
 		}
 	});
 
-	const searchResult = desSearch.filter((event) => {
+	const searchResult = desSearch.filter((event) => {                     //return array of search result
 		return event.name.toLowerCase().includes(searchField.toLowerCase());
 	});
 
-	return (
+	return (           //render community page
 		<Grid container direction='row' justify='center' alignItems='center'>
 			<React.Fragment>
 				<CssBaseline />

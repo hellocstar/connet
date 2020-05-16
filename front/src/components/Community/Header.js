@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 
 //contains methods, theme and styles for componenets to render the community page
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({     //custom material-ui style
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const theme = createMuiTheme({
+const theme = createMuiTheme({                //custom material-ui theme
 	palette: {
 		primary: {
 			main: '#ffffff',
@@ -48,7 +48,7 @@ const theme = createMuiTheme({
 	},
 });
 
-export default function Header(props) {
+export default function Header(props) {            //render the search section with sections and suggestions
   const classes = useStyles();
   const { sections, suggestions } = props;
 

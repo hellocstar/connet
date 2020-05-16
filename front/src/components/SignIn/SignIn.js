@@ -11,15 +11,15 @@ class SignIn extends React.Component {
 		};
 	}
 
-	onUsernameChange = (username) => {
+	onUsernameChange = (username) => {           //handle username input changes
 		this.setState({ username: username.target.value });
 	};
 
-	onPasswordChange = (password) => {
+	onPasswordChange = (password) => {               //handle password input changes
 		this.setState({ password: password.target.value });
 	};
 
-	onSubmitSignIn = () => {
+	onSubmitSignIn = () => {         //handle sign in activity
 		fetch('http://localhost:3000/signin', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/json' },
@@ -36,7 +36,7 @@ class SignIn extends React.Component {
 			});
 	};
 
-	render() {
+	render() {      //render the sign in page
 		return (
 			<div>
 				<fieldset id='sign_in'>
